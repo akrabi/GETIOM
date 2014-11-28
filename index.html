@@ -43,22 +43,22 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HeatMap Options <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+              <li><a href='javascript:toggleHeatmap()'>Toggle Heatmap</a></li>
+            <li><a href='javascript:changeGradient()'>Change gradient</a></li>
+            <li><a href='javascript:changeRadius()'>Change radius</a></li>
+            <li><a href='javascript:changeOpacity()'>Change opacity</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Separated link - To Be Continued</a></li>
           </ul>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 <div id="map-canvas"></div>
 <!-- Google Maps -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing,visualization"></script>
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
@@ -67,5 +67,8 @@
 <!-- Custom JS -->
 <script src="js/map.js"></script>
 <script src="js/time_range_slider.js"></script>
+<script src="js/heatMap.js"></script>
+
+
 </body>
 </html>
