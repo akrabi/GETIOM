@@ -41,15 +41,23 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+        <li class="dropdown"> <!-- Heatmap Control -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HeatMap Options <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-              <li><a href='javascript:toggleHeatmap()'>Toggle Heatmap</a></li>
+            <li><a href='javascript:toggleHeatmap()'>Toggle Heatmap</a></li>
             <li><a href='javascript:changeGradient()'>Change gradient</a></li>
             <li><a href='javascript:changeRadius()'>Change radius</a></li>
             <li><a href='javascript:changeOpacity()'>Change opacity</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"> <!-- Drawing Control -->
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Drawing Options <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href='javascript:drawRectangle()'>Rectangle</a></li>
+            <li><a href='javascript:drawCircle()'>Circle</a></li>
+            <li><a href='javascript:drawPolygon()'>Polygon</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link - To Be Continued</a></li>
+            <li><a href='javascript:deleteAllShapes()'>Delete Shapes</a></li>
           </ul>
         </li>
       </ul>
