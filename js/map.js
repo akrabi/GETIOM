@@ -1,10 +1,12 @@
+var map = null;
 function initialize() {
   var mapOptions = {
-    center: new google.maps.LatLng(-34.397, 150.644),
-    zoom: 8
+    center: new google.maps.LatLng(37.774546, -122.433523),
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    zoom: 13
   };
 
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
+  map = new google.maps.Map(document.getElementById('map-canvas'),
     mapOptions);
 
   var drawingManager = new google.maps.drawing.DrawingManager({

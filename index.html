@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -22,24 +24,8 @@
       <a class="navbar-brand" href="#">GETIOM</a>
     </div>
 
+
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
@@ -49,27 +35,30 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HeatMap Options <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+              <li><a href='javascript:toggleHeatmap()'>Toggle Heatmap</a></li>
+            <li><a href='javascript:changeGradient()'>Change gradient</a></li>
+            <li><a href='javascript:changeRadius()'>Change radius</a></li>
+            <li><a href='javascript:changeOpacity()'>Change opacity</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Separated link - To Be Continued</a></li>
           </ul>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
 </nav>
 <div id="map-canvas"></div>
 <!-- Google Maps -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing,visualization"></script>
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- Custom JS -->
 <script src="js/map.js"></script>
+<script src="js/heatMap.js"></script>
+
+
 </body>
 </html>
