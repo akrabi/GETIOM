@@ -7,3 +7,15 @@ html, body, #map-canvas {
 .navbar {
     margin-bottom: 0;
 }
+
+/* Time Range Slider */
+
+/*TODO change ids to classes, vertical align properly*/
+#slider-range {
+    width:300px;
+    margin: 19px;
+}
+
+#time {
+    margin-top: 15px;
+}
