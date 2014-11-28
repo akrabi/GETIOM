@@ -57,7 +57,7 @@ function drawPolygon(){
 function deleteAllShapes() {
   if (!shapes || shapes.length < 1) return;
   for (var i=0; i<shapes.length; ++i) {
-    shapes[i].setMap(null);
+    shapes[i].overlay.setMap(null);
   }
 }
 
