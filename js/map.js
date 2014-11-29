@@ -26,8 +26,24 @@ function initialize() {
     markerOptions: {
       icon: 'images/beachflag.png'
     },
+    rectangleOptions: {
+      fillColor: '#2D5DCA',
+      fillOpacity: 0.25,
+      strokeWeight: 3,
+      clickable: false,
+      editable: true,
+      zIndex: 1
+    },
     circleOptions: {
       fillColor: '#ffff00',
+      fillOpacity: 0.25,
+      strokeWeight: 3,
+      clickable: false,
+      editable: true,
+      zIndex: 1
+    },
+    polygonOptions: {
+      fillColor: '#008000',
       fillOpacity: 0.25,
       strokeWeight: 3,
       clickable: false,
@@ -37,12 +53,12 @@ function initialize() {
   });
 
   google.maps.event.addListener(drawingManager, 'overlaycomplete', function(shape) {
-      shapes.push(shape);
+    shapes.push(shape);
+    drawingManager.setDrawingMode(null);
   });
 
   drawingManager.setMap(map);
 }
-
 
 function drawRectangle() {
   drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
@@ -54,10 +70,15 @@ function drawPolygon(){
   drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
 }
 
+function stopDrawing() {
+  drawingManager.setDrawingMode(null);
+}
+
 function deleteAllShapes() {
   if (!shapes || shapes.length < 1) return;
-  for (var i=0; i<shapes.length; ++i) {
-    shapes[i].overlay.setMap(null);
+  while (shapes.length > 0) {
+    var shape = shapes.pop();
+    shape.overlay.setMap(null);
   }
 }
 

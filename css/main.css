@@ -9,13 +9,44 @@ html, body, #map-canvas {
 }
 
 /* Time Range Slider */
-
 /*TODO change ids to classes, vertical align properly*/
 #slider-range {
     width:300px;
-    margin: 19px;
+    margin-top: 5px;
 }
 
-#time {
-    margin-top: 15px;
+/* Shape Controls */
+.controlBtn {
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    position: relative;
 }
+
+.shapeControl {
+    position: absolute;
+    left: 0;
+    -webkit-user-select: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 16px;
+    height: 192px;
+}
+
+.rectangle {
+    top: -16px;
+}
+
+.circle {
+    top: -160px;
+}
+
+.polygon {
+    top: -64px;
+}
+
+.stopDrawing {
+    top: -80px;
+}
+
