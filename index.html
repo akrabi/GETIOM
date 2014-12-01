@@ -24,64 +24,11 @@
       <a class="navbar-brand" href="#">GETIOM</a>
     </div>
 
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-      .controls {
-        margin-top: 16px;
-        border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        height: 32px;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      }
-
-      #pac-input {
-        background-color: #fff;
-        padding: 0 11px 0 13px;
-        width: 400px;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        text-overflow: ellipsis;
-      }
-
-      #pac-input:focus {
-        border-color: #4d90fe;
-        margin-left: -1px;
-        padding-left: 14px;  /* Regular padding-left + 1. */
-        width: 401px;
-      }
-
-      .pac-container {
-        font-family: Roboto;
-      }
-
-      #type-selector {
-        color: #fff;
-        background-color: #4d90fe;
-        padding: 5px 11px 0px 11px;
-      }
-
-      #type-selector label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-      /*}*/
-
-    </style>
-
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <p class="navbar-text">GeoTagged Information on Map</p>
+      <div class="navbar-text">GeoTagged Information on Map</div>
+      <!-- Slider Range -->
+      <ul class="nav navbar-nav navbar-left">
         <li>
           <a href="#"><div id="slider-range" class="navbar-left"></div></a>
         </li>
@@ -89,8 +36,13 @@
           <a href="#"><span id="time" class="navbar-left"></span></a>
         </li>
       </ul>
+      <!-- Search Box -->
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="placesSearchBox" type="text" class="form-control" placeholder="Search">
+        </div>
+      </form>
       <ul class="nav navbar-nav navbar-right">
-
         <!-- Drawing Control -->
         <li>
           <a href='javascript:drawRectangle()'>
@@ -125,7 +77,6 @@
             <i class="glyphicon glyphicon-trash"></i>
           </a>
         </li>
-
         <!-- Heatmap Control -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-fire"></i> HeatMap <span class="caret"></span></a>
@@ -141,15 +92,6 @@
   </div>
 </nav>
 <div id="map-canvas"></div>
-<style>
-  #target {
-    width: 345px;
-  }
-</style>
-</head>
-<body>
-<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-</body>
 
 <!-- Google Maps -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing,visualization,places"></script>

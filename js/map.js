@@ -8,18 +8,14 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.SATELLITE,
     zoom: 13
   };
-  var markers = [];
 
   map = new google.maps.Map(document.getElementById('map-canvas'),
     mapOptions);
 
-  // Create the search box and link it to the UI element.
-  var input = /** @type {HTMLInputElement} */(
-      document.getElementById('pac-input'));
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-  var searchBox = new google.maps.places.SearchBox(
-      /** @type {HTMLInputElement} */(input));
+  var input = document.getElementById('placesSearchBox');
+  var searchBox = new google.maps.places.SearchBox(input);
+  var markers;
+  markers = [];
 
   // Listen for the event fired when the user selects an item from the
   // pick list. Retrieve the matching places for that item.
@@ -35,12 +31,15 @@ function initialize() {
 
     // For each place, get the icon, place name, and location.
     markers = [];
+    var pointCount = 0;
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0, place; place = places[i]; i++) {
+      pointCount++;
       var image = {
         url: place.icon,
         size: new google.maps.Size(71, 71),
         origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
         anchor: new google.maps.Point(17, 34),
         scaledSize: new google.maps.Size(25, 25)
       };
@@ -58,7 +57,13 @@ function initialize() {
       bounds.extend(place.geometry.location);
     }
 
-    map.fitBounds(bounds);
+    if (pointCount > 1) {
+      map.fitBounds(bounds);
+    }
+    else if (pointCount == 1) {
+      map.setCenter(bounds.getCenter());
+      map.setZoom(13);
+    }
   });
 
   // Bias the SearchBox results towards places that are within the bounds of the
@@ -67,7 +72,6 @@ function initialize() {
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
-
 
   drawingManager = new google.maps.drawing.DrawingManager({
     drawingMode: google.maps.drawing.OverlayType.MARKER,
