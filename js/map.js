@@ -40,7 +40,6 @@ function initialize() {
         size: new google.maps.Size(71, 71),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(17, 34),
-        anchor: new google.maps.Point(17, 34),
         scaledSize: new google.maps.Size(25, 25)
       };
 
@@ -91,24 +90,28 @@ function initialize() {
       fillColor: '#2D5DCA',
       fillOpacity: 0.25,
       strokeWeight: 3,
-      clickable: false,
+      clickable: true,
       editable: true,
+      draggable: true,
       zIndex: 1
     },
     circleOptions: {
       fillColor: '#ffff00',
       fillOpacity: 0.25,
       strokeWeight: 3,
-      clickable: false,
+      clickable: true,
       editable: true,
+      draggable: true,
       zIndex: 1
     },
     polygonOptions: {
       fillColor: '#008000',
       fillOpacity: 0.25,
       strokeWeight: 3,
-      clickable: false,
+      clickable: true,
       editable: true,
+      draggable: true,
+      geodesic: true,
       zIndex: 1
     }
   });

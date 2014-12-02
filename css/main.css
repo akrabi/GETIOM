@@ -8,14 +8,9 @@ html, body, #map-canvas {
     margin-bottom: 0;
 }
 
-nav.nav-center {
-    margin:0;
-    float:none;
-}
-
 /* Time Range Slider */
 /*TODO change ids to classes, vertical align properly*/
-#slider-range {
+#slider {
     width:300px;
     margin-top: 5px;
 }
