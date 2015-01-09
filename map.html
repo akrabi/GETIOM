@@ -43,35 +43,35 @@
       <ul class="nav navbar-nav navbar-right">
         <!-- Drawing Control -->
         <li>
-          <a href='javascript:drawRectangle()'>
+          <a href='#' id='drawRectangle'>
             <div class="controlBtn">
               <img src="img/drawing.png" class="shapeControl rectangle">
             </div>
           </a>
         </li>
         <li>
-          <a href='javascript:drawCircle()'>
+          <a href='#' id='drawCircle'>
             <div class="controlBtn">
               <img src="img/drawing.png" class="shapeControl circle">
               </div>
           </a>
         </li>
         <li>
-          <a href='javascript:drawPolygon()'>
+          <a href='#' id='drawPolygon'>
             <div class="controlBtn">
               <img src="img/drawing.png" class="shapeControl polygon">
             </div>
           </a>
         </li>
         <li>
-          <a href="javascript:stopDrawing()">
+          <a href='#' id='stopDrawing'>
             <div class="controlBtn">
               <img src="img/drawing.png" class="shapeControl stopDrawing">
             </div>
           </a>
         </li>
         <li>
-          <a href='javascript:deleteAllShapes()'>
+          <a href='#' id='deleteAllShapes'>
             <i class="glyphicon glyphicon-trash"></i>
           </a>
         </li>
@@ -79,16 +79,17 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-fire"></i> HeatMap <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href='javascript:toggleHeatmap()'>Toggle Heatmap</a></li>
-            <li><a href='javascript:changeGradient()'>Change gradient</a></li>
-            <li><a href='javascript:changeRadius()'>Change radius</a></li>
-            <li><a href='javascript:changeOpacity()'>Change opacity</a></li>
+            <li><a id="toggleHeatmap" href="#">Toggle Heatmap</a></li>
+            <li><a id="changeGradient" href='#'>Change gradient</a></li>
+            <li><a id="changeRadius" href='#'>Change radius</a></li>
+            <li><a id="changeOpacity" href='#'>Change opacity</a></li>
           </ul>
         </li>
       </ul>
     </div><!-- /.container-fluid -->
   </div>
 </nav>
+
 <div id="map-canvas"></div>
 
 <!-- Google Maps -->
@@ -99,10 +100,8 @@
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- Custom JS -->
-<script src="js/map.js"></script>
+<script src="js/Map.js"></script>
 <script src="js/TimeSlider.js"></script>
-<script src="js/heatMap.js"></script>
-
-
+<script src="js/main.js"></script>
 </body>
 </html>
