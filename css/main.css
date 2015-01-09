@@ -4,49 +4,37 @@ html, body, #map-canvas {
     padding: 0;
 }
 
-.navbar {
-    margin-bottom: 0;
+
+fieldset {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 /* Time Range Slider */
 /*TODO change ids to classes, vertical align properly*/
-#slider {
+#time_slider {
     width:300px;
     margin-top: 5px;
 }
 
-/* Shape Controls */
-.controlBtn {
-    width: 16px;
-    height: 16px;
-    overflow: hidden;
-    position: relative;
+/* Filter */
+
+#filter {
+
 }
 
-.shapeControl {
-    position: absolute;
-    left: 0;
-    -webkit-user-select: none;
-    border: 0;
-    padding: 0;
+/* Cluster */
+
+#cluster {
+    display: none;
+    text-align: center;
+}
+
+/* Results */
+
+#results {
+    display: none;
+    height: 100%;
     margin: 0;
-    width: 16px;
-    height: 192px;
+    padding: 0;
 }
-
-.rectangle {
-    top: -16px;
-}
-
-.circle {
-    top: -160px;
-}
-
-.polygon {
-    top: -64px;
-}
-
-.stopDrawing {
-    top: -80px;
-}
-

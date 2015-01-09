@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/steps.css">
+    <link rel="stylesheet" type="text/css" href="css/filter.css">
 
 </head>
 <body>
@@ -46,23 +47,25 @@
 </div>
 
 
-<form id="filterForm" class="form-horizontal" action="cluster.html" method="post">
-    <fieldset align="center">
-        <!-- Form Name -->
-        <legend>Filter</legend>
+<form id="filterForm" class="form-horizontal" action="cluster.html" method="post" align="center">
 
-        <!-- Time Slider -->
-        <div id="slider" style="width: 300px; display:inline-block;"></div>
-
-        <!-- Button -->
-        <div class="control-group">
-            <label class="control-label" for="Submit"></label>
-            <div class="controls">
-                <button id="Submit" type="submit" name="Submit" class="btn btn-success">Filter</button>
-            </div>
-        </div>
-
+    <fieldset><!-- Location -->
+        <legend>Filter by location</legend>
+        add some location filters
     </fieldset>
+
+    <fieldset><!-- Time -->
+        <legend>Filter by time</legend>
+        <div id="slider" style="width: 300px; display:inline-block;"></div>
+    </fieldset>
+
+    <!-- Submit Button -->
+    <div class="control-group">
+        <label class="control-label" for="Submit"></label>
+        <div class="controls">
+            <button id="Submit" type="submit" name="Submit" class="btn btn-success">Apply Filters</button>
+        </div>
+    </div>
 </form>
 
 
@@ -72,6 +75,6 @@
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="js/filter.js"></script>
-<script src="js/TimeSlider.js"></script>
+<script src="js/modules/TimeSlider.js"></script>
 </body>
 </html>

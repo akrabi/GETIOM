@@ -1,7 +1,8 @@
 .bs-wizard {margin-top: 40px;}
 
 /*Form Wizard*/
-
+#progress_steps {text-align: center;}
+.bs-wizard.row  {border-bottom:0; display: inline-block; width:75%;}
 .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}

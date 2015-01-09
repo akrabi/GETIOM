@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- JQueryUI theme -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.2/themes/ui-lightness/jquery-ui.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/steps.css">
+    <link rel="stylesheet" type="text/css" href="css/filter.css">
+    <link rel="stylesheet" type="text/css" href="css/cluster.css">
+    <link rel="stylesheet" type="text/css" href="css/results.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">GETIOM</a>
+        </div>
+    </div>
+</nav>
+
+<div id="progress_steps">
+    <div class="row bs-wizard">
+        <div id="filterStep" class="col-xs-4 bs-wizard-step active">
+            <div class="text-center bs-wizard-stepnum">Filter</div>
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="bs-wizard-dot"></a>
+
+            <div class="bs-wizard-info text-center">Filter messages</div>
+        </div>
+
+        <div id="clusterStep" class="col-xs-4 bs-wizard-step disabled">
+            <div class="text-center bs-wizard-stepnum">Cluster</div>
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="bs-wizard-dot"></a>
+
+            <div class="bs-wizard-info text-center">Cluster messages using your choice of clustring algorithm</div>
+        </div>
+
+        <div id="resultsStep" class="col-xs-4 bs-wizard-step disabled">
+            <div class="text-center bs-wizard-stepnum">Display Information</div>
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="bs-wizard-dot"></a>
+
+            <div class="bs-wizard-info text-center">Display information about your messages and clusters</div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Filter -->
+
+<div id="filter">
+    <form id="filterForm" class="form-horizontal" align="center">
+
+        <fieldset><!-- Location -->
+            <legend>Filter by location</legend>
+            add some location filters
+        </fieldset>
+
+        <fieldset><!-- Time -->
+            <legend>Filter by time</legend>
+            <div id="time_slider" style="width: 300px; display:inline-block;"></div>
+        </fieldset>
+
+        <!-- Submit Button -->
+        <div class="control-group">
+            <label class="control-label" for="filterSubmit"></label>
+            <div class="controls">
+                <button id="filterSubmit" type="submit" name="filterSubmit" class="btn btn-success">Apply Filters</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- Cluster -->
+<div id="cluster">
+    <div id="input_panel">
+        <div id="algo_panel">
+            <fieldset id="algorithms">
+                <legend>Clustering algorithm</legend>
+                <select id="algo" onchange="updateAlgo();">
+                    <option value="hierarchical" selected>Hierarchical clustering</option>
+                    <option value="kmeans">K-means</option>
+                    <option value="fcmeans">Fuzzy C-means (Experimental)</option>
+                </select>
+            </fieldset>
+        </div>
+
+
+        <div id="param_panel">
+
+            <div id="km_panel">
+                <fieldset id="km_params">
+                    <legend>Control panel</legend>
+                    Number of clusters (K):
+                    <select id="KM-K">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected="selected">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </fieldset>
+            </div>
+
+            <div id="fcm_panel">
+                <fieldset id="fcm_params">
+                    <legend>Control panel</legend>
+                    Number of clusters (K):
+                    <select id="FCM-K">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected="selected">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                    <br/>
+                    Epsilon: <input id="epsilon" value="0.3" size="5"/>
+                    <br/>
+                    Fuzziness: <input id="fuzziness" value="2" size="5"/>
+                </fieldset>
+            </div>
+
+            <div id="hc_panel">
+                <fieldset id="hc_params">
+                    <legend>Control panel</legend>
+                    Linkage method:
+                    <input type="radio" name="linkage" value="0" checked/>Single-linkage
+                    <input type="radio" name="linkage" value="1"/>Complete-linkage
+                    <input type="radio" name="linkage" value="2"/>Average-linkage<br/>
+                    <br/>
+                    Distance:
+                    <input type="radio" name="distance" value="0" checked/>Euclidian
+                    <input type="radio" name="distance" value="1"/>Manhattan
+                    <input type="radio" name="distance" value="2"/>Maximum<br/>
+                    <br/>
+                    Show labels:
+                    <input type="radio" name="withLabel" value="true" checked/>Yes
+                    <input type="radio" name="withLabel" value="false"/>No <br/>
+                    <br/>
+                    Show centroids:
+                    <input type="radio" name="withCentroid" value="true"/>Yes
+                    <input type="radio" name="withCentroid" value="false" checked/>No<br/>
+                    <br/>
+                    Show distance:
+                    <input type="radio" name="withDistance" value="true"/>Yes
+                    <input type="radio" name="withDistance" value="false" checked/>No<br/>
+                    <br/>
+                    Balance dendogram:
+                    <input type="radio" name="balanced" value="true" checked/>Yes
+                    <input type="radio" name="balanced" value="false"/>No <br/>
+                    <br/>
+                    Minimum spacing between nodes:
+                    <select id="space">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="7" selected="selected">7</option>
+                        <option value="9">9</option>
+                    </select>
+                </fieldset>
+            </div>
+
+            <div id="cluster_button" style="">
+                <div style="display:table-row; width:100%;text-align:center;">
+                    <div style="vertical-align: middle; display:table-cell;">
+                        <input type="button" onclick="moveTo('results');/*runAlgo();*/" class="btn btn-success" value="Cluster Data"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="output_panel">
+                <fieldset>
+                    <legend>Output</legend>
+                    <pre id="text"> </pre>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Results -->
+<div id="results">
+    <div id="map-canvas"></div>
+</div>
+
+
+
+<!-- Google Maps -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing,visualization,places"></script>
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+<!-- Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<!-- Custom JS -->
+<script src="js/modules/Map.js"></script>
+<script src="js/modules/TimeSlider.js"></script>
+<script src="js/main.js"></script>
+<script src="js/cluster.js"></script>
+
+
+</body>
+</html>

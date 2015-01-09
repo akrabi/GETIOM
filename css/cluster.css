@@ -9,12 +9,13 @@ body {
 }
 
 #input_panel {
-    display: block;
+    display: inline-block;
     clear: both;
     width:800px;
 }
 
 #algo_panel {
+    display: inline-block;
     clear:both;
     width: 800px;
 }
