@@ -1,3 +1,4 @@
+var filteredMessages;
 
 function parseData(data) {
     var labels = new Array();
