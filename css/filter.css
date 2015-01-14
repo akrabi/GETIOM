@@ -1,4 +1,10 @@
-/*#filter fieldset {
-    margin-top: 50px;
-    margin-bottom: 50px;
-}*/
+#filterLocationMap {
+    display: inline-block;
+    width: 75%;
+    height: 500px;
+}
+
+#filterTimeSlider {
+    width:300px;
+    display:inline-block;
+}
