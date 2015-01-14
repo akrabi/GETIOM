@@ -32,20 +32,3 @@ function moveTo(step) {
     }
     $( window ).scrollTop( 0 );
 }
-
-$( document ).ready(function() {
-    // Initialize the map with the drawing controls
-    var map = new Map($('#map-canvas').get(0));
-    //map.setDrawingManager($('#drawRectangle'), $('#drawCircle'), $('#drawPolygon'), $('#stopDrawing'), $('#deleteAllShapes'));
-    map.init();
-    map.hide();
-
-    // Initialize slider
-    var slider = new TimeSlider($('#time_slider')[0]);
-    slider.init();
-});
-
-$('#filterForm').submit(function(e) {
-    e.preventDefault();
-    moveTo('cluster');
-});
