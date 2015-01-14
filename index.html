@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/map.css">
     <link rel="stylesheet" type="text/css" href="css/steps.css">
     <link rel="stylesheet" type="text/css" href="css/filter.css">
     <link rel="stylesheet" type="text/css" href="css/cluster.css">
@@ -62,22 +63,20 @@
 
 <div id="filter">
     <form id="filterForm" class="form-horizontal" align="center">
-
         <fieldset><!-- Location -->
             <legend>Filter by location</legend>
-            add some location filters
+            <a href="#"><div class="content"><div id="filterLocationMap"></div></div></a>
         </fieldset>
-
         <fieldset><!-- Time -->
             <legend>Filter by time</legend>
-            <div id="time_slider" style="width: 300px; display:inline-block;"></div>
+            <div id="filterTimeSlider"></div>
         </fieldset>
 
         <!-- Submit Button -->
         <div class="control-group">
             <label class="control-label" for="filterSubmit"></label>
             <div class="controls">
-                <button id="filterSubmit" type="submit" name="filterSubmit" class="btn btn-success">Apply Filters</button>
+                <button id="filterSubmit"  name="filterSubmit" class="btn btn-success">Apply Filters</button>
             </div>
         </div>
     </form>
@@ -201,7 +200,7 @@
 
 <!-- Results -->
 <div id="results">
-    <div id="map-canvas"></div>
+    <div id="resultsMap"></div>
 </div>
 
 
@@ -217,6 +216,7 @@
 <script src="js/modules/Map.js"></script>
 <script src="js/modules/TimeSlider.js"></script>
 <script src="js/main.js"></script>
+<script src="js/filter.js"></script>
 <script src="js/cluster.js"></script>
 
 
