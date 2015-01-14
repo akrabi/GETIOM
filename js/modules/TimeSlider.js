@@ -1,6 +1,9 @@
 var TimeSlider = function(domNode) {
     var domNode = domNode;
 
+    var startVal = 0;
+    var endVal = 1435;
+
     function getTime(sliderVal) {
         var minutes = parseInt(sliderVal % 60, 10);
         var hours = parseInt(sliderVal / 60 % 24, 10);
@@ -18,8 +21,10 @@ var TimeSlider = function(domNode) {
     return {
 
         init: function() {
-            var startVal = 0;
-            var endVal = 1435;
+
+            // Create a wrapping container
+            $(domNode).wrap( '<div class="container"></div>' );
+
             $(domNode).slider({
                 range: true,
                 min: 0,
@@ -39,7 +44,7 @@ var TimeSlider = function(domNode) {
 
                     // Wait for the slider to be in position
                     (wait = function () {
-                        if ((container = target.parents('.content')).length != 0) {
+                        if ((container = target.parents('.container')).length != 0) {
                             handles.eq(0).tooltip({
                                 animation: false,
                                 placement: 'bottom',
@@ -60,6 +65,11 @@ var TimeSlider = function(domNode) {
                     })();
                 }
             });
+        },
+
+        getTimeRange: function() {
+            return {start: getTime(startVal), end: getTime(endVal)}
         }
+
     }
 };
