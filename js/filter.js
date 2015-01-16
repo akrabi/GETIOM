@@ -12,20 +12,22 @@ $(document).ready(function () {
         var shape = map.getShape();
         if (shape.type === 'circle') {
             var circle = shape.overlay;
-            var x = circle.getCenter().lat();
-            var y = circle.getCenter().lng();
-            var r = circle.getRadius();
-            $.getJSON('rest/messages/filter/location/circle?x='+x+'&y='+y+'&r='+r, function( data ) {
+            var lat = circle.getCenter().lat();
+            var lng = circle.getCenter().lng();
+            var radius = circle.getRadius();
+            $.getJSON('messages/filter/location/circle?lat='+lat+'&lng='+lng+'&radius='+radius, function( data ) {
                 filteredMessages = data;
                 moveTo('cluster');
             });
         }
         else if (shape.type === 'rectangle') {
-            var rectangle = shape.overlay;
-            var x = circle.getCenter().lat();
-            var y = circle.getCenter().lng();
-            var r = circle.getRadius();
-            $.getJSON('rest/messages/filter/location/circle?x='+x+'&y='+y+'&r='+r, function( data ) {
+            var rect = shape.overlay;
+            var bounds = rect.getBounds();
+            var lat1 = bounds.getNorthEast().lat();
+            var lng1 = bounds.getNorthEast().lng();
+            var lat2 = bounds.getSouthWest().lat();
+            var lng2 = bounds.getSouthWest().lng();
+            $.getJSON('messages/filter/location/rectangle?lat1='+lat1+'&lng1='+lng1+'&lat2='+lat2+'&lng2='+lng2, function( data ) {
                 filteredMessages = data;
                 moveTo('cluster');
             });
