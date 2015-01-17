@@ -19,31 +19,31 @@ var router = express.Router();
 router.use(function(req, res, next) {
     // do logging
     console.log('Request routed...');
-    var lat1=40.798217025760515;
-    var lng1=-73.77439498901367;
-    var lat2=40.52006312552015;
-    var lng2=-74.1712760925293;
-    var rect = [
-        {
-            latitude: lat1,
-            longitude: lng1
-        },
-        {
-            latitude: lat1,
-            longitude: lng2
-        },
-        {
-            latitude: lat2,
-            longitude: lng2
-        },
-        {
-            latitude: lat2,
-            longitude: lng1
-        }
-    ];
-    var point = {"latitude": "40.71660077", "longitude": "-73.95056784"};
-    console.log(geolib.isPointInside(point, rect));
-    next();
+    //var lat1=40.798217025760515;
+    //var lng1=-73.77439498901367;
+    //var lat2=40.52006312552015;
+    //var lng2=-74.1712760925293;
+    //var rect = [
+    //    {
+    //        latitude: lat1,
+    //        longitude: lng1
+    //    },
+    //    {
+    //        latitude: lat1,
+    //        longitude: lng2
+    //    },
+    //    {
+    //        latitude: lat2,
+    //        longitude: lng2
+    //    },
+    //    {
+    //        latitude: lat2,
+    //        longitude: lng1
+    //    }
+    //];
+    //var point = {"latitude": "40.71660077", "longitude": "-73.95056784"};
+    //console.log(geolib.isPointInside(point, rect));
+    //next();
 });
 
 
@@ -97,6 +97,10 @@ router.route('/filter/location/polygon')
         }));
     });
 
+router.route('/')
+    .get(function(req, res, next) {
+        res.json(messages);
+    });
 
 // Register routers
 app.use('/messages', router);
