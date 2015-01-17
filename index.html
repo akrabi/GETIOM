@@ -65,7 +65,7 @@
     <form id="filterForm" class="form-horizontal" align="center">
         <fieldset><!-- Location -->
             <legend>Filter by location</legend>
-            <a href="#"><div class="content"><div id="filterLocationMap"></div></div></a>
+            <a href="#"><div class="content"><div id="filterLocationMap" class="map-canvas"></div></div></a>
         </fieldset>
         <fieldset><!-- Time -->
             <legend>Filter by time</legend>
@@ -151,47 +151,16 @@
                     <input type="radio" name="distance" value="0" checked/>Euclidian
                     <input type="radio" name="distance" value="1"/>Manhattan
                     <input type="radio" name="distance" value="2"/>Maximum<br/>
-                    <br/>
-                    Show labels:
-                    <input type="radio" name="withLabel" value="true" checked/>Yes
-                    <input type="radio" name="withLabel" value="false"/>No <br/>
-                    <br/>
-                    Show centroids:
-                    <input type="radio" name="withCentroid" value="true"/>Yes
-                    <input type="radio" name="withCentroid" value="false" checked/>No<br/>
-                    <br/>
-                    Show distance:
-                    <input type="radio" name="withDistance" value="true"/>Yes
-                    <input type="radio" name="withDistance" value="false" checked/>No<br/>
-                    <br/>
-                    Balance dendogram:
-                    <input type="radio" name="balanced" value="true" checked/>Yes
-                    <input type="radio" name="balanced" value="false"/>No <br/>
-                    <br/>
-                    Minimum spacing between nodes:
-                    <select id="space">
-                        <option value="3">3</option>
-                        <option value="5">5</option>
-                        <option value="7" selected="selected">7</option>
-                        <option value="9">9</option>
-                    </select>
+
                 </fieldset>
             </div>
 
             <div id="cluster_button" style="">
                 <div style="display:table-row; width:100%;text-align:center;">
                     <div style="vertical-align: middle; display:table-cell;">
-                        <input type="button" onclick="moveTo('results');/*runAlgo();*/" class="btn btn-success" value="Cluster Data"/>
+                        <input id="submitCluster" type="button" class="btn btn-success" value="Cluster Data"/>
                     </div>
                 </div>
-            </div>
-
-
-            <div id="output_panel">
-                <fieldset>
-                    <legend>Output</legend>
-                    <pre id="text"> </pre>
-                </fieldset>
             </div>
         </div>
     </div>
@@ -200,7 +169,9 @@
 
 <!-- Results -->
 <div id="results">
-    <div id="resultsMap"></div>
+    <input id="resultsShowMap" type="button" class="btn btn-success" value="Show on map"/>
+    <br>
+    <div id="resultsMap" class="map-canvas"></div>
 </div>
 
 
@@ -218,7 +189,9 @@
 <script src="js/main.js"></script>
 <script src="js/filter.js"></script>
 <script src="js/cluster.js"></script>
-
+<script src="js/results.js"></script>
+<script src="js/modules/HCluster.js"></script>
+<script src="js/libs/clusterfck.js"></script>
 
 </body>
 </html>

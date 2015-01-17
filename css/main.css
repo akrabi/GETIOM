@@ -27,6 +27,7 @@ fieldset {
 
 #results {
     display: none;
+    text-align: center;
     margin: 0;
     padding: 0;
 }

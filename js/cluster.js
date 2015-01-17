@@ -38,7 +38,6 @@ function runAlgo() {
             break;
         }
     }
-    document.getElementById('output_panel').style.display = 'block';
 }
 
 function showParamPanel(visiblePanel) {
@@ -68,17 +67,16 @@ function updateAlgo() {
             break;
         }
     }
-    document.getElementById('text').innerHTML = "";
-    document.getElementById('output_panel').style.display = 'none';
 }
 
 function runKM() {
-    var data = parseData(document.getElementById('data').value);
+    /*var data = parseData(document.getElementById('data').value);
     var vectors = data['vectors'];
-    var labels = data['labels'];
+    var labels = data['labels'];*/
     var domobj = document.getElementById('KM-K');
     var K = parseInt(domobj.options[domobj.selectedIndex].value);
-    var clusters = figue.kmeans(K, vectors);
+
+    var clusters = figue.kmeans(K, filteredMessages, metric);
 
     var txt;
     if (clusters) {
@@ -96,7 +94,7 @@ function runKM() {
 }
 
 function runHC() {
-    var data = parseData(document.getElementById('data').value);
+    /*var data = parseData(document.getElementById('data').value);
     var domobj = document.getElementById('space');
     var space = parseInt(domobj.options[domobj.selectedIndex].value);
     var balanced = (radioValue('balanced') === 'true');
@@ -112,7 +110,11 @@ function runHC() {
         pre.innerText = text;
     } else {
         pre.innerHTML = text;
-    }
+    }*/
+
+    alert(filteredMessages.length);
+    var clusters = HCluster.clusterMessages(filteredMessages, 'average');
+    alert(clusters.length);
 }
 
 function runFCM() {
@@ -153,3 +155,8 @@ function radioValue(name) {
 window.onload = function () {
     updateAlgo();
 }
+
+$('#submitCluster').click(function() {
+    runAlgo();
+    moveTo('results');
+})

@@ -27,9 +27,9 @@ var Map = function (domNode) {
 
     return {
 
-        init: function () {
+        init: function (lat, lng) {
             var mapOptions = {
-                center: new google.maps.LatLng(37.774546, -122.433523),
+                center: new google.maps.LatLng(lat, lng),
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
                 zoom: 13
             };
@@ -170,7 +170,7 @@ var Map = function (domNode) {
         },
 
         show: function () {
-            domNode.style.display = 'block';
+            domNode.style.display = 'inline-block';
         },
 
         hide: function () {
