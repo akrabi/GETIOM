@@ -42,7 +42,7 @@ var HCluster =
 
             var flat_clusters = clusters.map(function (hcluster) {
                 return self.leaves(hcluster).map(function (leaf) {
-                    return leaf.value;
+                    return leaf.canonical;
                 });
             });
             return flat_clusters;

@@ -179,7 +179,9 @@ var Map = function (domNode) {
 
         getShape: function() {
             return shapes && shapes.length && shapes[0];
+        },
+        getMapInstance: function() {
+            return map;
         }
-
     }
 };

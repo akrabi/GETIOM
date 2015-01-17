@@ -112,7 +112,7 @@ function runHC() {
     }*/
 
     alert(filteredMessages.length);
-    var clusters = HCluster.clusterMessages(filteredMessages, 'average');
+    clusters = HCluster.clusterMessages(filteredMessages, 'average');
     alert(clusters.length);
 }
 
