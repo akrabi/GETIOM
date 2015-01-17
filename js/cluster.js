@@ -1,25 +1,7 @@
 var clusters;
-function parseData(data) {
-    var labels = new Array();
-    var vectors = new Array();
-    lines = data.split("\n");
-    for (var i = 0; i < lines.length; i++) {
-        if (lines[i].length == 0)
-            continue;
-        var elements = lines[i].split(",");
-        var label = elements.shift();
-        var vector = new Array();
-        for (j = 0; j < elements.length; j++)
-            vector.push(parseFloat(elements[j]));
-        vectors.push(vector);
-        labels.push(label);
-    }
-    return {'labels': labels, 'vectors': vectors};
-}
 
 function runAlgo() {
-    var domobj = document.getElementById('algo');
-    var algo = domobj.options[domobj.selectedIndex].value;
+    var algo = $('#algo').val();
     switch (algo) {
         case 'kmeans':
         {
@@ -41,14 +23,14 @@ function runAlgo() {
 
 function showParamPanel(visiblePanel) {
     var panelNames = ['km_panel', 'fcm_panel', 'hc_panel'];
-    for (var i = 0; i < panelNames.length; i++)
-        document.getElementById(panelNames[i]).style.display = 'none';
-    document.getElementById(visiblePanel).style.display = 'block';
+    for (var i = 0; i < panelNames.length; i++) {
+        $('#'+panelNames[i]).hide();
+    }
+    $('#'+visiblePanel).show();
 }
 
 function updateAlgo() {
-    var domobj = document.getElementById('algo');
-    var algo = domobj.options[domobj.selectedIndex].value;
+    var algo = $('#algo').val();
     switch (algo) {
         case 'kmeans':
         {
@@ -69,9 +51,6 @@ function updateAlgo() {
 }
 
 function runKM() {
-    /*var data = parseData(document.getElementById('data').value);
-    var vectors = data['vectors'];
-    var labels = data['labels'];*/
     var domobj = document.getElementById('KM-K');
     var K = parseInt(domobj.options[domobj.selectedIndex].value);
 
@@ -93,31 +72,15 @@ function runKM() {
 }
 
 function runHC() {
-    /*var data = parseData(document.getElementById('data').value);
-    var domobj = document.getElementById('space');
-    var space = parseInt(domobj.options[domobj.selectedIndex].value);
-    var balanced = (radioValue('balanced') === 'true');
-    var withLabel = (radioValue('withLabel') === 'true');
-    var withCentroid = (radioValue('withCentroid') === 'true');
-    var withDistance = (radioValue('withDistance') === 'true');
+
     var linkage = parseInt(radioValue('linkage'));
     var distance = parseInt(radioValue('distance'));
-    root = figue.agglomerate(data['labels'], data['vectors'], distance, linkage);
-    var pre = document.getElementById('text');
-    var text = root.buildDendogram(space, balanced, withLabel, withCentroid, withDistance);
-    if (document.all) {
-        pre.innerText = text;
-    } else {
-        pre.innerHTML = text;
-    }*/
+    var threshold = parseInt($('input[name="threshold"]').val());
 
-    alert(filteredMessages.length);
-    clusters = HCluster.clusterMessages(filteredMessages, 'average');
-    alert(clusters.length);
+    clusters = HCluster.clusterMessages(filteredMessages, distance, linkage, threshold);
 }
 
 function runFCM() {
-    var data = parseData(document.getElementById('data').value);
     var vectors = data['vectors'];
     var labels = data['labels'];
     var domobj = document.getElementById('FCM-K');
@@ -127,33 +90,18 @@ function runFCM() {
 
     var clusters = figue.fcmeans(K, vectors, epsilon, fuzziness);
 
-    var txt;
-    if (clusters) {
-        txt = "<table border='1'>";
-        txt += "<tr><th>Cluster id</th><th>Cluster centroid</th></tr>";
-
-        for (var i = 0; i < K; i++) {
-            txt += "<tr><td>" + i + "</td><td>" + clusters.centroids[i] + "</td></tr>";
-        }
-        txt += "</table>"
-        txt += "<br/>"
-        txt += clusters.membershipMatrix;
-
-    } else
-        txt = "No result (too many clusters/too few different instances (try changing K)";
-    document.getElementById('text').innerHTML = txt;
 }
 
 function radioValue(name) {
-    var radios = document.getElementsByName(name);
+    var radios = $('input[name='+name+']');
     for (var i = 0; i < radios.length; i++)
         if (radios[i].checked)
             return radios[i].value;
 }
 
-window.onload = function () {
+$(document).ready(function () {
     updateAlgo();
-}
+});
 
 $('#submitCluster').click(function() {
     runAlgo();
