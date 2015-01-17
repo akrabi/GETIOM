@@ -1,5 +1,4 @@
-var filteredMessages;
-
+var clusters;
 function parseData(data) {
     var labels = new Array();
     var vectors = new Array();

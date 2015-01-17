@@ -1,3 +1,5 @@
+var filteredMessages;
+
 $(document).ready(function () {
     // Initialize slider
     var slider = new TimeSlider($('#filterTimeSlider')[0]);
@@ -9,11 +11,7 @@ $(document).ready(function () {
 
     $('#filterForm').submit(function(e) {
         e.preventDefault();
-        $.getJSON('messages/filter/location/circle?lat=40.72072146844198&lng=-73.95854473114014&radius=5380.252305577227', function( data ) {
-            filteredMessages = data;
-            moveTo('cluster');
-        });
-        /*var shape = map.getShape();
+        var shape = map.getShape();
         if (shape.type === 'circle') {
             var circle = shape.overlay;
             var lat = circle.getCenter().lat();
@@ -35,7 +33,13 @@ $(document).ready(function () {
                 filteredMessages = data;
                 moveTo('cluster');
             });
-        }*/
+        }
+        else {
+            $.getJSON('messages', function( data ) {
+                filteredMessages = data;
+                moveTo('cluster');
+            });
+        }
     });
 
 });
