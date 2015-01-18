@@ -207,6 +207,21 @@
 
 <!-- Results -->
 <div id="results">
+    <div class="charts-row">
+        <div class="col-xs-4">
+            <div class="chart-label"><h4>Filtered Messages</h4></div>
+            <div id="resultsFilterChart" class="resultsChart"></div>
+        </div>
+        <div class="col-xs-4">
+            <div class="chart-label"><h4>Clusters</h4></div>
+            <div id="resultsClusterChart" class="resultsChart"></div>
+        </div>
+        <div class="col-xs-4">
+            <div class="chart-label"><h4>Something Else??</h4></div>
+            <div id="resultsOtherChart" class="resultsChart"></div>
+        </div>
+    </div>
+    <br>
     <input id="resultsShowMap" type="button" class="btn btn-success" value="Show on map"/>
     <br>
     <div id="resultsMap" class="map-canvas"></div>
@@ -240,6 +255,8 @@
 <!-- Included JS Libs -->
 <script src="js/libs/clusterfck.js"></script>
 <script src="js/libs/graham_scan.js"></script>
+<script src="js/libs/flot/jquery.flot.min.js"></script>
+<script src="js/libs/flot/jquery.flot.pie.min.js"></script>
 <!-- Custom JS -->
 <script src="js/modules/Map.js"></script>
 <script src="js/modules/TimeSlider.js"></script>

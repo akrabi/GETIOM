@@ -36,6 +36,7 @@ function moveTo(step) {
         filterStep.removeClass('active , disabled').addClass('complete');
         clusterStep.removeClass('active , disabled').addClass('complete');
         resultsStep.removeClass('complete , disabled').addClass('active');
+        ResultsPage.init();
     }
     $( window ).scrollTop( 0 );
 }
