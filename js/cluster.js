@@ -74,8 +74,11 @@ function runHC() {
     var linkage = parseInt(radioValue('linkage'));
     var distance = parseInt(radioValue('distance'));
     var threshold = parseInt($('input[name="threshold"]').val());
-
+    var t1 = Date.now();
     GETIOM.clusters = HCluster.clusterMessages(GETIOM.filteredMessages, distance, linkage, threshold);
+    var t2 = Date.now();
+    var ms = t2-t1;     //time in milliseconds
+    GETIOM.time = ms / 1000;
 }
 
 function runFCM() {
@@ -104,7 +107,7 @@ $(document).ready(function () {
 $('#submitCluster').click(function() {
     runAlgo();
     var resultsModal = $('#resultsModal');
-    resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessages.length + ' messages into ' + GETIOM.clusters.length + ' clusters!')
+    resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessages.length + ' messages into ' + GETIOM.clusters.length + ' clusters in ' + GETIOM.time + ' seconds!')
     resultsModal.modal();
     moveTo('results');
 })

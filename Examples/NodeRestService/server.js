@@ -3,7 +3,13 @@ var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
-var messages   = require('./models/messages.js');
+//var messages   = require('./models/messages.js');
+// Declare variables
+var fs = require('fs');
+//var messages = JSON.parse(fs.readFileSync('./models/10KMessages.json', 'utf8'));
+var messages = JSON.parse(fs.readFileSync('./models/5KMessages.json', 'utf8'));
+//var messages = JSON.parse(fs.readFileSync('./models/1KMessages.json', 'utf8'));
+
 
 var port = process.env.PORT || 8080;    // Server's port
 var webAppPath = "../../";              // Path to client web application

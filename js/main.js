@@ -2,7 +2,8 @@
 var GETIOM = {
     serverMessagesNum: null,
     filteredMessages: null,
-    clusters: null
+    clusters: null,
+    time: null
 }
 
 function moveTo(step) {
