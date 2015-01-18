@@ -1,5 +1,3 @@
-var clusters;
-
 function runAlgo() {
     var algo = $('#algo').val();
     switch (algo) {
@@ -54,7 +52,7 @@ function runKM() {
     var domobj = document.getElementById('KM-K');
     var K = parseInt(domobj.options[domobj.selectedIndex].value);
 
-    var clusters = figue.kmeans(K, filteredMessages, metric);
+    var clusters = figue.kmeans(K, GETIOM.filteredMessages, metric);
 
     var txt;
     if (clusters) {
@@ -77,7 +75,7 @@ function runHC() {
     var distance = parseInt(radioValue('distance'));
     var threshold = parseInt($('input[name="threshold"]').val());
 
-    clusters = HCluster.clusterMessages(filteredMessages, distance, linkage, threshold);
+    GETIOM.clusters = HCluster.clusterMessages(GETIOM.filteredMessages, distance, linkage, threshold);
 }
 
 function runFCM() {
@@ -106,7 +104,7 @@ $(document).ready(function () {
 $('#submitCluster').click(function() {
     runAlgo();
     var resultsModal = $('#resultsModal');
-    resultsModal.find('.modal-body').html('Clustered ' + filteredMessages.length + ' messages into ' + clusters.length + ' clusters!')
+    resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessages.length + ' messages into ' + GETIOM.clusters.length + ' clusters!')
     resultsModal.modal();
     moveTo('results');
 })

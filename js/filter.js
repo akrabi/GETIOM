@@ -1,5 +1,3 @@
-var filteredMessages;
-
 $(document).ready(function () {
     // Initialize slider
     var slider = new TimeSlider($('#filterTimeSlider')[0]);
@@ -23,7 +21,7 @@ $(document).ready(function () {
             var lng = circle.getCenter().lng();
             var radius = circle.getRadius();
             $.getJSON('messages/filter/location/circle?lat='+lat+'&lng='+lng+'&radius='+radius, function( data ) {
-                filteredMessages = data;
+                GETIOM.filteredMessages = data;
                 moveTo('cluster');
             });
         }
@@ -35,15 +33,15 @@ $(document).ready(function () {
             var lat2 = bounds.getSouthWest().lat();
             var lng2 = bounds.getSouthWest().lng();
             $.getJSON('messages/filter/location/rectangle?lat1='+lat1+'&lng1='+lng1+'&lat2='+lat2+'&lng2='+lng2, function( data ) {
-                filteredMessages = data;
+                GETIOM.filteredMessages = data;
                 moveTo('cluster');
             });
         }
         else {
             $.getJSON('messages', function( data ) {
-                filteredMessages = data;
+                GETIOM.filteredMessages = data;
                 var resultsModal = $('#resultsModal');
-                resultsModal.find('.modal-body').html('Filtered ' + filteredMessages.length + ' messages!')
+                resultsModal.find('.modal-body').html('Filtered ' + GETIOM.filteredMessages.length + ' messages!')
                 resultsModal.modal();
                 moveTo('cluster');
             });

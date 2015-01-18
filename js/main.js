@@ -1,3 +1,10 @@
+// Global application variables
+var GETIOM = {
+    serverMessagesNum: null,
+    filteredMessages: null,
+    clusters: null
+}
+
 function moveTo(step) {
     var filter = $('#filter');
     var cluster = $('#cluster');

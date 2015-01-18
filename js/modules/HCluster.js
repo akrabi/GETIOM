@@ -12,7 +12,7 @@ var HCluster =
             }
             var clusterfckLinkage = [clusterfck.SINGLE_LINKAGE, clusterfck.COMPLETE_LINKAGE,clusterfck.AVERAGE_LINKAGE][linkage];
 
-            var clusters = clusterfck.hcluster(filteredMessages, metric, clusterfckLinkage, threshold);
+            var clusters = clusterfck.hcluster(messages, metric, clusterfckLinkage, threshold);
 
             var flat_clusters = clusters.map(function (hcluster) {
                 return self.leaves(hcluster).map(function (leaf) {

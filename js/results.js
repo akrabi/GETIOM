@@ -11,8 +11,7 @@ $(document).ready(function () {
 //clusters
 
 function loadPolygons(map) {
-
-//Create a new instance.
+    var clusters = GETIOM.clusters;
     var convexHull = new ConvexHullGrahamScan();
     var poly;
     var polyHull;
