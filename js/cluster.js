@@ -105,5 +105,8 @@ $(document).ready(function () {
 
 $('#submitCluster').click(function() {
     runAlgo();
+    var resultsModal = $('#resultsModal');
+    resultsModal.find('.modal-body').html('Clustered ' + filteredMessages.length + ' messages into ' + clusters.length + ' clusters!')
+    resultsModal.modal();
     moveTo('results');
 })

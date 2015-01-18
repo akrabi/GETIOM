@@ -42,6 +42,9 @@ $(document).ready(function () {
         else {
             $.getJSON('messages', function( data ) {
                 filteredMessages = data;
+                var resultsModal = $('#resultsModal');
+                resultsModal.find('.modal-body').html('Filtered ' + filteredMessages.length + ' messages!')
+                resultsModal.modal();
                 moveTo('cluster');
             });
         }
