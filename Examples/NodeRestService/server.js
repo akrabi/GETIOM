@@ -23,6 +23,12 @@ router.use(function(req, res, next) {
 });
 
 
+router.route('/num')
+    .get(function(req, res) {
+        res.json({messagesNum: messages.length});
+    });
+
+
 router.route('/filter/location/circle')
     .get(function(req, res, next) {
         console.log(req.query);
