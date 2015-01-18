@@ -8,8 +8,13 @@ $(document).ready(function () {
     map.init(40.71660077, -73.95056784);
     map.addSearchBox();
     map.addDrawingManager();
+    $('#filterLocationCollapse').click(function() {
+            setTimeout(function() {
+                map.show();
+            }, 50);
+    });
 
-    $('#filterForm').submit(function(e) {
+    $('#filterLocationForm').submit(function(e) {
         e.preventDefault();
         var shape = map.getShape();
         if (shape.type === 'circle') {

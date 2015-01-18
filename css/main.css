@@ -13,7 +13,11 @@ fieldset {
 /* Filter */
 
 #filter {
+    margin: 20px;
+}
 
+#filter h4 {
+    text-align: center;
 }
 
 /* Cluster */

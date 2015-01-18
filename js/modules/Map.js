@@ -4,6 +4,7 @@ var Map = function (domNode) {
     var drawingManager = null;
     var searchBox = null;
     var map = null;
+    var center = null;
     var shapes = [];
     var markers = [];
 
@@ -28,8 +29,9 @@ var Map = function (domNode) {
     return {
 
         init: function (lat, lng) {
+            center = new google.maps.LatLng(lat, lng);
             var mapOptions = {
-                center: new google.maps.LatLng(lat, lng),
+                center: center,
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
                 zoom: 13
             };
@@ -171,6 +173,7 @@ var Map = function (domNode) {
 
         show: function () {
             domNode.style.display = 'inline-block';
+            google.maps.event.trigger(map, 'resize');
         },
 
         hide: function () {
