@@ -19,6 +19,10 @@ var ResultsPage = {
         var clusterData = GETIOM.clusters.map(function(cluster) {
             return {label:"", data: cluster.length};
         });
+        var computationTime = [
+            {label: "Filtering Time", data: GETIOM.filteringTime},
+            {label: "Clustering Time", data: GETIOM.clusteringTime}
+        ]
         $.plot('#resultsFilterChart', filterData, {
             series: {
                 pie: {
@@ -40,7 +44,7 @@ var ResultsPage = {
                 }
             }
         });
-        $.plot('#resultsOtherChart', filterData, {
+        $.plot('#resultsComputationChart', computationTime, {
             series: {
                 pie: {
                     innerRadius: 0.9,
