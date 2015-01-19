@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var map = new Map($('#resultsMap')[0]);
-    map.init(40.778043, -73.969059);                //TODO optimize zoom and location to display results
+    map.init(40.821715, -74.122381);               //TODO optimize zoom and location to display results
     map.hide();
 
     $('#resultsShowMap').click(function () {

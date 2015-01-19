@@ -33,7 +33,7 @@ var Map = function (domNode) {
             var mapOptions = {
                 center: center,
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
-                zoom: 13
+                zoom: 12
             };
 
             map = new google.maps.Map(domNode, mapOptions);

@@ -11,7 +11,7 @@ $(document).ready(function () {
     var slider = new TimeSlider($('#filterTimeSlider')[0]);
     slider.init()
     var map = new Map($('#filterLocationMap')[0]);
-    map.init(40.777263, -73.972493);
+    map.init(40.821715, -74.122381);
     map.addSearchBox();
     map.addDrawingManager();
     $('#filterLocationCollapse').click(function() {
