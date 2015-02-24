@@ -94,13 +94,32 @@ router.route('/filter/*')
 router.route('/cluster/hierarchical')
     .get(function(req, res) {
         console.log('Handling cluster request...');
-        var distance = req.query.distance;
-        var linkage = req.query.linkage;
+        var distance = ['euclidean', 'manhattan', 'max'][req.query.distance];
+        var linkage = ['single', 'complete', 'average'][req.query.linkage];
         var threshold = req.query.threshold;
-        console.log({distance: distance, linkage: linkage, threshold: threshold});
-        clusters = clusterfck.hcluster(messages, distance, linkage, threshold);
-        clusterfck.hcluster.SINGLE_LINKAGE
-        console.log(clusters);
+
+        var metric = function(msg1, msg2) {
+            return geolib.getDistance(msg1.location, msg2.location);
+        }
+
+        var leaves = function (hcluster) {
+            // flatten cluster hierarchy
+            if (!hcluster.left)
+                return [hcluster];
+            else
+                return leaves(hcluster.left).concat(leaves(hcluster.right));
+        }
+
+        clusters = clusterfck.hcluster(messages, metric, linkage, threshold);
+
+        var flat_clusters = clusters.map(function (hcluster) {
+            return leaves(hcluster).map(function (leaf) {
+                return leaf.value;
+            });
+        });
+
+        clusters = flat_clusters;
+        console.log(clusters.length);
         res.json({clustersNum: clusters.length});
     });
 
