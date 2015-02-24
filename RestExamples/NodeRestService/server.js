@@ -2,17 +2,16 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var geolib     = require('geolib');
-var clusterfck = require('clusterfck');
+
 //var messages   = require('./models/messages.js');
 // Declare variables
 var fs = require('fs');
 //var messages = JSON.parse(fs.readFileSync('./models/10KMessages.json', 'utf8'));
-var messages = JSON.parse(fs.readFileSync('./models/5KMessages.json', 'utf8'));
-//var messages = JSON.parse(fs.readFileSync('./models/1KMessages.json', 'utf8'));
+//var messages = JSON.parse(fs.readFileSync('./models/5KMssages.json', 'utf8'));
+var messages = JSON.parse(fs.readFileSync('./models/1KMessages.json', 'utf8'));
 
 
-var port = process.env.PORT || 8080;    // Server's port
-var webAppPath = "../../";              // Path to client web application
+var port = process.env.PORT || 8081;    // Server's port
 
 // configure app
 var app = express();
@@ -92,9 +91,6 @@ router.route('/')
 
 // Register routers
 app.use('/messages', router);
-
-// Register client side web app
-app.use(express.static(webAppPath));
 
 // Start the server
 app.listen(port);

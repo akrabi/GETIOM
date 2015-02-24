@@ -1,8 +1,8 @@
 // Global application variables
 var GETIOM = {
     serverMessagesNum: null,
-    filteredMessages: null,
-    clusters: null,
+    filteredMessagesNum: null,
+    clustersNum: null,
     clusteringTime: null,
     filteringT1: null,
     filteringTime: null
