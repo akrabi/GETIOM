@@ -1,14 +1,12 @@
 var HCluster =
     {
         clusterMessages: function(messages, distance, linkage, threshold) {
-
+            var clusterfck = require('clusterfck');
+            var geolib     = require('geolib');
             var self = this;
 
             var metric = function(msg1, msg2) {
-                function locToLatLng(loc) {
-                    return new google.maps.LatLng(loc.latitude, loc.longitude);
-                }
-                return google.maps.geometry.spherical.computeDistanceBetween(locToLatLng(msg1.location), locToLatLng(msg2.location));
+                return geolib.getDistance(msg1.location, msg2.location);
             }
             var clusterfckLinkage = [clusterfck.SINGLE_LINKAGE, clusterfck.COMPLETE_LINKAGE,clusterfck.AVERAGE_LINKAGE][linkage];
 

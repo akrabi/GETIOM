@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
-
+//var hcluster   = require('./added_modules/hcluster');
 
 // Configuration parameters
 var restURL = "http://localhost:8081"
@@ -51,6 +51,25 @@ router.use(function(req, res, next) {
     next();
 });
 
+router.route('/filter')
+    .get(function(req, response) {
+        console.log('Handling filter request...');
+        var url = restURL+'/messages';
+        http.get(url, function(res) {
+            var chunks = '';
+
+            res.on('data', function(chunk) {
+                chunks += chunk;
+            });
+
+            res.on('end', function() {
+                messages = JSON.parse(chunks);
+                response.json({messagesNum: messages.length});
+            });
+        }).on('error', function(e) {
+            console.log("Got error: ", e);
+        });
+    });
 
 router.route('/filter/*')
     .get(function(req, response) {
@@ -72,10 +91,17 @@ router.route('/filter/*')
         });
     });
 
-router.route('/cluster')
+router.route('/cluster/hierarchical')
     .get(function(req, res) {
         console.log('Handling cluster request...');
-        res.json({messagesNum: messages.length});
+        var distance = req.query.distance;
+        var linkage = req.query.linkage;
+        var threshold = req.query.threshold;
+        console.log({distance: distance, linkage: linkage, threshold: threshold});
+        clusters = clusterfck.hcluster(messages, distance, linkage, threshold);
+        clusterfck.hcluster.SINGLE_LINKAGE
+        console.log(clusters);
+        res.json({clustersNum: clusters.length});
     });
 
 
