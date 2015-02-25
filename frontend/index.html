@@ -228,7 +228,7 @@
 </div>
 
 
-
+<!-- Results Modal -->
 <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="filterResultsModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -245,6 +245,20 @@
 </div>
 
 
+<!-- Processing Modal -->
+<div class="modal fade" id="processingModal" role="dialog" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <img src="img/loading.gif" class="icon" />
+                    <h4>Processing...</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Google Maps -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing,visualization,places"></script>
 <!-- JQuery -->
@@ -260,11 +274,11 @@
 <!-- Custom JS -->
 <script src="js/modules/Map.js"></script>
 <script src="js/modules/TimeSlider.js"></script>
+<script src="js/modules/HCluster.js"></script>
 <script src="js/main.js"></script>
 <script src="js/filter.js"></script>
 <script src="js/cluster.js"></script>
 <script src="js/results.js"></script>
-<script src="../backend/added_modules/HCluster.js"></script>
 
 </body>
 </html>

@@ -1,11 +1,5 @@
 function runAlgo() {
-    /*var processing = $('#resultsModal');
-    processing.find('.modal-body').html('Clustering...');
-    processing.find('button').hide();
-    processing.modal({
-        backdrop: 'static',
-        keyboard: false
-    });*/
+    $('#processingModal').modal();
     var algo = $('#algo').val();
     switch (algo) {
         case 'kmeans':
@@ -123,7 +117,7 @@ function radioValue(name) {
 }
 
 function clusteringDone() {
-    $('#resultsModal').modal('hide');
+    $('#processingModal').modal('hide');
     var resultsModal = $('#resultsModal');
     resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusters.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!')
     resultsModal.modal();
