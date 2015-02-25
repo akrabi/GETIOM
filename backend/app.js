@@ -141,33 +141,6 @@ router.route('/cluster/hierarchical')
 
         clusters = flat_clusters;
 
-        clusters.forEach(function (cluster) {
-            poly = terraformer.Polygon({
-                paths: cluster.map(function (item) {
-                    return new google.maps.LatLng(item.lat, item.lon);
-                }),
-                strokeColor: '#000',
-                strokeOpacity: 0.2,
-                strokeWeight: 2,
-                fillColor: '#000',
-                fillOpacity: 0.1
-            });
-
-
-            cluster.forEach(function (message) {
-                /*var marker = new google.maps.Marker({
-                 position: new google.maps.LatLng(message.location.latitude, message.location.longitude),
-                 map: map.getMapInstance()
-                 });*/
-                convexHull.addPoint(message.location.longitude, message.location.latitude);
-            });
-
-
-            if (convexHull.points.length > 0) {
-                var hullPoints = convexHull.getHull();
-
-
-                console.log(clusters.length);
         res.json(clusters);
     });
 
