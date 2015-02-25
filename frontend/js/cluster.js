@@ -1,4 +1,11 @@
 function runAlgo() {
+    /*var processing = $('#resultsModal');
+    processing.find('.modal-body').html('Clustering...');
+    processing.find('button').hide();
+    processing.modal({
+        backdrop: 'static',
+        keyboard: false
+    });*/
     var algo = $('#algo').val();
     switch (algo) {
         case 'kmeans':
@@ -75,9 +82,19 @@ function runHC() {
     var threshold = parseInt($('input[name="threshold"]').val());
 
     var t1 = Date.now();
+
+    /*$.ajax({
+        url: 'cluster/hierarchical?linkage='+linkage+'&distance='+distance+'&threshold='+threshold,
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            GETIOM.clustersNum = data.clustersNum;
+        }
+    });*/
+
     $.getJSON('cluster/hierarchical?linkage='+linkage+'&distance='+distance+'&threshold='+threshold, function( data ) {
-        GETIOM.clustersNum = data.clustersNum;
-        moveTo('cluster');
+        GETIOM.clusters = data;
+        clusteringDone();
     });
 
 //    GETIOM.clusters = HCluster.clusterMessages(GETIOM.filteredMessages, distance, linkage, threshold);
@@ -105,14 +122,18 @@ function radioValue(name) {
             return radios[i].value;
 }
 
+function clusteringDone() {
+    $('#resultsModal').modal('hide');
+    var resultsModal = $('#resultsModal');
+    resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusters.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!')
+    resultsModal.modal();
+    moveTo('results');
+}
+
 $(document).ready(function () {
     updateAlgo();
 });
 
 $('#submitCluster').click(function() {
     runAlgo();
-    var resultsModal = $('#resultsModal');
-    resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clustersNum + ' clusters in ' + GETIOM.clusteringTime + ' seconds!')
-    resultsModal.modal();
-    moveTo('results');
 })

@@ -13,8 +13,8 @@ var ResultsPage = {
     init: function() {
         // Draw Charts
         var filterData = [
-            {label: "", data: GETIOM.filteredMessages.length},
-            {label: "", data: GETIOM.serverMessagesNum-GETIOM.filteredMessages.length}
+            {label: "", data: GETIOM.filteredMessagesNum},
+            {label: "", data: GETIOM.databaseMessagesNum-GETIOM.filteredMessagesNum}
         ]
         var clusterData = GETIOM.clusters.map(function(cluster) {
             return {label:"", data: cluster.length};

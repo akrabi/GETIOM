@@ -1,9 +1,9 @@
 $(document).ready(function () {
     // Get number of messages stored in server's DB
     $.getJSON('messages/num', function( data ) {
-        GETIOM.serverMessagesNum = data.messagesNum;
+        GETIOM.databaseMessagesNum = data.messagesNum;
         var resultsModal = $('#resultsModal');
-        resultsModal.find('.modal-body').html('GETIOM Started.<br>Server DB contains ' + GETIOM.serverMessagesNum + ' messages!')
+        resultsModal.find('.modal-body').html('GETIOM Started.<br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!')
         resultsModal.modal();
     });
 

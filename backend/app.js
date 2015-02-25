@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
+var terraformer = require('terraformer');
 //var hcluster   = require('./added_modules/hcluster');
 
 // Configuration parameters
@@ -50,6 +51,26 @@ router.use(function(req, res, next) {
     console.log('Request routed...');
     next();
 });
+
+
+router.route('/messages/num')
+    .get(function(req, response) {
+        console.log('Retrieving number of messages in DB...');
+        var url = restURL+'/messages/num';
+        http.get(url, function(res) {
+            var chunks = '';
+
+            res.on('data', function(chunk) {
+                chunks += chunk;
+            });
+
+            res.on('end', function() {
+                response.json(JSON.parse(chunks));
+            });
+        }).on('error', function(e) {
+            console.log("Got error: ", e);
+        });
+    });
 
 router.route('/filter')
     .get(function(req, response) {
@@ -119,8 +140,35 @@ router.route('/cluster/hierarchical')
         });
 
         clusters = flat_clusters;
-        console.log(clusters.length);
-        res.json({clustersNum: clusters.length});
+
+        clusters.forEach(function (cluster) {
+            poly = terraformer.Polygon({
+                paths: cluster.map(function (item) {
+                    return new google.maps.LatLng(item.lat, item.lon);
+                }),
+                strokeColor: '#000',
+                strokeOpacity: 0.2,
+                strokeWeight: 2,
+                fillColor: '#000',
+                fillOpacity: 0.1
+            });
+
+
+            cluster.forEach(function (message) {
+                /*var marker = new google.maps.Marker({
+                 position: new google.maps.LatLng(message.location.latitude, message.location.longitude),
+                 map: map.getMapInstance()
+                 });*/
+                convexHull.addPoint(message.location.longitude, message.location.latitude);
+            });
+
+
+            if (convexHull.points.length > 0) {
+                var hullPoints = convexHull.getHull();
+
+
+                console.log(clusters.length);
+        res.json(clusters);
     });
 
 
