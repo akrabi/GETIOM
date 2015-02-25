@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var geolib     = require('geolib');
 
-//var messages   = require('./models/messages.js');
 // Declare variables
 var fs = require('fs');
 //var messages = JSON.parse(fs.readFileSync('./models/10KMessages.json', 'utf8'));
