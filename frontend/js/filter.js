@@ -28,12 +28,12 @@ $(document).ready(function () {
             var lat = circle.getCenter().lat();
             var lng = circle.getCenter().lng();
             var radius = circle.getRadius();
-            GETIOM.filteringT1 = Date.now();
+            GETIOM.filteringTime = Date.now();
             $.getJSON('filter/location/circle?lat='+lat+'&lng='+lng+'&radius='+radius, function( data ) {
                 var resultsModal = $('#resultsModal');
                 GETIOM.filteredMessagesNum = data.messagesNum;
                 var t2 = Date.now();
-                var ms = t2-GETIOM.filteringT1;     //time in milliseconds
+                var ms = t2-GETIOM.filteringTime;     //time in milliseconds
                 GETIOM.filteringTime = ms / 1000;
                 resultsModal.find('.modal-body').html('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!')
                 resultsModal.modal();
@@ -54,12 +54,12 @@ $(document).ready(function () {
             });
         }
         else {
-            GETIOM.filteringT1 = Date.now();
+            GETIOM.filteringTime = Date.now();
             $.getJSON('filter', function( data ) {
                 GETIOM.filteredMessagesNum = data.messagesNum;
                 var resultsModal = $('#resultsModal');
                 var t2 = Date.now();
-                var ms = t2-GETIOM.filteringT1;     //time in milliseconds
+                var ms = t2-GETIOM.filteringTime;     //time in milliseconds
                 GETIOM.filteringTime = ms / 1000;
                 resultsModal.find('.modal-body').html('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!')
                 resultsModal.modal();

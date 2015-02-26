@@ -1,12 +1,9 @@
 var http       = require('http');
-var bl         = require('bl');
 var express    = require('express');
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
-var terraformer = require('terraformer');
-//var hcluster   = require('./added_modules/hcluster');
 
 // Configuration parameters
 var restURL = "http://localhost:8081"
@@ -141,7 +138,7 @@ router.route('/cluster/hierarchical')
 
         clusters = flat_clusters;
 
-        res.json(clusters);
+        res.json(clusters.map(function(cluster) {return cluster.length}));
     });
 
 

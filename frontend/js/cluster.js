@@ -75,26 +75,14 @@ function runHC() {
     var distance = parseInt(radioValue('distance'));
     var threshold = parseInt($('input[name="threshold"]').val());
 
-    var t1 = Date.now();
-
-    /*$.ajax({
-        url: 'cluster/hierarchical?linkage='+linkage+'&distance='+distance+'&threshold='+threshold,
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-            GETIOM.clustersNum = data.clustersNum;
-        }
-    });*/
-
+    GETIOM.clusteringTime = Date.now();
     $.getJSON('cluster/hierarchical?linkage='+linkage+'&distance='+distance+'&threshold='+threshold, function( data ) {
-        GETIOM.clusters = data;
+        GETIOM.clusterSizeArray = data;
+        var t2 = Date.now();
+        var ms = t2-GETIOM.clusteringTime;     //time in milliseconds
+        GETIOM.clusteringTime = ms / 1000;
         clusteringDone();
     });
-
-//    GETIOM.clusters = HCluster.clusterMessages(GETIOM.filteredMessages, distance, linkage, threshold);
-    var t2 = Date.now();
-    var ms = t2-t1;     //time in milliseconds
-    GETIOM.clusteringTime = ms / 1000;
 }
 
 function runFCM() {
@@ -119,7 +107,7 @@ function radioValue(name) {
 function clusteringDone() {
     $('#processingModal').modal('hide');
     var resultsModal = $('#resultsModal');
-    resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusters.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!')
+    resultsModal.find('.modal-body').html('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!')
     resultsModal.modal();
     moveTo('results');
 }

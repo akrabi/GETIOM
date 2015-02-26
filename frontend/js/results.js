@@ -16,12 +16,12 @@ var ResultsPage = {
             {label: "", data: GETIOM.filteredMessagesNum},
             {label: "", data: GETIOM.databaseMessagesNum-GETIOM.filteredMessagesNum}
         ]
-        var clusterData = GETIOM.clusters.map(function(cluster) {
-            return {label:"", data: cluster.length};
+        var clusterData = GETIOM.clusterSizeArray.map(function(clusterSize) {
+            return {label:"", data: clusterSize};
         });
         var computationTime = [
-            {label: "Filtering Time", data: GETIOM.filteringTime},
-            {label: "Clustering Time", data: GETIOM.clusteringTime}
+            {label: "Filtering:" + GETIOM.filteringTime + ' sec', data: GETIOM.filteringTime},
+            {label: "Clustering:" + GETIOM.clusteringTime + ' sec', data: GETIOM.clusteringTime}
         ]
         $.plot('#resultsFilterChart', filterData, {
             series: {

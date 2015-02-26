@@ -2,11 +2,10 @@
 var GETIOM = {
     databaseMessagesNum: null,
     filteredMessagesNum: null,
-    clusters: null,
+    clusterSizeArray: null,
     clusteringTime: null,
-    filteringT1: null,
     filteringTime: null
-}
+};
 
 function moveTo(step) {
     var filter = $('#filter');
@@ -17,7 +16,7 @@ function moveTo(step) {
     var resultsStep = $('#resultsStep');
 
     if (step === 'filter') {
-        filter.show()
+        filter.show();
         cluster.hide();
         results.hide();
         filterStep.removeClass('complete , disabled').addClass('active');
@@ -25,7 +24,7 @@ function moveTo(step) {
         resultsStep.removeClass('complete , active').addClass('disabled');
     }
     else if (step === 'cluster') {
-        filter.hide()
+        filter.hide();
         cluster.show();
         results.hide();
         filterStep.removeClass('active , disabled').addClass('complete');
@@ -33,7 +32,7 @@ function moveTo(step) {
         resultsStep.removeClass('complete , active').addClass('disabled');
     }
     else if (step === 'results') {
-        filter.hide()
+        filter.hide();
         cluster.hide();
         results.show();
         filterStep.removeClass('active , disabled').addClass('complete');
