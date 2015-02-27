@@ -94,13 +94,3 @@ app.use('/messages', router);
 // Start the server
 app.listen(port);
 console.log('Node.js server started on port ' + port);
-
-
-
-
-
-//var timeMetric = function (msg1, msg2) {
-//    return Math.abs(msg1.time1 - msg2.time1); // return time difference (in milliseconds)
-//}
-//var threshold = 1800000; // 3hrs in milliseconds
-//var clusters = clusterfck.hcluster(messages, timeMetric, clusterfck.AVERAGE_LINKAGE, threshold); //TODO save clusters somewhere
