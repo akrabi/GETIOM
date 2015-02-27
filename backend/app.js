@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 
 
 // function to recieve filtered messages from REST API
-function getFilteredMessages(url) {
-    console.log(url);
+function getData(url, callback) {
+    console.log('Getting data from: ' + url);
     http.get(url, function(res) {
         var chunks = '';
 
@@ -33,7 +33,7 @@ function getFilteredMessages(url) {
         });
 
         res.on('end', function() {
-            messages = JSON.parse(chunks);
+            callback(JSON.parse(chunks));
         });
     }).on('error', function(e) {
         console.log("Got error: ", e);
@@ -54,18 +54,8 @@ router.route('/messages/num')
     .get(function(req, response) {
         console.log('Retrieving number of messages in DB...');
         var url = restURL+'/messages/num';
-        http.get(url, function(res) {
-            var chunks = '';
-
-            res.on('data', function(chunk) {
-                chunks += chunk;
-            });
-
-            res.on('end', function() {
-                response.json(JSON.parse(chunks));
-            });
-        }).on('error', function(e) {
-            console.log("Got error: ", e);
+        getData(url, function(messagesNum) {
+            response.json(messagesNum);
         });
     });
 
@@ -73,19 +63,9 @@ router.route('/filter')
     .get(function(req, response) {
         console.log('Handling filter request...');
         var url = restURL+'/messages';
-        http.get(url, function(res) {
-            var chunks = '';
-
-            res.on('data', function(chunk) {
-                chunks += chunk;
-            });
-
-            res.on('end', function() {
-                messages = JSON.parse(chunks);
-                response.json({messagesNum: messages.length});
-            });
-        }).on('error', function(e) {
-            console.log("Got error: ", e);
+        getData(url, function(data) {
+            messages = data;
+            response.json({messagesNum: messages.length});
         });
     });
 
@@ -93,19 +73,9 @@ router.route('/filter/*')
     .get(function(req, response) {
         console.log('Handling filter request...');
         var url = restURL+'/messages'+req.url;
-        http.get(url, function(res) {
-            var chunks = '';
-
-            res.on('data', function(chunk) {
-                chunks += chunk;
-            });
-
-            res.on('end', function() {
-                messages = JSON.parse(chunks);
-                response.json({messagesNum: messages.length});
-            });
-        }).on('error', function(e) {
-            console.log("Got error: ", e);
+        getData(url, function(data) {
+            messages = data;
+            response.json({messagesNum: messages.length});
         });
     });
 
