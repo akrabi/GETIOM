@@ -18,6 +18,11 @@ app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+function getMsgCoordinates(msg) {
+    return {latitude: msg.geometry.coordinates[0], longitude: msg.geometry.coordinates[1]};
+}
+
 // configure routers
 var router = express.Router();
 router.use(function(req, res, next) {
@@ -39,8 +44,8 @@ router.route('/filter/location/circle')
         var circleRadius = req.query.radius;
         var circleCenter = {latitude: req.query.lat, longitude: req.query.lng};
         if (!circleCenter || !circleRadius) next();
-        res.json(messages.filter(function(message) {
-            return geolib.isPointInCircle(message.location, circleCenter, circleRadius);
+        res.json(messages.filter(function(msg) {
+            return geolib.isPointInCircle(getMsgCoordinates(msg), circleCenter, circleRadius);
         }));
     });
 
@@ -70,16 +75,16 @@ router.route('/filter/location/rectangle')
                 longitude: lng1
             }
         ];
-        res.json(messages.filter(function(message) {
-            return geolib.isPointInside(message.location, rect);
+        res.json(messages.filter(function(msg) {
+            return geolib.isPointInside(getMsgCoordinates(msg), rect);
         }));
     });
 
 router.route('/filter/location/polygon')
     .get(function(req, res, next) {
         var polygon;
-        res.json(messages.filter(function(message) {
-            return geolib.isPointInside(message.location, polygon);
+        res.json(messages.filter(function(msg) {
+            return geolib.isPointInside(getMsgCoordinates(msg), polygon);
         }));
     });
 
