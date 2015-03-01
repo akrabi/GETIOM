@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
+var terraformer= require('terraformer');
 
 // Configuration parameters
 var restURL = "http://localhost:8081"
@@ -12,7 +13,8 @@ var webAppPath = "../frontend";         // Path to client web application
 
 // Declare global app variables
 var messages = null;
-var clusters = [];
+var clusters = null;
+var convexHulls = null;
 
 
 // configure app
@@ -81,13 +83,20 @@ router.route('/filter/*')
 
 router.route('/cluster/hierarchical')
     .get(function(req, res) {
+        if (!messages) {
+            console.log('Cannot cluster when no messages are loaded!');
+            res.json([]);
+        }
         console.log('Handling cluster request...');
         var distance = ['euclidean', 'manhattan', 'max'][req.query.distance];
         var linkage = ['single', 'complete', 'average'][req.query.linkage];
         var threshold = req.query.threshold;
 
         var metric = function(msg1, msg2) {
-            return geolib.getDistance(msg1.location, msg2.location);
+            //return geolib.getDistance(msg1.location, msg2.location);
+            var loc1 = {latitude: msg1.geometry.coordinates[0], longitude: msg1.geometry.coordinates[1]};
+            var loc2 = {latitude: msg2.geometry.coordinates[0], longitude: msg2.geometry.coordinates[1]};
+            return geolib.getDistance(loc1, loc2);
         }
 
         var leaves = function (hcluster) {
@@ -111,6 +120,21 @@ router.route('/cluster/hierarchical')
         res.json(clusters.map(function(cluster) {return cluster.length}));
     });
 
+
+router.route('/convexhulls')
+    .get(function(req, res) {
+        if (!clusters) {
+            console.log('Cannot cluster when no messages are loaded!');
+            res.json([]);
+        }
+        convexHulls = clusters.map(function(cluster) {
+            return terraformer.Tools.convexHull(cluster.map(function (geoPoint) {
+                //return terraformer.Tools.toGeographic(geoPoint);
+                return geoPoint.geometry.coordinates;
+            }));
+        });
+        res.json(convexHulls);
+    });
 
 // Register routers
 app.use('/', router);

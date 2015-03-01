@@ -171,6 +171,22 @@ var Map = function (domNode) {
             });
         },
 
+        addShapeTooltip: function(shape, html) {
+            shape.infoWindow = new google.maps.InfoWindow({
+                content: html
+            });
+            google.maps.event.addListener(shape, 'mouseover', function(e) {
+                var latLng = e.latLng;
+                this.setOptions({fillOpacity:0.1});
+                shape.infoWindow.setPosition(latLng);
+                shape.infoWindow.open(map);
+            });
+            google.maps.event.addListener(shape, 'mouseout', function() {
+                this.setOptions({fillOpacity:0.35});
+                shape.infoWindow.close();
+            });
+        },
+
         show: function () {
             domNode.style.display = 'inline-block';
             google.maps.event.trigger(map, 'resize');

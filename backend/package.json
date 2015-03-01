@@ -11,5 +11,10 @@
     "body-parser": "~1.0.1",
     "clusterfck": "*",
     "geolib": "*",
+    "terraformer": "*"
   }
 }
+
+
+
+
