@@ -7,6 +7,8 @@ var GETIOM = {
     filteringTime: null
 };
 
+//TODO clear data when going "back" from an advanced step....
+
 function moveTo(step) {
     var filter = $('#filter');
     var cluster = $('#cluster');
@@ -40,5 +42,5 @@ function moveTo(step) {
         resultsStep.removeClass('complete , disabled').addClass('active');
         ResultsPage.init();
     }
-    $( window ).scrollTop( 0 );
+    $(window).scrollTop(0);
 }

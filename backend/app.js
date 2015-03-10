@@ -2,17 +2,20 @@ var http       = require('http');
 var express    = require('express');
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
+var mongoose   = require('mongoose');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
 var terraformer= require('terraformer');
+var trends     = require('./trends/trends.js')
 
 // Configuration parameters
-var restURL = "http://localhost:8081"
+var restURL = "http://localhost:8081/messages"
 var port = process.env.PORT || 8080;    // Server's port
 var webAppPath = "../frontend";         // Path to client web application
+var dbURL = "mongodb://localhost:8082";
 
 // Declare global app variables
-var messages = null;
+var messages = require("../RestExamples/NodeRestService/models/1KMessages.json");//null;
 var clusters = null;
 var convexHulls = null;
 
@@ -23,6 +26,25 @@ app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+//mongoose.connect(dbURL);
+//var db = mongoose.connection;
+//
+//db.on('error', console.error.bind(console, 'connection error:'));
+//db.once('open', function (callback) {
+//    console.log('MongoDB Connected!');
+//});
+//
+//db.collection.insert(messages, function(error, results) {
+//    if (error) {
+//        console.log(error);
+//    }
+//    else {
+//        console.log(results);
+//    }
+//});
+var average = trends.average();
+console.log(average.findTrends(messages));
 
 // function to recieve filtered messages from REST API
 function getData(url, callback) {
@@ -55,7 +77,7 @@ router.use(function(req, res, next) {
 router.route('/messages/num')
     .get(function(req, response) {
         console.log('Retrieving number of messages in DB...');
-        var url = restURL+'/messages/num';
+        var url = restURL+'/num';
         getData(url, function(messagesNum) {
             response.json(messagesNum);
         });
@@ -64,7 +86,7 @@ router.route('/messages/num')
 router.route('/filter')
     .get(function(req, response) {
         console.log('Handling filter request...');
-        var url = restURL+'/messages';
+        var url = restURL;
         getData(url, function(data) {
             messages = data;
             response.json({messagesNum: messages.length});
@@ -74,7 +96,7 @@ router.route('/filter')
 router.route('/filter/*')
     .get(function(req, response) {
         console.log('Handling filter request...');
-        var url = restURL+'/messages'+req.url;
+        var url = restURL+req.url;
         getData(url, function(data) {
             messages = data;
             response.json({messagesNum: messages.length});
@@ -120,6 +142,14 @@ router.route('/cluster/hierarchical')
         res.json(clusters.map(function(cluster) {return cluster.length}));
     });
 
+router.route('/cluster/dbscan')
+    .get(function(req, res) {
+        if (!messages) {
+            console.log('Cannot cluster when no messages are loaded!');
+            res.json([]);
+        }
+        console.log('Handling cluster request...');
+    });
 
 router.route('/convexhulls')
     .get(function(req, res) {
@@ -134,6 +164,33 @@ router.route('/convexhulls')
             }));
         });
         res.json(convexHulls);
+    });
+
+router.route('/trends')
+    .get(function(req, res) {
+        res.json(trends.map(function(trend) {
+            return trend.name;
+        }));
+    });
+
+router.route('/trends')
+    .get(function(req, res) {
+        var trendResults = {};
+        for (var trend in trends) {
+            var trendyClusters = trend.findTrends(clusters);
+            trendResults && trendyClusters.length && (trendResults[trend] = trendyClusters);
+        }
+        res.json(trendResults);
+    });
+
+router.route('/trends/{name}')//TODO: find specific trend
+    .get(function(req, res) {
+        var trendResults = {};
+        for (var trend in trends) {
+            var trendyClusters = trend.findTrends(clusters);
+            trendResults && trendyClusters.length && (trendResults[trend] = trendyClusters);
+        }
+        res.json(trendResults);
     });
 
 // Register routers

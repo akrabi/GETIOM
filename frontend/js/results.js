@@ -61,7 +61,6 @@ var ResultsPage = {
     },
     loadPolygons: function (map) {
         for (var i=0; i < GETIOM.convexHulls.length; ++i) {
-        //.forEach(function (hull) {
             var hull = GETIOM.convexHulls[i];
             var hullPoints = hull.map(function (point) {
                 return new google.maps.LatLng(point[0], point[1]);
@@ -80,6 +79,6 @@ var ResultsPage = {
 
             map.addShapeTooltip(polyHull, '<div class="hullToolTip"></div><strong>Cluster size: '+GETIOM.clusterSizeArray[i]+'</strong></div>');
             polyHull.setMap(map.getMapInstance());
-        }//);
+        }
     }
 };
