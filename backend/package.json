@@ -12,7 +12,9 @@
     "mongoose": "*",
     "clusterfck": "*",
     "geolib": "*",
-    "terraformer": "*"
+    "terraformer": "*",
+    "terraformer-geostore": "*",
+    "terraformer-rtree": "*"
   }
 }
 

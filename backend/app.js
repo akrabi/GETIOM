@@ -6,7 +6,8 @@ var mongoose   = require('mongoose');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
 var terraformer= require('terraformer');
-var trends     = require('./trends/trends.js')
+var trends     = require('./trends/trends.js');
+
 
 // Configuration parameters
 var restURL = "http://localhost:8081/messages"
@@ -19,32 +20,25 @@ var messages = require("../RestExamples/NodeRestService/models/1KMessages.json")
 var clusters = null;
 var convexHulls = null;
 
-
 // configure app
 var app = express();
 app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
+//
 //mongoose.connect(dbURL);
-//var db = mongoose.connection;
-//
-//db.on('error', console.error.bind(console, 'connection error:'));
-//db.once('open', function (callback) {
+//mongoose.connection.once('open', function (callback) {
 //    console.log('MongoDB Connected!');
+//    db.collection.insert(messages, function(error, results) {
+//        if (error) {
+//            console.log(error);
+//        }
+//        else {
+//            console.log(results);
+//        }
+//    });
 //});
-//
-//db.collection.insert(messages, function(error, results) {
-//    if (error) {
-//        console.log(error);
-//    }
-//    else {
-//        console.log(results);
-//    }
-//});
-var average = trends.average();
-console.log(average.findTrends(messages));
 
 // function to recieve filtered messages from REST API
 function getData(url, callback) {
@@ -166,31 +160,10 @@ router.route('/convexhulls')
         res.json(convexHulls);
     });
 
-router.route('/trends')
+router.route('/trends/:cluster')
     .get(function(req, res) {
-        res.json(trends.map(function(trend) {
-            return trend.name;
-        }));
-    });
-
-router.route('/trends')
-    .get(function(req, res) {
-        var trendResults = {};
-        for (var trend in trends) {
-            var trendyClusters = trend.findTrends(clusters);
-            trendResults && trendyClusters.length && (trendResults[trend] = trendyClusters);
-        }
-        res.json(trendResults);
-    });
-
-router.route('/trends/{name}')//TODO: find specific trend
-    .get(function(req, res) {
-        var trendResults = {};
-        for (var trend in trends) {
-            var trendyClusters = trend.findTrends(clusters);
-            trendResults && trendyClusters.length && (trendResults[trend] = trendyClusters);
-        }
-        res.json(trendResults);
+        var cluster = clusters[req.params.cluster];
+        res.json(trends.average.findTrends(cluster));
     });
 
 // Register routers

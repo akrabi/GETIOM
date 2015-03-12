@@ -61,64 +61,26 @@
 
 <!-- Filter -->
 <div id="filter" class="panel-group">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a id="filterLocationCollapse" data-toggle="collapse" data-parent="#filter" href="#collapseOne">Filter By Location</a>
-            </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse">
-            <div class="panel-body">
-                <form id="filterLocationForm" class="form-horizontal" align="center">
-                    <fieldset><!-- Location -->
-                        <div class="content"><div id="filterLocationMap" class="map-canvas"></div></div>
-                    </fieldset>
-                    <!-- Submit Button -->
-                    <button id="filterLocationSubmit"  name="filterLocationSubmit" class="btn btn-success">Apply Filters</button>
+    <form id="filterLocationForm" class="form-horizontal" align="center">
+        <fieldset><!-- Location -->
+            <div class="content"><div id="filterLocationMap" class="map-canvas"></div></div>
+        </fieldset>
+        <!-- Submit Button -->
+        <button id="filterLocationSubmit"  name="filterLocationSubmit" class="btn btn-success">Apply Filters</button>
 
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#filter" href="#collapseTwo">Filter By Time</a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
-            <div class="panel-body">
-                <form id="filterTimeForm" class="form-horizontal" align="center">
-                    <fieldset><!-- Time -->
-                        <div id="filterTimeSlider"></div>
-                    </fieldset>
+    </form>
 
-                    <!-- Submit Button -->
-                    <button id="filterTimeSubmit"  name="filterTimeSubmit" class="btn btn-success">Apply Filters</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#filter" href="#collapseThree">Filter By Content</a>
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse">
-            <div class="panel-body">
-                <form id="filterContentForm" class="form-horizontal" align="center">
-                    <fieldset>
+    <form id="filterTimeForm" class="form-horizontal" align="center">
+        <fieldset><!-- Time -->
+            <div id="filterTimeSlider"></div>
+        </fieldset>
 
-                    </fieldset>
-
-                    <!-- Submit Button -->
-                    <button id="filterContentSubmit"  name="filterContentSubmit" class="btn btn-success">Apply Filters</button>
-                </form>
-            </div>
-        </div>
-    </div>
+        <!-- Submit Button -->
+        <button id="filterTimeSubmit"  name="filterTimeSubmit" class="btn btn-success">Apply Filters</button>
+    </form>
 </div>
+
+
 
 <!-- Cluster -->
 <div id="cluster">
