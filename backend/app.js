@@ -2,7 +2,6 @@ var http       = require('http');
 var express    = require('express');
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
-var mongoose   = require('mongoose');
 var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
 var terraformer= require('terraformer');
@@ -13,7 +12,6 @@ var trends     = require('./trends/trends.js');
 var restURL = "http://localhost:8081/messages"
 var port = process.env.PORT || 8080;    // Server's port
 var webAppPath = "../frontend";         // Path to client web application
-var dbURL = "mongodb://localhost:8082";
 
 // Declare global app variables
 var messages = require("../RestExamples/NodeRestService/models/1KMessages.json");//null;
@@ -26,19 +24,6 @@ app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//
-//mongoose.connect(dbURL);
-//mongoose.connection.once('open', function (callback) {
-//    console.log('MongoDB Connected!');
-//    db.collection.insert(messages, function(error, results) {
-//        if (error) {
-//            console.log(error);
-//        }
-//        else {
-//            console.log(results);
-//        }
-//    });
-//});
 
 // function to recieve filtered messages from REST API
 function getData(url, callback) {
