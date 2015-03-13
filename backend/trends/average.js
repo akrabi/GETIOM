@@ -25,9 +25,10 @@ var average = function() {
     }
 
     return {
-        findTrends: function(cluster) {
+        findTrends: function(cluster, params) {
             var messagesPerDay = {};
             var daysArray = [];
+            var factor = params.factor;
             cluster.forEach(function(point) {
                 var date = new Date(point.properties.time*1000);
                 var day = date.toDateString();
@@ -43,7 +44,7 @@ var average = function() {
             var sd = standardDeviation(daysArray);
 
             return daysArray.filter(function(day) {
-               return day.messages > avgMsgPerDay + sd || day.messages < avgMsgPerDay - sd
+               return day.messages > avgMsgPerDay + sd*factor || day.messages < avgMsgPerDay - sd*factor;
             });
 
         }

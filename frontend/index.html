@@ -16,6 +16,7 @@
 </head>
 <body>
 
+<!-- Heading -->
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -24,6 +25,8 @@
     </div>
 </nav>
 
+
+<!-- Progress Bar -->
 <div id="progress_steps">
     <div class="row bs-wizard">
         <div id="filterStep" class="col-xs-4 bs-wizard-step active">
@@ -88,10 +91,9 @@
         <div id="algo_panel">
             <fieldset id="algorithms">
                 <legend>Clustering algorithm</legend>
-                <select id="algo" onchange="updateAlgo();">
+                <select id="cluster_algo_select">
                     <option value="hierarchical" selected>Hierarchical clustering</option>
                     <option value="kmeans">K-means</option>
-                    <option value="fcmeans">Fuzzy C-means (Experimental)</option>
                 </select>
             </fieldset>
         </div>
@@ -113,27 +115,6 @@
                         <option value="8">8</option>
                         <option value="9">9</option>
                     </select>
-                </fieldset>
-            </div>
-
-            <div id="fcm_panel">
-                <fieldset id="fcm_params">
-                    <legend>Control panel</legend>
-                    Number of clusters (K):
-                    <select id="FCM-K">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4" selected="selected">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
-                    <br/>
-                    Epsilon: <input id="epsilon" value="0.3" size="5"/>
-                    <br/>
-                    Fuzziness: <input id="fuzziness" value="2" size="5"/>
                 </fieldset>
             </div>
 
@@ -183,11 +164,64 @@
             <div id="resultsComputationChart" class="resultsChart"></div>
         </div>
     </div>
-    <br>
-    <input id="resultsShowMap" type="button" class="btn btn-success" value="Show on map"/>
-    <br>
+
     <div id="resultsMap" class="map-canvas"></div>
+
+
+    <!-- Trend Detection -->
+    <div id="trends" align="center">
+        <div id="trend_input_panel">
+            <div id="trend_algo_panel">
+                <fieldset id="trend_algorithms">
+                    <legend>Trends</legend>
+                    <select id="trend_algo_select">
+                        <option value="standard deviation" selected>Standard Deviation</option>
+                        <option value="linear regression">Linear Regression</option>
+                        <option value="running average">Running Average</option>
+                    </select>
+                </fieldset>
+            </div>
+
+
+            <div id="trend_param_panel">
+                <div id="sd_panel">
+                    <fieldset id="sd_params">
+                        <legend>Control panel</legend>
+                        Multiple of SD to consider as trend:
+                        <input type="text" name="sd" value="1" />
+                    </fieldset>
+                </div>
+
+                <div id="lr_panel">
+                    <fieldset id="lr_params">
+                        <legend>Control panel</legend>
+
+                    </fieldset>
+                </div>
+
+                <div id="ra_panel">
+                    <fieldset id="ra_params">
+                        <legend>Control panel</legend>
+
+                    </fieldset>
+                </div>
+
+                <div id="trend_button" style="">
+                    <div style="display:table-row; width:100%;text-align:center;">
+                        <div style="vertical-align: middle; display:table-cell;">
+                            <input id="submitTrend" type="button" class="btn btn-success" value="Find Trends"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
+
+
 
 
 <!-- Results Modal -->
@@ -229,14 +263,13 @@
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <!-- Included JS Libs -->
-<script src="js/libs/clusterfck.js"></script>
-<script src="js/libs/graham_scan.js"></script>
 <script src="js/libs/flot/jquery.flot.min.js"></script>
 <script src="js/libs/flot/jquery.flot.pie.min.js"></script>
 <!-- Custom JS -->
 <script src="js/modules/Map.js"></script>
 <script src="js/modules/TimeSlider.js"></script>
 <script src="js/modules/HCluster.js"></script>
+<script src="js/modules/SelectiveForm.js"></script>
 <script src="js/main.js"></script>
 <script src="js/filter.js"></script>
 <script src="js/cluster.js"></script>

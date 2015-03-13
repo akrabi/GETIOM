@@ -44,3 +44,10 @@ function moveTo(step) {
     }
     $(window).scrollTop(0);
 }
+
+
+function modalMessage(msg) { //TODO add title option, build html around title and msg
+    var resultsModal = $('#resultsModal');
+    resultsModal.find('.modal-body').html(msg);
+    resultsModal.modal();
+}

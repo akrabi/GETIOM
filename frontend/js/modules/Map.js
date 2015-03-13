@@ -7,6 +7,10 @@ var Map = function (domNode) {
     var center = null;
     var shapes = [];
     var markers = [];
+    var clusters = [];
+    var selectedCluster = null;
+    var normalClusterColor = '#000';
+    var selectedClusterColor = '#FFF';
 
     function drawRectangle() {
         drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
@@ -24,6 +28,17 @@ var Map = function (domNode) {
             var shape = shapes.pop();
             shape.overlay.setMap(null);
         }
+    }
+
+    function clearSelection() {
+        selectedCluster && selectedCluster.set('fillColor', normalClusterColor);
+        selectedCluster = null;
+    }
+
+    function setSelectedCluster(cluster) {
+        clearSelection();
+        cluster.set('fillColor', selectedClusterColor);
+        selectedCluster = cluster;
     }
 
     return {
@@ -171,20 +186,51 @@ var Map = function (domNode) {
             });
         },
 
-        addShapeTooltip: function(shape, html) {
-            shape.infoWindow = new google.maps.InfoWindow({
-                content: html
+        addClusterPolygon: function(clusterHullPoints, clusterSize) {
+            var polyHull = new google.maps.Polygon({
+                paths: clusterHullPoints,
+                strokeColor: normalClusterColor,
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: normalClusterColor,
+                fillOpacity: 0.35,
+                clickable: true
             });
-            google.maps.event.addListener(shape, 'mouseover', function(e) {
+
+            clusters.push(polyHull);
+            polyHull.setMap(map);
+            polyHull.infoWindow = new google.maps.InfoWindow({
+                content: '<div class="hullToolTip"></div><strong>Cluster size: '+clusterSize+'</strong></div>'
+            });
+
+            google.maps.event.addListener(polyHull, 'click', function() {
+                setSelectedCluster(polyHull);
+            });
+
+            google.maps.event.addListener(polyHull, 'mouseover', function(e) {
                 var latLng = e.latLng;
-                this.setOptions({fillOpacity:0.1});
-                shape.infoWindow.setPosition(latLng);
-                shape.infoWindow.open(map);
+                polyHull.infoWindow.setPosition(latLng);
+                polyHull.infoWindow.open(map);
             });
-            google.maps.event.addListener(shape, 'mouseout', function() {
-                this.setOptions({fillOpacity:0.35});
-                shape.infoWindow.close();
+            google.maps.event.addListener(polyHull, 'mouseout', function() {
+                polyHull.infoWindow.close();
             });
+        },
+
+        deleteAllClusters: function() {
+            clusters.forEach(function(cluster) {
+                cluster.setMap(null);
+            });
+            clusters = [];
+        },
+
+        getSelectedClusterIndex: function() {
+            for (var i=0; i<clusters.length; ++i) {
+                if (selectedCluster === clusters[i]) {
+                    return i;
+                }
+            }
+            return -1;
         },
 
         show: function () {

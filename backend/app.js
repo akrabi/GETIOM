@@ -160,10 +160,10 @@ router.route('/convexhulls')
         res.json(convexHulls);
     });
 
-router.route('/trends/:cluster')
+router.route('/trends/:trend/:cluster')
     .get(function(req, res) {
         var cluster = clusters[req.params.cluster];
-        res.json(trends.average.findTrends(cluster));
+        res.json(trends[req.params.trend].findTrends(cluster, req.query));
     });
 
 // Register routers
