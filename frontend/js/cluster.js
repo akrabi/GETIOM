@@ -34,6 +34,23 @@ function runHC() {
     });
 }
 
+
+function runGrid() {
+    $('#processingModal').modal();
+    var optional = parseInt($('input[name="optional"]').val());
+    //TODO: Get more options from the Control Panel
+    GETIOM.clusteringTime = Date.now();
+    $.getJSON('cluster/grid', function( data ) {
+        //TODO: Add some logic here.
+
+        GETIOM.clusterSizeArray = data;
+        var t2 = Date.now();
+        var ms = t2-GETIOM.clusteringTime;     //time in milliseconds
+        GETIOM.clusteringTime = ms / 1000;
+        clusteringDone();
+    });
+}
+
 function radioValue(name) {
     var radios = $('input[name='+name+']');
     for (var i = 0; i < radios.length; i++)
@@ -54,7 +71,7 @@ function clusteringError(msg) {
 }
 
 $(document).ready(function () {
-    var clusterForm = new SelectiveForm(['kmeans', 'hierarchical'], ['km_panel', 'hc_panel'], 'cluster_algo_select', [runKM, runHC]);
+    var clusterForm = new SelectiveForm(['kmeans', 'hierarchical', 'grid'], ['km_panel', 'hc_panel','grid_panel'], 'cluster_algo_select', [runKM, runHC, runGrid]);
     clusterForm.init();
     $('#submitCluster').click(function() {
         clusterForm.submit();

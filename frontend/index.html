@@ -94,13 +94,13 @@
                 <select id="cluster_algo_select">
                     <option value="hierarchical" selected>Hierarchical clustering</option>
                     <option value="kmeans">K-means</option>
+                    <option value="grid">Grid</option>
                 </select>
             </fieldset>
         </div>
 
 
         <div id="param_panel">
-
             <div id="km_panel">
                 <fieldset id="km_params">
                     <legend>Control panel</legend>
@@ -135,6 +135,21 @@
                     <input type="text" name="threshold" value="2500" />
                 </fieldset>
             </div>
+
+            <div id="grid_panel">
+                <fieldset id="grid_params">
+                    <legend>Control panel</legend>
+                    Options:
+                    <input type="radio" name="distance" value="0" checked/>Option 1
+                    <input type="radio" name="distance" value="1"/>Option 2
+                    <input type="radio" name="distance" value="2"/>Option 3<br/>
+                    <br/>
+                    Text Option:
+                    <input type="text" name="demo" value="2500" />
+                </fieldset>
+            </div>
+
+
 
             <div id="cluster_button" style="">
                 <div style="display:table-row; width:100%;text-align:center;">
