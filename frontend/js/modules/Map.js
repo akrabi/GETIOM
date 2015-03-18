@@ -31,7 +31,10 @@ var Map = function (domNode) {
     }
 
     function clearSelection() {
-        selectedCluster && selectedCluster.set('fillColor', normalClusterColor);
+        if (selectedCluster) {
+            selectedCluster.set('fillColor', normalClusterColor);
+            selectedCluster.infoWindow.close();
+        }
         selectedCluster = null;
     }
 
@@ -200,20 +203,14 @@ var Map = function (domNode) {
             clusters.push(polyHull);
             polyHull.setMap(map);
             polyHull.infoWindow = new google.maps.InfoWindow({
-                content: '<div class="hullToolTip"></div><strong>Cluster size: '+clusterSize+'</strong></div>'
+                content: '<div class="hullToolTip"><strong>Cluster size: '+clusterSize+'</strong></div>',
             });
 
-            google.maps.event.addListener(polyHull, 'click', function() {
+            google.maps.event.addListener(polyHull, 'click', function(e) {
                 setSelectedCluster(polyHull);
-            });
-
-            google.maps.event.addListener(polyHull, 'mouseover', function(e) {
                 var latLng = e.latLng;
                 polyHull.infoWindow.setPosition(latLng);
                 polyHull.infoWindow.open(map);
-            });
-            google.maps.event.addListener(polyHull, 'mouseout', function() {
-                polyHull.infoWindow.close();
             });
         },
 
