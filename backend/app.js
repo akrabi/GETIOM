@@ -161,7 +161,7 @@ router.route('/cluster/dbscan')
 router.route('/convexhulls')
     .get(function(req, res) {
         if (!clusters) {
-            console.log('Cannot cluster when no messages are loaded!');
+            console.log('No clusters to display...');
             res.json([]);
         }
         convexHulls = clusters.map(function(cluster) {
