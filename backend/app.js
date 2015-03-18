@@ -14,7 +14,7 @@ var port = process.env.PORT || 8080;    // Server's port
 var webAppPath = "../frontend";         // Path to client web application
 
 // Declare global app variables
-var messages = require("../RestExamples/NodeRestService/models/1KMessages.json");//null;
+var messages = require("../RestExamples/NodeRestService/models/1KMessages.json");
 var clusters = null;
 var convexHulls = null;
 
@@ -23,6 +23,21 @@ var app = express();
 app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+//TODO consider usage of GeoStore
+//var GeoStore = require('terraformer-geostore').GeoStore;
+//var RTree = require('terraformer-rtree').RTree;
+//var Memory = require('terraformer-geostore-memory').Memory;
+//var store = new GeoStore({
+//    store: new Memory(),
+//    index: new RTree()
+//});
+//
+//store.add(messages, function(err, res){
+//    err && console.log('Error!!! ' + err);
+//    res && console.log('Success!!');
+//});
 
 
 // function to recieve filtered messages from REST API
@@ -118,6 +133,19 @@ router.route('/cluster/hierarchical')
 
         clusters = flat_clusters;
 
+        res.json(clusters.map(function(cluster) {return cluster.length}));
+    });
+
+router.route('/cluster/kmeans')
+    .get(function(req, res) {
+        console.log('Initiating kmeans clustering...');
+        var k = req.query.k;
+        var metric = function(msg1, msg2) {
+            var loc1 = {latitude: msg1.geometry.coordinates[0], longitude: msg1.geometry.coordinates[1]};
+            var loc2 = {latitude: msg2.geometry.coordinates[0], longitude: msg2.geometry.coordinates[1]};
+            return geolib.getDistance(loc1, loc2);
+        }
+        clusters = clusterfck.kmeans(messages, k, metric);
         res.json(clusters.map(function(cluster) {return cluster.length}));
     });
 
