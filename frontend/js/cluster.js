@@ -1,4 +1,5 @@
 function runKM() {
+    $('#processingModal').modal();
     var domobj = document.getElementById('KM-K');
     var K = parseInt(domobj.options[domobj.selectedIndex].value);
 
