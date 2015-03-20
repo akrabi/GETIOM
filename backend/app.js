@@ -125,7 +125,7 @@ router.route('/cluster/hierarchical')
 
         clusters = clusterfck.hcluster(messages, metric, linkage, threshold);
 
-        var flat_clusters = clusters.map(function (hcluster) {
+        var flat_clusters = clusters.map(function (hcluster) { //TODO do it without recursion
             return leaves(hcluster).map(function (leaf) {
                 return leaf.value;
             });

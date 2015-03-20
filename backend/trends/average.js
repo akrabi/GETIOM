@@ -1,7 +1,7 @@
 var average = function() {
-
+    var trendUtils = require('./trendUtils.js');
     function standardDeviation(daysArray){
-        var avg = average(daysArray.map(function(day) {return day.messages;}));
+        var avg = trendUtils.average(daysArray.map(function(day) {return day.messages;}));
 
         var squareDiffs = daysArray.map(function(day){
             var diff = day.messages - avg;
@@ -9,31 +9,19 @@ var average = function() {
             return sqrDiff;
         });
 
-        var avgSquareDiff = average(squareDiffs);
+        var avgSquareDiff = trendUtils.average(squareDiffs);
 
         var stdDev = Math.sqrt(avgSquareDiff);
         return stdDev;
     }
 
-    function average(array){
-        var sum = array.reduce(function(sum, val){
-            return sum + val;
-        }, 0);
-
-        var avg = sum / array.length;
-        return avg;
-    }
 
     return {
         findTrends: function(cluster, params) {
-            var messagesPerDay = {};
+            var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
             var daysArray = [];
             var factor = params.factor;
-            cluster.forEach(function(point) {
-                var date = new Date(point.properties.time*1000);
-                var day = date.toDateString();
-                messagesPerDay[day] = messagesPerDay[day] ? messagesPerDay[day]+1 : 1;
-            });
+
             for (var day in messagesPerDay) {
                 daysArray.push({day: day, messages: messagesPerDay[day]});
             }
