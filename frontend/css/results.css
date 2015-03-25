@@ -5,6 +5,11 @@
     margin: 20px;
 }
 
+#trend_results {
+    height: 300px;
+    width: 50%;
+}
+
 .resultsChart {
     height: 200px;
 }

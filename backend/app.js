@@ -6,7 +6,7 @@ var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
 var terraformer= require('terraformer');
 var trends     = require('./trends/trends.js');
-var clustering  = require('./clustering/clustering.js');
+var clustering = require('./clustering/clustering.js');
 
 
 // Configuration parameters

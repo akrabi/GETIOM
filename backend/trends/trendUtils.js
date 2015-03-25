@@ -10,10 +10,10 @@ module.exports = {
     findMessagesPerDay: function(cluster) {
         var messagesPerDay = {};
         cluster.forEach(function(point) {
-            var date = new Date(point.properties.time*1000);
-            var day = date.toDateString();
+            var day = Math.floor(point.properties.time/86400)*86400000; // Convert unix timestamp to day in miliseconds
             messagesPerDay[day] = messagesPerDay[day] ? messagesPerDay[day]+1 : 1;
         });
         return messagesPerDay;
     }
+
 }

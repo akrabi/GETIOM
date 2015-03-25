@@ -1,10 +1,10 @@
 var StandardDeviation = function() {
     var trendUtils = require('./trendUtils.js');
     function standardDeviation(daysArray){
-        var avg = trendUtils.average(daysArray.map(function(day) {return day.messages;}));
+        var avg = trendUtils.average(daysArray.map(function(day) {return day[1];}));
 
         var squareDiffs = daysArray.map(function(day){
-            var diff = day.messages - avg;
+            var diff = day[1] - avg;
             var sqrDiff = diff * diff;
             return sqrDiff;
         });
@@ -23,16 +23,14 @@ var StandardDeviation = function() {
             var factor = params.factor;
 
             for (var day in messagesPerDay) {
-                daysArray.push({day: day, messages: messagesPerDay[day]});
+                daysArray.push([parseInt(day), messagesPerDay[day]]);
             }
-            daysArray.sort(function(day1, day2) {       //TODO sort by actual date!!!!!!
-                return day1.messages - day2.messages;
-            });
+
             var avgMsgPerDay = cluster.length / daysArray.length //Number of messages divided by number of days
             var sd = standardDeviation(daysArray);
 
             var trends = daysArray.filter(function(day) {
-               return day.messages > avgMsgPerDay + sd*factor || day.messages < avgMsgPerDay - sd*factor;
+               return day[1] > avgMsgPerDay + sd*factor || day[1] < avgMsgPerDay - sd*factor;
             });
 
             return {

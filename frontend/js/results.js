@@ -79,14 +79,19 @@ function runSD(){
             else {
                 var result = 'Found trend on';
                 for (var i=0; i<trends.length; ++i) {
-                    result = result + ' ' + trends[i].day;
+                    result = result + ' ' + trends[i][0];
                 }
                 modalMessage(result);
+                $.plot("#trend_results", [trends], {
+                    xaxis: { mode: "time" },
+                    lines: { show: false },
+                    points: { show: true }
+                });
             }
         });
     }
     else {
-        modalMessage('No cluster selected')
+        modalMessage('No cluster selected');
     }
 }
 
@@ -102,6 +107,9 @@ function runLR(){
             }
             else {
                 var line = data.additional.line;
+                $.plot("#trend_results", [trends], {
+                    xaxis: { mode: "time" }
+                });
             }
         });
     }
