@@ -1,5 +1,5 @@
-//module.exports = {
-//    name1: require("./name1"),
-//    name2: require("./name2"),
-//    name3: require("./name3")
-//};
+module.exports = {
+    hierarchical: require("./hierarchical.js"),
+    kmeans: require("./kmeans.js"),
+    grid: require("./grid.js")
+};

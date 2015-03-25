@@ -72,13 +72,14 @@ function runSD(){
     var sdFactor = parseFloat($('input[name="sd"]').val());
     if (clusterIndex > -1) {
         $.getJSON('trends/standard_deviation/'+clusterIndex+'?factor='+sdFactor, function( data ) {
-            if (data.length == 0) {
+            var trends = data && data.trends;
+            if (!trends || trends.length == 0) {
                 modalMessage('No trends found!');
             }
             else {
                 var result = 'Found trend on';
-                for (var i=0; i<data.length; ++i) {
-                    result = result + ' ' + data[i].day;
+                for (var i=0; i<trends.length; ++i) {
+                    result = result + ' ' + trends[i].day;
                 }
                 modalMessage(result);
             }
@@ -90,7 +91,23 @@ function runSD(){
 }
 
 function runLR(){
-
+    var map = ResultsPage.map;
+    var clusterIndex = map.getSelectedClusterIndex();
+    var threshold = parseFloat($('input[name="lr"]').val());
+    if (clusterIndex > -1) {
+        $.getJSON('trends/linear_regression/'+clusterIndex+'?threshold='+threshold, function( data ) {
+            var trends = data.trends;
+            if (trends.length == 0) {
+                modalMessage('No trends found!');
+            }
+            else {
+                var line = data.additional.line;
+            }
+        });
+    }
+    else {
+        modalMessage('No cluster selected')
+    }
 }
 
 function runRA() {

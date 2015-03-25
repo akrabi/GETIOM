@@ -1,5 +1,5 @@
 module.exports = {
-    standard_deviation: require("./average.js")
-//    name2: require("./name2"),
-//    name3: require("./name3")
+    standard_deviation: require("./standard_deviation.js"),
+    linear_regression: require("./linear_regression.js"),
+    running_average: require("./running_average.js")
 };

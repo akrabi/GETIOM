@@ -1,6 +1,6 @@
 var LinearRegression = function() {
     var trendUtils = require('./trendUtils.js');
-    function findLineByLeastSquares(data) {
+    function findLineByLeastSquares(values_x, values_y) {
         var sum_x = 0;
         var sum_y = 0;
         var sum_xy = 0;
@@ -12,19 +12,23 @@ var LinearRegression = function() {
          */
         var x = 0;
         var y = 0;
-        var length = data.length;
+        var values_length = values_x.length;
+
+        if (values_length != values_y.length) {
+            throw new Error('The parameters values_x and values_y need to have same size!');
+        }
 
         /*
          * Nothing to do.
          */
-        if (length === 0) {
+        if (values_length === 0) {
             return [ [], [] ];
         }
 
         /*
          * Calculate the sum for each of the parts necessary.
          */
-        for (var v = 0; v < length; v++) {
+        for (var v = 0; v < values_length; v++) {
             x = values_x[v];
             y = values_y[v];
             sum_x += x;
@@ -48,7 +52,13 @@ var LinearRegression = function() {
         findTrends: function(cluster, params) {
             var threshold = params.threshold;
             var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
-            var line = findLineByLeastSquares(messagesPerDay);
+            values_x = [];
+            values_y = [];
+            for (var day in messagesPerDay) {
+                values_x.push(day/(1000*60*60*24));
+                values_y.push(messagesPerDay[day]);
+            }
+            var line = findLineByLeastSquares(values_x, values_y);
             var f = function(x) {return line[0]*x+line[1]};
             var clusterSize = cluster.length;
 
@@ -60,7 +70,15 @@ var LinearRegression = function() {
                     trends.push(day);
                 }
             }
-            return trends;
+            return {
+                trends: trends,
+                additional: {
+                    line: line
+                }
+            };
         }
     };
-}
+}();
+
+
+module.exports = LinearRegression;

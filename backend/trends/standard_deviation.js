@@ -1,4 +1,4 @@
-var average = function() {
+var StandardDeviation = function() {
     var trendUtils = require('./trendUtils.js');
     function standardDeviation(daysArray){
         var avg = trendUtils.average(daysArray.map(function(day) {return day.messages;}));
@@ -31,12 +31,20 @@ var average = function() {
             var avgMsgPerDay = cluster.length / daysArray.length //Number of messages divided by number of days
             var sd = standardDeviation(daysArray);
 
-            return daysArray.filter(function(day) {
+            var trends = daysArray.filter(function(day) {
                return day.messages > avgMsgPerDay + sd*factor || day.messages < avgMsgPerDay - sd*factor;
             });
+
+            return {
+                trends: trends,
+                additional: {
+                    average: avgMsgPerDay,
+                    sd: sd
+                }
+            }
 
         }
     }
 }();
 
-module.exports = average;
+module.exports = StandardDeviation;
