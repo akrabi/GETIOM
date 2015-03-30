@@ -7,7 +7,9 @@ var geolib     = require('geolib');
 var fs = require('fs');
 //var messages = JSON.parse(fs.readFileSync('./models/10KMessages.json', 'utf8'));
 //var messages = JSON.parse(fs.readFileSync('./models/5KMssages.json', 'utf8'));
-var messages = JSON.parse(fs.readFileSync('./models/1KMessages.json', 'utf8'));
+//var messages = JSON.parse(fs.readFileSync('./models/1KMessages.json', 'utf8'));
+//var messages = JSON.parse(fs.readFileSync('./models/100KNewFormat.json', 'utf8'));
+var messages = JSON.parse(fs.readFileSync('./models/1KNewNEWNEWNEWFormat.json', 'utf8'));
 
 
 var port = process.env.PORT || 8081;    // Server's port

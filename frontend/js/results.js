@@ -4,10 +4,15 @@ var ResultsPage = {
         var map = new Map($('#resultsMap')[0]);
         this.map = map;
         map.init(40.821715, -74.122381);               //TODO optimize zoom and location to display results
+        $.getJSON('grid', function(data) {
+            GETIOM.gridData = data;
+            ResultsPage.loadGrid(map);
+        });
         $.getJSON('convexhulls', function(data) {
             GETIOM.convexHulls = data;
             ResultsPage.loadPolygons(map);
         });
+
 
         // Draw Charts
         var filterData = [
@@ -61,6 +66,13 @@ var ResultsPage = {
                 return new google.maps.LatLng(point[0], point[1]);
             });
             map.addClusterPolygon(hullPoints, GETIOM.clusterSizeArray[i]);
+        }
+    },
+    loadGrid: function (map) {
+        console.log('Trying to load the GRID!!!!!!!!!!!!!!!!!!!!');
+        for (var i=0; i < GETIOM.messagesNum; ++i) {
+
+    //TODO: OMER - ADD THE POINTS TO THE CLUSTERER ?
         }
     }
 };

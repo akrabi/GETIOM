@@ -56,6 +56,10 @@ var Map = function (domNode) {
 
             map = new google.maps.Map(domNode, mapOptions);
             drawingManager && drawingManager.setMap(map);
+
+
+
+
         },
 
         addDrawingManager: function(rectangleControl, circleControl, polygonControl, deleteControl) {

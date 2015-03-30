@@ -4,7 +4,8 @@ var GETIOM = {
     filteredMessagesNum: null,
     clusterSizeArray: null,
     clusteringTime: null,
-    filteringTime: null
+    filteringTime: null,
+    gridData: null
 };
 
 //TODO clear data when going "back" from an advanced step....

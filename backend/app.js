@@ -6,7 +6,6 @@ var geolib     = require('geolib');
 var clusterfck = require('clusterfck');
 var terraformer= require('terraformer');
 var trends     = require('./trends/trends.js');
-var clustering = require('./clustering/clustering.js');
 
 
 // Configuration parameters
@@ -15,7 +14,7 @@ var port = process.env.PORT || 8080;    // Server's port
 var webAppPath = "../frontend";         // Path to client web application
 
 // Declare global app variables
-var messages = require("../RestExamples/NodeRestService/models/1KMessages.json");   //TODO refactor to data instead of messages
+var messages = require("../RestExamples/NodeRestService/models/1KMessages.json");
 var clusters = null;
 var convexHulls = null;
 
@@ -98,6 +97,67 @@ router.route('/filter/*')
         });
     });
 
+router.route('/cluster/hierarchical')
+    .get(function(req, res) {
+        if (!messages) {
+            console.log('Cannot cluster when no messages are loaded!');
+            res.json([]);
+        }
+        console.log('Handling cluster request...');
+        var distance = ['euclidean', 'manhattan', 'max'][req.query.distance];
+        var linkage = ['single', 'complete', 'average'][req.query.linkage];
+        var threshold = req.query.threshold;
+
+        var metric = function(msg1, msg2) {
+            //return geolib.getDistance(msg1.location, msg2.location);
+            var loc1 = {latitude: msg1.geometry.coordinates[0], longitude: msg1.geometry.coordinates[1]};
+            var loc2 = {latitude: msg2.geometry.coordinates[0], longitude: msg2.geometry.coordinates[1]};
+            return geolib.getDistance(loc1, loc2);
+        }
+
+        var leaves = function (hcluster) {
+            // flatten cluster hierarchy
+            if (!hcluster.left)
+                return [hcluster];
+            else
+                return leaves(hcluster.left).concat(leaves(hcluster.right));
+        }
+
+        clusters = clusterfck.hcluster(messages, metric, linkage, threshold);
+
+        var flat_clusters = clusters.map(function (hcluster) { //TODO do it without recursion
+            return leaves(hcluster).map(function (leaf) {
+                return leaf.value;
+            });
+        });
+
+        clusters = flat_clusters;
+
+        res.json(clusters.map(function(cluster) {return cluster.length}));
+    });
+
+router.route('/cluster/kmeans')
+    .get(function(req, res) {
+        console.log('Initiating kmeans clustering...');
+        var k = req.query.k;
+        var metric = function(msg1, msg2) {
+            var loc1 = {latitude: msg1.geometry.coordinates[0], longitude: msg1.geometry.coordinates[1]};
+            var loc2 = {latitude: msg2.geometry.coordinates[0], longitude: msg2.geometry.coordinates[1]};
+            return geolib.getDistance(loc1, loc2);
+        }
+        clusters = clusterfck.kmeans(messages, k, metric);
+        res.json(clusters.map(function(cluster) {return cluster.length}));
+    });
+
+router.route('/cluster/dbscan')
+    .get(function(req, res) {
+        if (!messages) {
+            console.log('Cannot cluster when no messages are loaded!');
+            res.json([]);
+        }
+        console.log('Handling cluster request...');
+    });
+
 router.route('/convexhulls')
     .get(function(req, res) {
         if (!clusters) {
@@ -113,27 +173,54 @@ router.route('/convexhulls')
         res.json(convexHulls);
     });
 
-router.route('/cluster/:clusterAlgo')
+router.route('/cluster/grid')
     .get(function(req, res) {
-        console.log('Handling ' + req.params.clusterAlgo + ' clustering request...');
         if (!messages) {
             console.log('Cannot cluster when no messages are loaded!');
             res.json([]);
         }
-        var clusterAlgo = clustering[req.params.clusterAlgo];
-        clusters = clusterAlgo.cluster(messages, req.query);
+        console.log('Handling Grid cluster request...');
+        console.log('OMER - GOT HERE.');
+        //var mcOptions = {gridSize: 50, maxZoom: 15};
+        ////var markers = []; // Create the markers you want to add and collect them into a array.
+        //var markers = GETIOM.data; // Create the markers you want to add and collect them into a array.
+        //var mc = new MarkerClusterer(map, markers, mcOptions);
+
+        if (!messages) {
+            console.log('Cannot cluster when no messages are loaded!');
+            res.json([]);
+        }
+        console.log('Handling Grid cluster request...');
+        var markers_data = [];
+        if (messages.length > 0) {
+            for (var i = 0; i < messages.length; i++) {
+                markers_data.push({
+                    lat: messages[i].geometry.coordinates[0],
+                    lng: messages[i].geometry.coordinates[1]
+                });
+            }
+        }
+        map.addMarkers(markers_data);
+
+        markerClusterer: function(map) {
+            options = {
+                gridSize: 40
+            }
+
+            //return new MarkerClusterer(map, [], options);
+        }
+        clusters = clusterfck.kmeans(messages, k, metric);
         res.json(clusters.map(function(cluster) {return cluster.length}));
     });
 
-router.route('/trends/:trendAlgo/:clusterIndex')
+
+
+
+
+router.route('/trends/:trend/:cluster')
     .get(function(req, res) {
-        if (!clusters || clusters.length == 0) {
-            console.log('Cannot find trends when there are no clusters!');
-            res.json([]);
-        }
-        var cluster = clusters[req.params.clusterIndex];
-        var trendAlgo = trends[req.params.trendAlgo];
-        res.json(trendAlgo.findTrends(cluster, req.query));
+        var cluster = clusters[req.params.cluster];
+        res.json(trends[req.params.trend].findTrends(cluster, req.query));
     });
 
 // Register routers
