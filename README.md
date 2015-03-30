@@ -12,10 +12,7 @@ The main goal of our project is to provide an easy framework in order to process
 See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
 
 ## Communication
-
-- Google Group: [HystrixOSS](http://groups.google.com/d/forum/hystrixoss)
-- Twitter: [@HystrixOSS](http://twitter.com/HystrixOSS)
-- [GitHub Issues](https://github.com/Netflix/Hystrix/issues)
+<a href="https://github.com/snaxoa">snaxoa</a> & <a href="https://github.com/akrabi">akrabi</a>
 
 ## What does it do?
 
