@@ -42,7 +42,7 @@ GETIOM is extendable and let's you add your own Clustering Algorithms or Trend D
 To build:
 
 ```
-$ git clone getiom
+$ git clone https://github.com/akrabi/GETIOM.git
 $ cd backend/
 $ ./node app.js
 ```
