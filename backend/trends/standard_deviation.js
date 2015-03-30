@@ -36,7 +36,7 @@ var StandardDeviation = function() {
             return {
                 trends: trends,
                 additional: {
-                    average: avgMsgPerDay,
+                    avg: avgMsgPerDay,
                     sd: sd
                 }
             }

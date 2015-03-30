@@ -15,7 +15,9 @@
     "terraformer": "*",
     "terraformer-geostore": "*",
     "terraformer-geostore-memory": "*",
-    "terraformer-rtree": "*"
+    "terraformer-rtree": "*",
+    "turf": "*",
+    "turf-square-grid": "*"
   }
 }
 
