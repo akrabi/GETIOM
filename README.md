@@ -23,7 +23,7 @@ Stop wasting your time on configuring servers and settings. GETIOM handle's all 
 
 #### 2) Built in Popular Clustering Algorithms
 
-GETIOM comes with built in Clustering Algorithms: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a>, <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical clustering</a> & Grid Clustering (To be added later).
+GETIOM comes with built in Clustering Algorithms such as: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a>, <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical</a> & Grid(To be added later).
 
 #### 3) Concurrency
 
