@@ -56,7 +56,7 @@ Return    : Return all entries for which their coordinates are inside the given 
 
 
 
-<img src="https://netflix.github.com/Hystrix/images/hystrix-logo-tagline-850.png">
+<img src="https://github.com/akrabi/GETIOM/blob/master/GETIOM-logo.png">
 
 # Hystrix: Latency and Fault Tolerance for Distributed Systems
 
