@@ -21,11 +21,9 @@ See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, ex
 
 Stop wasting your time on configuring servers and settings. GETIOM handle's all the hard work for you! Simply run the server via Node.js and start analyzing your data. Frustration free!
 
-#### 2) Realtime Operations
+#### 2) Built in Popular Clustering Algorithms
 
-Realtime monitoring and configuration changes. Watch service and property changes take effect immediately as they spread across a fleet. 
-
-Be alerted, make decisions, affect change and see results in seconds. 
+GETIOM comes with built in Clustering Algorithms: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a>, <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical clustering</a> & Grid Clustering (To be added later).
 
 #### 3) Concurrency
 
