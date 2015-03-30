@@ -30,6 +30,8 @@ var RunningAverage = function() {
             }
             return {trends: trends,
                     additional: {
+                        days: daysArray.length,
+                        messages: cluster.length,
                         averages: averages
                     }};
         }

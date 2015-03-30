@@ -60,7 +60,6 @@ var LinearRegression = function() {
             }
             var line = findLineByLeastSquares(values_x, values_y);
             var f = function(x) {return line[0]*x+line[1]};
-            var clusterSize = cluster.length;
 
             var trends = [];
 
@@ -74,6 +73,8 @@ var LinearRegression = function() {
             return {
                 trends: trends,
                 additional: {
+                    days: messagesPerDay.length,
+                    messages: cluster.length,
                     line: line
                 }
             };

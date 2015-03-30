@@ -91,8 +91,11 @@ function runSD(){
             else {
                 var avg = data.additional.avg;
                 var sd = data.additional.sd;
-                var result = 'Found trend on';
+                var result =    'Messages: ' + data.additional.messages + '<br>' +
+                                'Days: ' + data.additional.days + '<br>' +
+                                'Trends: ' + trends.length;
 
+                modalMessage(result);
                 var f = function(x) { return m*x+b };
 
                 var linePoints = [];
@@ -101,14 +104,10 @@ function runSD(){
 
                 for (var i=0; i<trends.length; ++i) {
                     var day = trends[i][0];
-                    result = result + ' ' + day;
                     linePoints.push([day, avg]); //TODO handle single point
-                    topSDPoints.push([day, avg+sd*sdFactor]);
-                    bottomSDPoints.push([day, avg-sd*sdFactor]);
+                    topSDPoints.push([day, avg + sd * sdFactor]);
+                    bottomSDPoints.push([day, avg - sd * sdFactor]);
                 }
-
-                modalMessage(result);
-
                 $.plot("#trend_results", [
                         {	data: trends,
                             points: { show: true }
