@@ -67,9 +67,7 @@ The main goal of our project is to provide an easy framework in order to process
 
 ## Full Documentation
 
-See the [Wiki](https://github.com/Netflix/Hystrix/wiki/) for full documentation, examples, operational details and other information.
-
-See the [Javadoc](http://netflix.github.com/Hystrix/javadoc) for the API.
+See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
 
 ## Communication
 
