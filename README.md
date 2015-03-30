@@ -21,13 +21,17 @@ See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, ex
 
 Stop wasting your time on configuring servers and settings. GETIOM handle's all the hard work for you! Simply run the server via Node.js and start analyzing your data. Frustration free!
 
-#### 2) Built in Popular Clustering Algorithms
+#### 2) Filter your data!
+
+No need to analyze all of your Big Data for nothing, just use our unique map filters: Polygon, Circle & Rectangle - On your own map!
+
+#### 3) Built in Popular Clustering Algorithms
 
 GETIOM comes with built in Popular Clustering Algorithms such as: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a>, <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical</a> & Grid (To be added later).
 
-#### 3) Concurrency
+#### 4) Trend Detection!
 
-Parallel execution. Concurrency aware request caching. Automated batching through request collapsing.
+GETIOM
 
 ## Hello World!
 
