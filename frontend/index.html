@@ -26,6 +26,7 @@
 </nav>
 
 
+
 <!-- Progress Bar -->
 <div id="progress_steps">
     <div class="row bs-wizard">
@@ -49,14 +50,14 @@
             <div class="bs-wizard-info text-center">Cluster messages using your choice of clustring algorithm</div>
         </div>
 
-        <div id="resultsStep" class="col-xs-4 bs-wizard-step disabled">
-            <div class="text-center bs-wizard-stepnum">Display Information</div>
+        <div id="trendsStep" class="col-xs-4 bs-wizard-step disabled">
+            <div class="text-center bs-wizard-stepnum">Trend Detection</div>
             <div class="progress">
                 <div class="progress-bar"></div>
             </div>
-            <a href="javascript:moveTo('results');" class="bs-wizard-dot"></a>
+            <a href="javascript:moveTo('trends');" class="bs-wizard-dot"></a>
 
-            <div class="bs-wizard-info text-center">Display information about your messages and clusters</div>
+            <div class="bs-wizard-info text-center">Runs trend detection algorithms on specific clusters</div>
         </div>
     </div>
 </div>
@@ -163,81 +164,83 @@
 </div>
 
 
-<!-- Results -->
-<div id="results">
-    <div class="charts-row">
-        <div class="col-xs-4">
-            <div class="chart-label"><h4>Filtered Messages</h4></div>
-            <div id="resultsFilterChart" class="resultsChart"></div>
-        </div>
-        <div class="col-xs-4">
-            <div class="chart-label"><h4>Clusters</h4></div>
-            <div id="resultsClusterChart" class="resultsChart"></div>
-        </div>
-        <div class="col-xs-4">
-            <div class="chart-label"><h4>Computation Time</h4></div>
-            <div id="resultsComputationChart" class="resultsChart"></div>
-        </div>
-    </div>
-
+<!-- Trend Detection -->
+<div id="trends" align="center">
     <div id="resultsMap" class="map-canvas"></div>
+    <div id="trend_input_panel">
+        <div id="trend_algo_panel">
+            <fieldset id="trend_algorithms">
+                <legend>Trends</legend>
+                <select id="trend_algo_select">
+                    <option value="standard deviation" selected>Standard Deviation</option>
+                    <option value="linear regression">Linear Regression</option>
+                    <option value="running average">Running Average</option>
+                </select>
+            </fieldset>
+        </div>
 
 
-    <!-- Trend Detection -->
-    <div id="trends" align="center">
-        <div id="trend_input_panel">
-            <div id="trend_algo_panel">
-                <fieldset id="trend_algorithms">
-                    <legend>Trends</legend>
-                    <select id="trend_algo_select">
-                        <option value="standard deviation" selected>Standard Deviation</option>
-                        <option value="linear regression">Linear Regression</option>
-                        <option value="running average">Running Average</option>
-                    </select>
+        <div id="trend_param_panel">
+            <div id="sd_panel">
+                <fieldset id="sd_params">
+                    <legend>Control panel</legend>
+                    Multiple of SD to consider as trend:
+                    <input type="text" name="sd" value="0.5" />
                 </fieldset>
             </div>
 
+            <div id="lr_panel">
+                <fieldset id="lr_params">
+                    <legend>Control panel</legend>
+                    Threshold for difference from slope:
+                    <input type="text" name="lr" value="50" />
+                </fieldset>
+            </div>
 
-            <div id="trend_param_panel">
-                <div id="sd_panel">
-                    <fieldset id="sd_params">
-                        <legend>Control panel</legend>
-                        Multiple of SD to consider as trend:
-                        <input type="text" name="sd" value="1" />
-                    </fieldset>
-                </div>
+            <div id="ra_panel">
+                <fieldset id="ra_params">
+                    <legend>Control panel</legend>
+                    Threshold for difference from running average slope:
+                    <input type="text" name="ra" value="50" />
+                </fieldset>
+            </div>
 
-                <div id="lr_panel">
-                    <fieldset id="lr_params">
-                        <legend>Control panel</legend>
-                        Threshold for difference from slope:
-                        <input type="text" name="lr" value="50" />
-                    </fieldset>
-                </div>
+            <!--<div id="trend_button" style="">
+                <div style="display:table-row; width:100%;text-align:center;">
+                    <div style="vertical-align: middle; display:table-cell;">-->
+                        <input id="submitTrend" type="button" class="btn btn-success" value="Find Trends"/>
+                    <!--</div>
+                </div>-
+            </div>-->
+        </div>
+    </div>
+</div>
 
-                <div id="ra_panel">
-                    <fieldset id="ra_params">
-                        <legend>Control panel</legend>
-                        Threshold for difference from running average slope:
-                        <input type="text" name="ra" value="50" />
-                    </fieldset>
-                </div>
 
-                <div id="trend_button" style="">
-                    <div style="display:table-row; width:100%;text-align:center;">
-                        <div style="vertical-align: middle; display:table-cell;">
-                            <input id="submitTrend" type="button" class="btn btn-success" value="Find Trends"/>
-                        </div>
-                    </div>
-                </div>
+
+<!-- Results -->
+<div id="results" align="center">
+    <fieldset>
+        <legend>Computation Statistics</legend>
+        <div class="charts-row">
+            <div class="col-xs-4">
+                <div class="chart-label"><h4>Filtered Messages</h4></div>
+                <div id="resultsFilterChart" class="resultsChart"></div>
+            </div>
+            <div class="col-xs-4">
+                <div class="chart-label"><h4>Clusters</h4></div>
+                <div id="resultsClusterChart" class="resultsChart"></div>
+            </div>
+            <div class="col-xs-4">
+                <div class="chart-label"><h4>Computation Time</h4></div>
+                <div id="resultsComputationChart" class="resultsChart"></div>
             </div>
         </div>
-
+    </fieldset>
+    <fieldset>
+        <legend>Trends</legend>
         <div id="trend_results"></div>
-    </div>
-
-
-
+    </fieldset>
 </div>
 
 
@@ -293,6 +296,7 @@
 <script src="js/main.js"></script>
 <script src="js/filter.js"></script>
 <script src="js/cluster.js"></script>
+<script src="js/trends.js"></script>
 <script src="js/results.js"></script>
 
 </body>

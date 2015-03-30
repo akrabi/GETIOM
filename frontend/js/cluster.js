@@ -62,13 +62,13 @@ function radioValue(name) {
 function clusteringDone() {
     $('#processingModal').modal('hide');
     modalMessage('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!');
-    moveTo('results');
+    moveTo('trends');
 }
 
 function clusteringError(msg) {
     $('#processingModal').modal('hide');
     modalMessage(msg);
-    moveTo('results');
+    moveTo('trends');
 }
 
 $(document).ready(function () {

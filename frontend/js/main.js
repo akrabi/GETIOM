@@ -13,34 +13,48 @@ var GETIOM = {
 function moveTo(step) {
     var filter = $('#filter');
     var cluster = $('#cluster');
+    var trends = $('#trends');
     var results = $('#results');
     var filterStep = $('#filterStep');
     var clusterStep = $('#clusterStep');
-    var resultsStep = $('#resultsStep');
+    var trendsStep = $('#trendsStep');
 
     if (step === 'filter') {
         filter.show();
         cluster.hide();
+        trends.hide();
         results.hide();
         filterStep.removeClass('complete , disabled').addClass('active');
         clusterStep.removeClass('complete , active').addClass('disabled');
-        resultsStep.removeClass('complete , active').addClass('disabled');
+        trendsStep.removeClass('complete , active').addClass('disabled');
     }
     else if (step === 'cluster') {
         filter.hide();
         cluster.show();
+        trends.hide();
         results.hide();
         filterStep.removeClass('active , disabled').addClass('complete');
         clusterStep.removeClass('complete , disabled').addClass('active');
-        resultsStep.removeClass('complete , active').addClass('disabled');
+        trendsStep.removeClass('complete , active').addClass('disabled');
+    }
+    else if (step === 'trends') {
+        filter.hide();
+        cluster.hide();
+        trends.show();
+        results.hide();
+        filterStep.removeClass('active , disabled').addClass('complete');
+        clusterStep.removeClass('active , disabled').addClass('complete');
+        trendsStep.removeClass('complete , disabled').addClass('active');
+        TrendsPage.init();
     }
     else if (step === 'results') {
         filter.hide();
         cluster.hide();
+        trends.hide();
         results.show();
         filterStep.removeClass('active , disabled').addClass('complete');
         clusterStep.removeClass('active , disabled').addClass('complete');
-        resultsStep.removeClass('complete , disabled').addClass('active');
+        trendsStep.removeClass('complete , disabled').addClass('active');
         ResultsPage.init();
     }
     $(window).scrollTop(0);

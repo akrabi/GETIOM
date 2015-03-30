@@ -27,6 +27,11 @@ fieldset {
     text-align: center;
 }
 
+#trends {
+    display: none;
+    text-align: center;
+}
+
 /* Results */
 
 #results {

@@ -36,8 +36,8 @@ var StandardDeviation = function() {
             return {
                 trends: trends,
                 additional: {
-                    days: daysArray.length,
-                    messages: cluster.length,
+                    days: daysArray,
+                    messagesNum: cluster.length,
                     avg: avgMsgPerDay,
                     sd: sd
                 }
