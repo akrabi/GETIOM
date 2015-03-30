@@ -5,7 +5,7 @@
 <a href="https://github.com/akrabi/GETIOM/">GETIOM</a> is an open source project for representing and analyzing Geo-Tagged information on Google Maps.
 The project is based on <a href="https://nodejs.org/">Node.js</a> platform and other Open-Source algorithms.
 
-The main goal of our project is to provide an easy framework in order to process & analyze Geo-Tagged information (Big Data) on the Google Map's platform - without the need to mess with servers and configurations. All you need to do is to provide a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> with a <a href="http://geojson.org/">GeoJSON</a> collection (<a href="https://github.com/akrabi/GETIOM/wiki/Rest-API">Explained here</a>) and start using the app's flow.
+The main goal of our project is to provide an easy framework in order to process & analyze Geo-Tagged information (Big Data) on the Google Map's platform - without the need to mess with servers and configurations. All you need to do is to provide a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> with a <a href="http://geojson.org/">GeoJSON</a> collection (<a href="https://github.com/akrabi/GETIOM/wiki/Rest-API">Explained here</a>) and start using the app's flow even today!
 
 ## Full Documentation
 
