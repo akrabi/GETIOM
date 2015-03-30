@@ -1,78 +1,19 @@
-GETIOM - GeoTagged Information on Map
-=====================================
+<img src="https://github.com/akrabi/GETIOM/blob/master/GETIOM-logo.png">
 
-GETIOM API is an open source project for representing and analyzing geotagged information on maps.
+# Welcome to GETIOM!
 
-By @akrabi and @snaxoa
+<a href="https://github.com/akrabi/GETIOM/">GETIOM</a> is an open source project for representing and analyzing Geo-Tagged information on Google Maps.
+The project is based on <a href="https://nodejs.org/">Node.js</a> platform and other Open-Source algorithms.
 
-<h2>Data Format</h2>
-The information we work with is formatted as <a href="http://geojson.org">GeoJSON</a>.
-More precisely, each GeoJSON object should be of type "Feature" and should have a "geometry" member of type "Point" in a geographic coordinate reference system.
-All additional information should be under "properties" member.
-
-More information can be found in the <a href="https://github.com/akrabi/GETIOM/wiki"> Wiki section.</a>
-
-<h4>Example (A twitter message):</h4>
-```
-{
-  "type": "Feature",
-  "id": "TwitterMessage",
-  "geometry": {
-          "type": "Point",
-          "coordinates": [102.0, 0.6]
-  },
-  "properties": {
-    "msg": "Hello World!",
-    "time": "259797929",
-    "client":"twitter_instagram"
-  }
-}
-```
-
-<h2>API</h2>
-In order to use GETIOM, an API which allows GET requests to the database containing the GeoTagged information and returning it in the specified GeoJSON format.
-The API has a REST like url structure but requires only GET requests to be implemented. Therefore, from now on all paths refer specifically to GET requests to those paths.
-
-<h4>/dbsize</h4>
-Parameters: None
-Return    : The number of entries in the database
-
-<h4>/filter</h4>
-Parameters: None
-Return    : Return all entries in the database
-
-<h4>/filter/location/circle</h4>
-Parameters:
-Return    : Return all entries for which their coordinates are inside the given circle.
-
-<h4>/filter/location/rectangle</h4>
-Parameters:
-Return    : Return all entries for which their coordinates are inside the given rectangle.
-
-<h4>/filter/location/polygon</h4>
-Parameters:
-Return    : Return all entries for which their coordinates are inside the given polygon.
-
-
-
-
-<img src="https://netflix.github.com/Hystrix/images/hystrix-logo-tagline-850.png">
-
-# Hystrix: Latency and Fault Tolerance for Distributed Systems
-
-Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.
+The main goal of our project is to provide an easy framework in order to process & analyze Geo-Tagged information (Big Data) on the Google Map's platform - without the need to mess with servers and configurations. All you need to do is to provide a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> with a <a href="http://geojson.org/">GeoJSON</a> collection (<a href="https://github.com/akrabi/GETIOM/wiki/Rest-API">Explained here</a>) and start using the app's flow even today!
 
 ## Full Documentation
 
-See the [Wiki](https://github.com/Netflix/Hystrix/wiki/) for full documentation, examples, operational details and other information.
-
-See the [Javadoc](http://netflix.github.com/Hystrix/javadoc) for the API.
+See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
 
 ## Communication
-
-- Google Group: [HystrixOSS](http://groups.google.com/d/forum/hystrixoss)
-- Twitter: [@HystrixOSS](http://twitter.com/HystrixOSS)
-- [GitHub Issues](https://github.com/Netflix/Hystrix/issues)
+- <a href="https://github.com/snaxoa">snaxoa</a> 
+- <a href="https://github.com/akrabi">akrabi</a>
 
 ## What does it do?
 
@@ -235,22 +176,7 @@ More information can be found on the [Dashboard Wiki](https://github.com/Netflix
 
 ## Bugs and Feedback
 
-For bugs, questions and discussions please use the [Github Issues](https://github.com/Netflix/Hystrix/issues).
+For bugs, questions and discussions please use the [Github Issues](https://github.com/akrabi/GETIOM/issues).
 
- 
-## LICENSE
 
-Copyright 2013 Netflix, Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-<http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
