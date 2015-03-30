@@ -10,7 +10,7 @@ The information we work with is formatted as <a href="http://geojson.org">GeoJSO
 More precisely, each GeoJSON object should be of type "Feature" and should have a "geometry" member of type "Point" in a geographic coordinate reference system.
 All additional information should be under "properties" member.
 
-More information can be found in the Wiki section.
+More information can be found in the <a href="https://github.com/akrabi/GETIOM/wiki"> Wiki section.</a>
 
 <h4>Example (A twitter message):</h4>
 ```
