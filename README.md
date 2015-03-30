@@ -12,7 +12,8 @@ The main goal of our project is to provide an easy framework in order to process
 See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
 
 ## Communication
-<a href="https://github.com/snaxoa">snaxoa</a> & <a href="https://github.com/akrabi">akrabi</a>
+- <a href="https://github.com/snaxoa">snaxoa</a> 
+- <a href="https://github.com/akrabi">akrabi</a>
 
 ## What does it do?
 
