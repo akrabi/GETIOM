@@ -67,7 +67,8 @@ var LinearRegression = function() {
 
             for (var day in messagesPerDay) {
                 if (f(day) > threshold) {
-                    trends.push(day);
+                    trends.push([parseInt(day), messagesPerDay[day]]);
+
                 }
             }
             return {

@@ -2,8 +2,6 @@ var http       = require('http');
 var express    = require('express');
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
-var geolib     = require('geolib');
-var clusterfck = require('clusterfck');
 var terraformer= require('terraformer');
 var trends     = require('./trends/trends.js');
 var clustering = require('./clustering/clustering.js');
@@ -39,6 +37,29 @@ app.use(bodyParser.json());
 //    err && console.log('Error!!! ' + err);
 //    res && console.log('Success!!');
 //});
+
+//TODO check turf!
+//var turf = require('turf');
+//var extent = turf.extent({type: 'FeatureCollection', features: messages});
+//extent = extent.map(function(coord) {
+//    return parseFloat(coord);
+//});
+////var extent = [-77.3876953125,38.71980474264239,-76.9482421875,39.027718840211605];
+//console.log(extent);
+//var cellWidth = 100;
+//var units = 'miles';
+//
+//var squareGrid = turf.squareGrid(extent, cellWidth, units);
+//console.log(squareGrid);
+
+
+//(messages, function(err, features) {
+//    if (err) throw err;
+//    turf.extent(features, function(extent) {
+//        console.log(extent);
+//    });
+//});
+
 
 
 // function to recieve filtered messages from REST API

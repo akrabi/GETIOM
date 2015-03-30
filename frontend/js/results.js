@@ -77,16 +77,50 @@ function runSD(){
                 modalMessage('No trends found!');
             }
             else {
+                var avg = data.additional.avg;
+                var sd = data.additional.sd;
                 var result = 'Found trend on';
+
+                var f = function(x) { return m*x+b };
+
+                var linePoints = [];
+                var topSDPoints = [];
+                var bottomSDPoints = [];
+
                 for (var i=0; i<trends.length; ++i) {
-                    result = result + ' ' + trends[i][0];
+                    var day = trends[i][0];
+                    result = result + ' ' + day;
+                    linePoints.push([day, avg]); //TODO handle single point
+                    topSDPoints.push([day, avg+sd*sdFactor]);
+                    bottomSDPoints.push([day, avg-sd*sdFactor]);
                 }
+
                 modalMessage(result);
-                $.plot("#trend_results", [trends], {
-                    xaxis: { mode: "time" },
-                    lines: { show: false },
-                    points: { show: true }
-                });
+
+                $.plot("#trend_results", [
+                        {	data: trends,
+                            points: { show: true }
+                        },
+                        {
+                            data: topSDPoints,
+                            lines: { show: true }
+                        },
+                        {
+                            data: linePoints,
+                            lines: { show: true }
+                        },
+                        {
+                            data: bottomSDPoints,
+                            lines: { show: true }
+                        }],
+                        {
+                            xaxis:
+                            {
+                                mode: "time",
+                                timeformat: "%Y/%m/%d"
+                            }
+                        }
+                );
             }
         });
     }
@@ -107,9 +141,31 @@ function runLR(){
             }
             else {
                 var line = data.additional.line;
-                $.plot("#trend_results", [trends], {
-                    xaxis: { mode: "time" }
-                });
+                var f = function(x) { return m*x+b };
+
+                var linePoints = [];
+
+                for (var i=0; i<trends.length; ++i) {
+                    var day = trends[i][0];
+                    linePoints.push([day, f(day)]);
+                }
+
+                $.plot("#trend_results", [
+                        {	data: trends,
+                            points: { show: true }
+                        },
+                        {
+                            data: linePoints,
+                            lines: { show: true }
+                        }],
+                        {
+                            xaxis:
+                            {
+                                mode: "time",
+                                timeformat: "%Y/%m/%d"
+                            }
+                        }
+                );
             }
         });
     }
@@ -119,7 +175,39 @@ function runLR(){
 }
 
 function runRA() {
-
+    var map = ResultsPage.map;
+    var clusterIndex = map.getSelectedClusterIndex();
+    var threshold = parseFloat($('input[name="ra"]').val());
+    if (clusterIndex > -1) {
+        $.getJSON('trends/running_average/'+clusterIndex+'?threshold='+threshold, function( data ) {
+            var trends = data.trends;
+            var averages = data.additional.averages;
+            if (trends.length == 0) {
+                modalMessage('No trends found!');
+            }
+            else {
+                $.plot("#trend_results", [
+                        {	data: trends,
+                            points: { show: true }
+                        },
+                        {
+                            data: averages,
+                            lines: { show: true }
+                        }],
+                        {
+                            xaxis:
+                            {
+                                mode: "time",
+                                timeformat: "%Y/%m/%d"
+                            }
+                        }
+                );
+            }
+        });
+    }
+    else {
+        modalMessage('No cluster selected')
+    }
 }
 
 $(document).ready(function() {
