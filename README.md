@@ -31,7 +31,11 @@ GETIOM comes with built in Popular Clustering Algorithms such as: <a href="http:
 
 #### 4) Trend Detection!
 
-GETIOM
+GETIOM can analyze your data in your clusters, by simply clicking on a specific cluster - You can apply a Visualized trend detection alogrithms on your data.
+
+#### 5) Use your own Algorithm!
+
+GETIOM is extendable and let's you add your own Clustering Algorithms or Trend Detection Algorithms very easily!
 
 ## Hello World!
 
