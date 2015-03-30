@@ -49,9 +49,8 @@ $ ./node app.js
 
 ## Dashboard
 
-A dashboard for monitoring applications using Hystrix is available in the [hystrix-dashboard](https://github.com/Netflix/Hystrix/tree/master/hystrix-dashboard) module.
-
-More information can be found on the [Dashboard Wiki](https://github.com/Netflix/Hystrix/wiki/Dashboard).
+A dashboard for anazlyzing the clusters and trends will appear in the last step of the flow. 
+More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
 
 <img src="https://raw.github.com/wiki/Netflix/Hystrix/images/hystrix-dashboard-single-row.png">
 
