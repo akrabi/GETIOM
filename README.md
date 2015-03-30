@@ -23,7 +23,7 @@ Stop wasting your time on configuring servers and settings. GETIOM handle's all 
 
 #### 2) Filter your data!
 
-No need to analyze all of your Big Data for nothing, just use our unique map filters: Polygon, Circle & Rectangle - On your own map!
+No need to analyze all of your Big Data for nothing, Just use our unique map filters: Polygon, Circle & Rectangle - On your own map!
 
 #### 3) Built in Popular Clustering Algorithms
 
