@@ -17,11 +17,9 @@ See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, ex
 
 ## What does it do?
 
-#### 1) Latency and Fault Tolerance
+#### 1) An easy-to-use Geo-Tagged analyzing framework!
 
-Stop cascading failures. Fallbacks and graceful degradation. Fail fast and rapid recovery. 
-
-Thread and semaphore isolation with circuit breakers. 
+Stop wasting your time on configuring servers and settings. GETIOM handle's all the hard work for you! Simply run the server via Node.js and start analyzing your data. Frustration free!
 
 #### 2) Realtime Operations
 
