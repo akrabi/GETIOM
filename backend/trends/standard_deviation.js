@@ -19,12 +19,8 @@ var StandardDeviation = function() {
     return {
         findTrends: function(cluster, params) {
             var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
-            var daysArray = [];
+            var daysArray = trendUtils.daysArray(messagesPerDay);
             var factor = params.factor;
-
-            for (var day in messagesPerDay) {
-                daysArray.push([parseInt(day), messagesPerDay[day]]);
-            }
 
             var avgMsgPerDay = cluster.length / daysArray.length //Number of messages divided by number of days
             var sd = standardDeviation(daysArray);

@@ -35,7 +35,7 @@ var LinearRegression = function() {
         }
 
         /*
-         * Calculate m and b for the formular:
+         * Calculate m and b for the formula:
          * y = x * m + b
          */
         var m = (count*sum_xy - sum_x*sum_y) / (count*sum_xx - sum_x*sum_x);
@@ -48,10 +48,7 @@ var LinearRegression = function() {
         findTrends: function(cluster, params) {
             var threshold = params.threshold;
             var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
-            var daysArray = [];
-            for (var day in messagesPerDay) {
-                daysArray.push([day, messagesPerDay[day]]);
-            }
+            var daysArray = trendUtils.daysArray(messagesPerDay);
             var line = findLineByLeastSquares(daysArray);
             var f = function(x) {return line[0]*x+line[1]};
 
@@ -59,9 +56,9 @@ var LinearRegression = function() {
             var linePoints = [];
 
             for (var day in messagesPerDay) {
-                if (f(day) > threshold) {
+                linePoints.push([day, f(day)]);
+                if (Math.abs(f(day) - messagesPerDay[day]) > threshold) {
                     trends.push([day, messagesPerDay[day]]);
-                    linePoints.push([day, f(day)]);
                 }
             }
             return {

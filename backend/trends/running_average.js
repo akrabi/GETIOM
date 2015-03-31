@@ -4,10 +4,7 @@ var RunningAverage = function() {
         findTrends: function(cluster, params) {
             var threshold = params.threshold;
             var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
-            var daysArray = [];
-            for (var day in messagesPerDay) {
-                daysArray.push([parseInt(day), messagesPerDay[day]]);
-            }
+            var daysArray = trendUtils.daysArray(messagesPerDay);
             daysArray.sort(function(dayObject1, dayObject2) {
                 return dayObject1[0] - dayObject2[0];
             })

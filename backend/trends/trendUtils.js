@@ -14,6 +14,13 @@ module.exports = {
             messagesPerDay[day] = messagesPerDay[day] ? messagesPerDay[day]+1 : 1;
         });
         return messagesPerDay;
+    },
+    daysArray: function(messagesPerDay) {
+        var daysArray = [];
+        for (var day in messagesPerDay) {
+            daysArray.push([parseInt(day), parseInt(messagesPerDay[day])]);
+        }
+        return daysArray;
     }
 
 }
