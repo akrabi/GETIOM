@@ -2,47 +2,34 @@ var ResultsPage = {
     init: function() {
         // Draw Charts
         var filterData = [
-            {label: "", data: GETIOM.filteredMessagesNum},
-            {label: "", data: GETIOM.databaseMessagesNum-GETIOM.filteredMessagesNum}
+            {label: "Included", data: GETIOM.filteredMessagesNum},
+            {label: "Excluded", data: GETIOM.databaseMessagesNum-GETIOM.filteredMessagesNum}
         ]
         var clusterData = GETIOM.clusterSizeArray.map(function(clusterSize) {
             return {label:"", data: clusterSize};
         });
         var computationTime = [
-            {label: "Filtering:" + GETIOM.filteringTime + ' sec', data: GETIOM.filteringTime},
-            {label: "Clustering:" + GETIOM.clusteringTime + ' sec', data: GETIOM.clusteringTime}
+            {label: "Filtering", data: GETIOM.filteringTime},
+            {label: "Clustering", data: GETIOM.clusteringTime}
         ]
-        $.plot('#resultsFilterChart', filterData, {
-            series: {
-                pie: {
-                    show: true
-                },
-                legend: {
-                    show: false
-                }
 
-            }
-        });
-        $.plot('#resultsClusterChart', clusterData, {
+        var options = {
             series: {
                 pie: {
                     show: true
-                },
-                legend: {
-                    show: false
                 }
+            },
+            legend: {
+                show: false
+            },
+            grid: {
+                hoverable: true,
+                clickable: true
             }
-        });
-        $.plot('#resultsComputationChart', computationTime, {
-            series: {
-                pie: {
-                    innerRadius: 0.9,
-                    show: true
-                },
-                legend: {
-                    show: false
-                }
-            }
-        });
+        };
+
+        $.plot('#resultsFilterChart', filterData, options);
+        $.plot('#resultsClusterChart', clusterData, options);
+        $.plot('#resultsComputationChart', computationTime, options);
     }
 };

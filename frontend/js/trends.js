@@ -32,7 +32,11 @@ function runSD(){
                 moveTo('results');
                 $.plot("#trend_results", [
                         {	data: trends,
-                            points: { show: true }
+                            points: {
+                                        show: true,
+                                        radius: 5
+                                    },
+                            color: "#ff0000"
                         },
                         {
                             data: topSDPoints,
@@ -50,7 +54,12 @@ function runSD(){
                         xaxis:
                         {
                             mode: "time",
-                            timeformat: "%Y/%m/%d"
+                            timeformat: "%d/%m/%Y"
+                        },
+                        grid:
+                        {
+                            backgroundColor: "#f8f8f8",
+                            hoverable: true
                         }
                     }
                 );
@@ -92,7 +101,12 @@ function runLR(){
 
                 $.plot("#trend_results", [
                         {	data: trends,
-                            points: { show: true }
+                            points:
+                            {
+                                show: true,
+                                radius: 5
+                            },
+                            color: "#ff0000"
                         },
                         {
                             data: line,
@@ -102,7 +116,12 @@ function runLR(){
                         xaxis:
                         {
                             mode: "time",
-                            timeformat: "%Y/%m/%d"
+                            timeformat: "%d/%m/%Y"
+                        },
+                        grid:
+                        {
+                            backgroundColor: "#f8f8f8",
+                            hoverable: true
                         }
                     }
                 );
@@ -136,7 +155,13 @@ function runRA() {
                 modalMessage(result);
                 $.plot("#trend_results", [
                         {	data: trends,
-                            points: { show: true }
+                            points:
+                            {
+                                show: true,
+                                radius: 5
+                            },
+                            color: "#ff0000"
+
                         },
                         {
                             data: averages,
@@ -146,7 +171,12 @@ function runRA() {
                         xaxis:
                         {
                             mode: "time",
-                            timeformat: "%Y/%m/%d"
+                            timeformat: "%d/%m/%Y"
+                        },
+                        grid:
+                        {
+                            backgroundColor: "#f8f8f8",
+                            hoverable: true
                         }
                     }
                 );
