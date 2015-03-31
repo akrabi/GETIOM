@@ -10,8 +10,12 @@ fieldset {
     margin-bottom: 50px;
 }
 
-/* Filter */
+#logo {
+    max-width:100%;
+    max-height:100%;
+}
 
+/* Filter */
 #filter {
     margin: 20px;
 }
