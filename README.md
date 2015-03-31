@@ -52,7 +52,7 @@ $ ./node app.js
 A dashboard for anazlyzing the clusters and trends will appear in the last step of the flow. 
 More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
 
-<img src="https://raw.github.com/wiki/Netflix/Hystrix/images/hystrix-dashboard-single-row.png">
+Screenshots coming soon!
 
 ## Bugs and Feedback
 
