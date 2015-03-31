@@ -90,14 +90,8 @@ function runLR(){
 
                 modalMessage(result);
                 var line = data.additional.line;
-                //var f = function(x) { return m*x+b };
-                //
-                //var linePoints = [];
-                //
-                //for (var i=0; i<trends.length; ++i) {
-                //    var day = trends[i][0];
-                //    linePoints.push([day, f(day)]);
-                //}
+
+                moveTo('results');
 
                 $.plot("#trend_results", [
                         {	data: trends,
@@ -125,7 +119,6 @@ function runLR(){
                         }
                     }
                 );
-                moveTo('results');
             }
         });
     }
@@ -153,6 +146,7 @@ function runRA() {
                     'Trends: ' + trends.length;
 
                 modalMessage(result);
+                moveTo('results');
                 $.plot("#trend_results", [
                         {	data: trends,
                             points:
@@ -180,7 +174,6 @@ function runRA() {
                         }
                     }
                 );
-                moveTo('results');
             }
         });
     }

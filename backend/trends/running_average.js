@@ -24,7 +24,7 @@ var RunningAverage = function() {
                 average = messages / (i+1);
                 averages.push([daysArray[i][0], average]);
                 var slope = (average - previousAverage) / 2;
-                if (Math.abs(slope) > threshold) {
+                if (Math.abs(slope) > threshold && i>0) {
                     trends.push(daysArray[i]);
                 }
             }
