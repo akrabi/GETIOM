@@ -10,8 +10,9 @@ var ResultsPage = {
         });
         var computationTime = [
             {label: "Filtering", data: GETIOM.filteringTime},
-            {label: "Clustering", data: GETIOM.clusteringTime}
-        ]
+            {label: "Clustering", data: GETIOM.clusteringTime},
+            {label: "Trend Detection", data: GETIOM.trendDetectionTime}
+        ];
 
         var options = {
             series: {

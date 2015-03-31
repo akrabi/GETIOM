@@ -40,14 +40,17 @@ function runSD(){
                         },
                         {
                             data: topSDPoints,
+                            label: "Average + Factor*SD",
                             lines: { show: true }
                         },
                         {
                             data: averagePoints,
+                            label: "Average",
                             lines: { show: true }
                         },
                         {
                             data: bottomSDPoints,
+                            label: "Average - Factor*SD",
                             lines: { show: true }
                         }],
                     {
@@ -104,6 +107,7 @@ function runLR(){
                         },
                         {
                             data: line,
+                            label: "Linear Regression",
                             lines: { show: true }
                         }],
                     {
@@ -159,6 +163,7 @@ function runRA() {
                         },
                         {
                             data: averages,
+                            label: "Running Average",
                             lines: { show: true }
                         }],
                     {
@@ -208,6 +213,8 @@ $(document).ready(function() {
     var trendForm = new SelectiveForm(['standard deviation', 'linear regression', 'running average'], ['sd_panel', 'lr_panel', 'ra_panel'], 'trend_algo_select', [runSD, runLR, runRA]);
     trendForm.init();
     $('#submitTrend').click(function() {
+        var t1 = Date.now();
         trendForm.submit();
+        GETIOM.trendDetectionTime = (t1 - Date.now()) / 1000;
     })
 });

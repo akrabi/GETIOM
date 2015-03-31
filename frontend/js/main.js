@@ -5,6 +5,7 @@ var GETIOM = {
     clusterSizeArray: null,
     clusteringTime: null,
     filteringTime: null,
+    trendDetectionTime: null,
     gridData: null
 };
 
