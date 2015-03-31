@@ -215,6 +215,6 @@ $(document).ready(function() {
     $('#submitTrend').click(function() {
         var t1 = Date.now();
         trendForm.submit();
-        GETIOM.trendDetectionTime = (t1 - Date.now()) / 1000;
+        GETIOM.trendDetectionTime = (Date.now() - t1) / 1000;
     })
 });
