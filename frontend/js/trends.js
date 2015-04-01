@@ -39,6 +39,12 @@ function runSD(){
                             color: "#ff0000"
                         },
                         {
+                            data: days,
+                            lines:   {
+                                show: true
+                            }
+                        },
+                        {
                             data: topSDPoints,
                             label: "Average + Factor*SD",
                             lines: { show: true }
@@ -106,6 +112,12 @@ function runLR(){
                             color: "#ff0000"
                         },
                         {
+                            data: days,
+                            lines:   {
+                                show: true
+                            }
+                        },
+                        {
                             data: line,
                             label: "Linear Regression",
                             lines: { show: true }
@@ -160,6 +172,12 @@ function runRA() {
                             },
                             color: "#ff0000"
 
+                        },
+                        {
+                            data: days,
+                            lines:   {
+                                show: true
+                            }
                         },
                         {
                             data: averages,

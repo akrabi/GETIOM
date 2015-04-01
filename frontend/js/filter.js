@@ -1,7 +1,14 @@
 var FilterPage = {
+    map: null,
+    slider: null,
     init: function () {
+        if (this.map) { // Already initialized
+            this.map.deleteAllShapes();     //TODO remove this and add a button which allows shape deletion
+            return;
+        }
+
         // Get number of messages stored in server's DB
-        $.getJSON('messages/num', function (data) {
+        $.getJSON('messages/num', function (data) {         //TODO get rid of messages!! change to dbsize
             GETIOM.databaseMessagesNum = data.messagesNum;
             var resultsModal = $('#resultsModal');
             resultsModal.find('.modal-body').html('GETIOM Started.<br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!')
@@ -9,9 +16,15 @@ var FilterPage = {
         });
 
         // Initialize slider
-        var slider = new TimeSlider($('#filterTimeSlider')[0]);
-        slider.init()
+        if (!this.slider) {
+            this.slider = new TimeSlider($('#filterTimeSlider')[0]);
+            this.slider.init()
+        }
+
+
+        // Initialize map
         var map = new Map($('#filterLocationMap')[0]);
+        this.map = map;
         map.init(40.821715, -74.122381);
         map.addSearchBox();
         map.addDrawingManager();

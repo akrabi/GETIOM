@@ -12,24 +12,6 @@ var Map = function (domNode) {
     var normalClusterColor = '#000';
     var selectedClusterColor = '#FFF';
 
-    function drawRectangle() {
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
-    }
-    function drawCircle() {
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.CIRCLE);
-    }
-    function drawPolygon(){
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
-    }
-
-    function deleteAllShapes() {
-        if (!shapes || shapes.length < 1) return;
-        while (shapes.length > 0) {
-            var shape = shapes.pop();
-            shape.overlay.setMap(null);
-        }
-    }
-
     function clearSelection() {
         if (selectedCluster) {
             selectedCluster.set('fillColor', normalClusterColor);
@@ -207,7 +189,7 @@ var Map = function (domNode) {
             clusters.push(polyHull);
             polyHull.setMap(map);
             polyHull.infoWindow = new google.maps.InfoWindow({
-                content: '<div class="hullToolTip"><strong>Cluster size: '+clusterSize+'</strong></div>',
+                content: '<div class="hullToolTip"><strong>Cluster size: '+clusterSize+'</strong></div>'
             });
 
             google.maps.event.addListener(polyHull, 'click', function(e) {
@@ -248,6 +230,24 @@ var Map = function (domNode) {
         },
         getMapInstance: function() {
             return map;
+        },
+
+        drawRectangle: function() {
+        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
+        },
+        drawCircle: function() {
+            drawingManager.setDrawingMode(google.maps.drawing.OverlayType.CIRCLE);
+        },
+        drawPolygon: function() {
+            drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
+        },
+
+        deleteAllShapes: function() {
+            if (!shapes || shapes.length < 1) return;
+            while (shapes.length > 0) {
+                var shape = shapes.pop();
+                shape.overlay.setMap(null);
+            }
         }
     }
 };

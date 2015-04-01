@@ -6,6 +6,7 @@ var GETIOM = {
     clusteringTime: null,
     filteringTime: null,
     trendDetectionTime: null,
+    currentStep: 'welcome',
     gridData: null
 };
 
@@ -51,7 +52,9 @@ function moveTo(step) {
         filterStep.removeClass('active , disabled').addClass('complete');
         clusterStep.removeClass('active , disabled').addClass('complete');
         trendsStep.removeClass('complete , disabled').addClass('active');
-        TrendsPage.init();
+        if (GETIOM.currentStep !== 'results') {
+            TrendsPage.init();
+        }
     }
     else if (step === 'results') {
         filter.hide();
@@ -63,6 +66,8 @@ function moveTo(step) {
         trendsStep.removeClass('complete , disabled').addClass('active');
         ResultsPage.init();
     }
+
+    GETIOM.currentStep = step;
     $(window).scrollTop(0);
 }
 
