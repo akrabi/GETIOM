@@ -12,6 +12,8 @@ var GETIOM = {
 //TODO clear data when going "back" from an advanced step....
 
 function moveTo(step) {
+    var welcome = $('#welcome');
+    var steps = $('#progress_steps');
     var filter = $('#filter');
     var cluster = $('#cluster');
     var trends = $('#trends');
@@ -21,6 +23,8 @@ function moveTo(step) {
     var trendsStep = $('#trendsStep');
 
     if (step === 'filter') {
+        welcome.hide();
+        steps.show();
         filter.show();
         cluster.hide();
         trends.hide();
@@ -28,6 +32,7 @@ function moveTo(step) {
         filterStep.removeClass('complete , disabled').addClass('active');
         clusterStep.removeClass('complete , active').addClass('disabled');
         trendsStep.removeClass('complete , active').addClass('disabled');
+        FilterPage.init();
     }
     else if (step === 'cluster') {
         filter.hide();
