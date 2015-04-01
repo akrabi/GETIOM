@@ -60,9 +60,12 @@ function radioValue(name) {
 }
 
 function clusteringDone() {
-    $('#processingModal').modal('hide');
-    modalMessage('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!');
-    moveTo('trends');
+    $.getJSON('convexhulls', function(data) {
+        GETIOM.convexHulls = data;
+        $('#processingModal').modal('hide');
+        modalMessage('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!');
+        moveTo('trends');
+    });
 }
 
 function clusteringError(msg) {

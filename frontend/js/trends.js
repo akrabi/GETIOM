@@ -211,10 +211,7 @@ var TrendsPage = {
         var map = new Map($('#resultsMap')[0]);
         this.map = map;
         map.init(40.821715, -74.122381);               //TODO optimize zoom and location to display results
-        $.getJSON('convexhulls', function(data) {
-            GETIOM.convexHulls = data;
-            TrendsPage.loadPolygons(map);   //TODO use self instead of TrendsPage
-        });
+        TrendsPage.loadPolygons(map);   //TODO use self instead of TrendsPage
     },
     loadPolygons: function (map) {
         for (var i=0; i < GETIOM.convexHulls.length; ++i) {
