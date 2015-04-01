@@ -34,6 +34,10 @@ fieldset {
 #filter h4 {
     text-align: center;
 }
+#filterTimeForm {
+    display: none;
+}
+
 
 /* Cluster */
 
