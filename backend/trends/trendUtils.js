@@ -20,7 +20,9 @@ module.exports = {
         for (var day in messagesPerDay) {
             daysArray.push([parseInt(day), parseInt(messagesPerDay[day])]);
         }
-        return daysArray;
+        return daysArray.sort(function(day1, day2) {
+            return day1[0] - day2[0];
+        });
     }
 
 }
