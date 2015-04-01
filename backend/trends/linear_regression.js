@@ -56,8 +56,9 @@ var LinearRegression = function() {
             var linePoints = [];
 
             for (var day in messagesPerDay) {
-                linePoints.push([day, f(day)]);
-                if (Math.abs(f(day) - messagesPerDay[day]) > threshold) {
+                var lineValue = f(day);
+                linePoints.push([day, lineValue]);
+                if (Math.abs(lineValue - messagesPerDay[day]) > (threshold/100)*lineValue) {
                     trends.push([day, messagesPerDay[day]]);
                 }
             }

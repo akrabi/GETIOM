@@ -1,9 +1,9 @@
-function runSD(){
+function runGA(){
     var map = TrendsPage.map;
     var clusterIndex = map.getSelectedClusterIndex();
     var sdFactor = parseFloat($('input[name="sd"]').val());
     if (clusterIndex > -1) {
-        $.getJSON('trends/standard_deviation/'+clusterIndex+'?factor='+sdFactor, function( data ) {
+        $.getJSON('trends/global_average/'+clusterIndex+'?factor='+sdFactor, function( data ) {
             var trends = data && data.trends;
             if (!trends || trends.length == 0) {
                 modalMessage('No trends found!');
@@ -244,7 +244,7 @@ var TrendsPage = {
 }
 
 $(document).ready(function() {
-    var trendForm = new SelectiveForm(['standard deviation', 'linear regression', 'running average'], ['sd_panel', 'lr_panel', 'ra_panel'], 'trend_algo_select', [runSD, runLR, runRA]);
+    var trendForm = new SelectiveForm(['global average', 'linear regression', 'running average'], ['ga_panel', 'lr_panel', 'ra_panel'], 'trend_algo_select', [runGA, runLR, runRA]);
     trendForm.init();
     $('#submitTrend').click(function() {
         var t1 = Date.now();
