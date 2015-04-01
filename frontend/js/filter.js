@@ -37,6 +37,7 @@ var FilterPage = {
         $('#filterLocationForm').submit(function (e) {
             e.preventDefault();
             var shape = map.getShape();
+            $('#processingModal').modal();
             if (shape.type === 'circle') {
                 var circle = shape.overlay;
                 var lat = circle.getCenter().lat();
@@ -44,14 +45,8 @@ var FilterPage = {
                 var radius = circle.getRadius();
                 GETIOM.filteringTime = Date.now();
                 $.getJSON('filter/location/circle?lat=' + lat + '&lng=' + lng + '&radius=' + radius, function (data) {
-                    var resultsModal = $('#resultsModal');
                     GETIOM.filteredMessagesNum = data.messagesNum;
-                    var t2 = Date.now();
-                    var ms = t2 - GETIOM.filteringTime;     //time in milliseconds
-                    GETIOM.filteringTime = ms / 1000;
-                    resultsModal.find('.modal-body').html('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!')
-                    resultsModal.modal();
-                    moveTo('cluster');
+                    filteringDone();
                 });
             }
             else if (shape.type === 'rectangle') {
@@ -61,26 +56,30 @@ var FilterPage = {
                 var lng1 = bounds.getNorthEast().lng();
                 var lat2 = bounds.getSouthWest().lat();
                 var lng2 = bounds.getSouthWest().lng();
+                GETIOM.filteringTime = Date.now();
                 $.getJSON('filter/location/rectangle?lat1=' + lat1 + '&lng1=' + lng1 + '&lat2=' + lat2 + '&lng2=' + lng2, function (data) {
-                    //TODO: add time statistics!
                     GETIOM.filteredMessagesNum = data.messagesNum;
-                    moveTo('cluster');
+                    filteringDone();
                 });
             }
             else {
                 GETIOM.filteringTime = Date.now();
                 $.getJSON('filter', function (data) {
                     GETIOM.filteredMessagesNum = data.messagesNum;
-                    var resultsModal = $('#resultsModal');
-                    var t2 = Date.now();
-                    var ms = t2 - GETIOM.filteringTime;     //time in milliseconds
-                    GETIOM.filteringTime = ms / 1000;
-                    resultsModal.find('.modal-body').html('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!')
-                    resultsModal.modal();
-                    moveTo('cluster');
+                    filteringDone();
                 });
             }
         });
     }
 };
 
+function filteringDone() {
+    $('#processingModal').modal('hide');
+    var resultsModal = $('#resultsModal');
+    var t2 = Date.now();
+    var ms = t2 - GETIOM.filteringTime;     //time in milliseconds
+    GETIOM.filteringTime = ms / 1000;
+    resultsModal.find('.modal-body').html('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!')
+    resultsModal.modal();
+    moveTo('cluster');
+}
