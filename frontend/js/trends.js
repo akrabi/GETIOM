@@ -51,7 +51,7 @@ function runGA(){
                         {
                             data: topSDPoints,
                             label: "Average + Factor*SD",
-                            lines: { show: true }
+                            dashes: { show: true }
                         },
                         {
                             data: averagePoints,
@@ -61,7 +61,7 @@ function runGA(){
                         {
                             data: bottomSDPoints,
                             label: "Average - Factor*SD",
-                            lines: { show: true }
+                            dashes: { show: true }
                         }],
                     {
                         xaxis:
@@ -103,6 +103,8 @@ function runLR(){
 
                 modalMessage(result);
                 var line = data.additional.line;
+                var linePlusThreshold = data.additional.linePlusThreshold;
+                var lineMinusThreshold = data.additional.lineMinusThreshold;
 
                 moveTo('results');
 
@@ -130,7 +132,18 @@ function runLR(){
                             data: line,
                             label: "Linear Regression",
                             lines: { show: true }
-                        }],
+                        },
+                        {
+                            data: linePlusThreshold,
+                            label: "+ Threshold",
+                            dashes: { show: true }
+                        },
+                        {
+                            data: lineMinusThreshold,
+                            label: "- Threshold",
+                            dashes: { show: true }
+                        }
+                    ],
                     {
                         xaxis:
                         {
@@ -143,6 +156,7 @@ function runLR(){
                             hoverable: true
                         }
                     }
+
                 );
             }
         });
@@ -159,7 +173,9 @@ function runRA() {
     if (clusterIndex > -1) {
         $.getJSON('trends/running_average/'+clusterIndex+'?threshold='+threshold, function( data ) {
             var trends = data.trends;
-            var averages = data.additional.averages;
+            var runningAverage = data.additional.runningAverage;
+            var runningAveragePlusThreshold = data.additional.runningAveragePlusThreshold;
+            var runningAverageMinusThreshold = data.additional.runningAverageMinusThreshold;
             var days = data.additional.days;
             if (trends.length == 0) {
                 modalMessage('No trends found!');
@@ -193,29 +209,33 @@ function runRA() {
 
                         },
                         {
-                            data: days,
-                            lines:   {
-                                show: true
-                            }
-                        },
-                        {
-                            data: averages,
+                            data: runningAverage,
                             label: "Running Average",
                             lines: { show: true }
-                        }],
-                    {
-                        xaxis:
-                        {
-                            mode: "time",
-                            timeformat: "%d/%m/%Y"
                         },
-                        grid:
                         {
-                            backgroundColor: "#f8f8f8",
-                            hoverable: true
+                            data: runningAveragePlusThreshold,
+                            label: "+ Threshold",
+                            dashes: { show: true }
+                        },
+                        {
+                            data: runningAverageMinusThreshold,
+                            label: "- Threshold",
+                            dashes: { show: true }
+                        }],
+                        {
+                            xaxis:
+                            {
+                                mode: "time",
+                                timeformat: "%d/%m/%Y"
+                            },
+                            grid:
+                            {
+                                backgroundColor: "#f8f8f8",
+                                hoverable: true
+                            }
                         }
-                    }
-                );
+                    );
             }
         });
     }

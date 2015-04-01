@@ -54,10 +54,15 @@ var LinearRegression = function() {
 
             var trends = [];
             var linePoints = [];
+            var linePlusThreshold = [];
+            var lineMinusThreshold = [];
+
 
             for (var day in messagesPerDay) {
                 var lineValue = f(day);
                 linePoints.push([day, lineValue]);
+                linePlusThreshold.push([day, lineValue+(threshold/100)*lineValue]);
+                lineMinusThreshold.push([day, lineValue-(threshold/100)*lineValue]);
                 if (Math.abs(lineValue - messagesPerDay[day]) > (threshold/100)*lineValue) {
                     trends.push([day, messagesPerDay[day]]);
                 }
@@ -67,7 +72,9 @@ var LinearRegression = function() {
                 additional: {
                     days: daysArray,
                     messagesNum: cluster.length,
-                    line: linePoints
+                    line: linePoints,
+                    linePlusThreshold: linePlusThreshold,
+                    lineMinusThreshold: lineMinusThreshold
                 }
             };
         }

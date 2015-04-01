@@ -9,13 +9,17 @@ var RunningAverage = function() {
             var messages = 0;
             var average = 0;
             var trends = [];
-            var averages = [];
+            var runningAverage = [];
+            var runningAveragePlusThreshold = [];
+            var runningAverageMinusThreshold = [];
 
             for (var i=0; i<daysArray.length; ++i) {
                 messages += daysArray[i][1];
                 //var previousAverage = average;
                 average = messages / (i+1);
-                averages.push([daysArray[i][0], average]);
+                runningAverage.push([daysArray[i][0], average]);
+                runningAveragePlusThreshold.push([daysArray[i][0], average+(threshold/100)*average]);
+                runningAverageMinusThreshold.push([daysArray[i][0], average-(threshold/100)*average]);
                 //var slope = (average - previousAverage) / 2;
                 if (Math.abs(daysArray[i][1]-average) > (threshold/100)*average && i>0) {
                     trends.push(daysArray[i]);
@@ -25,7 +29,9 @@ var RunningAverage = function() {
                     additional: {
                         days: daysArray,
                         messagesNum: cluster.length,
-                        averages: averages
+                        runningAverage: runningAverage,
+                        runningAveragePlusThreshold: runningAveragePlusThreshold,
+                        runningAverageMinusThreshold: runningAverageMinusThreshold
                     }};
         }
     }
