@@ -31,18 +31,22 @@ function runSD(){
 
                 moveTo('results');
                 $.plot("#trend_results", [
-                        {	data: trends,
-                            points: {
-                                        show: true,
-                                        radius: 5
-                                    },
-                            color: "#ff0000"
-                        },
                         {
                             data: days,
                             lines:   {
                                 show: true
+                            },
+                            points: {
+                                show: true,
+                                radius: 4
                             }
+                        },
+                        {	data: trends,
+                            points: {
+                                show: true,
+                                radius: 5
+                            },
+                            color: "#ff0000"
                         },
                         {
                             data: topSDPoints,
@@ -103,19 +107,24 @@ function runLR(){
                 moveTo('results');
 
                 $.plot("#trend_results", [
-                        {	data: trends,
+                        {
+                            data: days,
+                            lines:   {
+                                show: true
+                            },
+                            points: {
+                                show: true,
+                                radius: 4
+                            }
+                        },
+                        {
+                            data: trends,
                             points:
                             {
                                 show: true,
                                 radius: 5
                             },
                             color: "#ff0000"
-                        },
-                        {
-                            data: days,
-                            lines:   {
-                                show: true
-                            }
                         },
                         {
                             data: line,
@@ -164,6 +173,16 @@ function runRA() {
                 modalMessage(result);
                 moveTo('results');
                 $.plot("#trend_results", [
+                        {
+                            data: days,
+                            lines:   {
+                                show: true
+                            },
+                            points: {
+                                show: true,
+                                radius: 4
+                            }
+                        },
                         {	data: trends,
                             points:
                             {
