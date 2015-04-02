@@ -9,15 +9,9 @@
     "express": "~4.0.0",
     "morgan": "~1.0.0",
     "body-parser": "~1.0.1",
-    "mongoose": "*",
     "clusterfck": "*",
     "geolib": "*",
-    "terraformer": "*",
-    "terraformer-geostore": "*",
-    "terraformer-geostore-memory": "*",
-    "terraformer-rtree": "*",
-    "turf": "*",
-    "turf-square-grid": "*"
+    "terraformer": "*"
   }
 }
 

@@ -80,7 +80,13 @@ router.route('/filter/location/rectangle')
 
 router.route('/filter/location/polygon')
     .get(function(req, res, next) {
-        var polygon;
+        var points = JSON.parse(req.query.points);
+        var polygon = points.map(function(point) {
+            return {
+                latitude: point[0],
+                longitude: point[1]
+            }
+        });
         res.json(messages.filter(function(msg) {
             return geolib.isPointInside(getMsgCoordinates(msg), polygon);
         }));

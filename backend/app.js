@@ -7,6 +7,7 @@ var trends     = require('./trends/trends.js');
 var clustering = require('./clustering/clustering.js');
 
 
+
 // Configuration parameters
 var restURL = "http://localhost:8081/messages"
 var port = process.env.PORT || 8080;    // Server's port
@@ -23,47 +24,15 @@ app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-//TODO consider usage of GeoStore
-//var GeoStore = require('terraformer-geostore').GeoStore;
-//var RTree = require('terraformer-rtree').RTree;
-//var Memory = require('terraformer-geostore-memory').Memory;
-//var store = new GeoStore({
-//    store: new Memory(),
-//    index: new RTree()
-//});
-//
-//store.add(messages, function(err, res){
-//    err && console.log('Error!!! ' + err);
-//    res && console.log('Success!!');
-//});
-
-//TODO check turf!
-//var turf = require('turf');
-//var extent = turf.extent({type: 'FeatureCollection', features: messages});
-//extent = extent.map(function(coord) {
-//    return parseFloat(coord);
-//});
-////var extent = [-77.3876953125,38.71980474264239,-76.9482421875,39.027718840211605];
-//console.log(extent);
-//var cellWidth = 100;
-//var units = 'miles';
-//
-//var squareGrid = turf.squareGrid(extent, cellWidth, units);
-//console.log(squareGrid);
-
-
-//(messages, function(err, features) {
-//    if (err) throw err;
-//    turf.extent(features, function(extent) {
-//        console.log(extent);
-//    });
-//});
-
+// Return an error to the client side
+function returnError(req, res) {
+    res.status(404);
+    res.send('Not found');
+}
 
 
 // function to recieve filtered messages from REST API
-function getData(url, callback) {
+function getData(req, res, url, callback) {
     console.log('Getting data from: ' + url);
     http.get(url, function(res) {
         var chunks = '';
@@ -77,6 +46,7 @@ function getData(url, callback) {
         });
     }).on('error', function(e) {
         console.log("Got error: ", e);
+        returnError(req, res);
     });
 }
 
@@ -91,37 +61,55 @@ router.use(function(req, res, next) {
 
 
 router.route('/messages/num')
-    .get(function(req, response) {
+    .get(function(req, res) {
         console.log('Retrieving number of messages in DB...');
         var url = restURL+'/num';
-        getData(url, function(messagesNum) {
-            response.json(messagesNum);
+        getData(req, res, url, function(messagesNum) {
+            res.json(messagesNum);
         });
     });
 
 router.route('/filter')
-    .get(function(req, response) {
+    .get(function(req, res) {
         console.log('Handling filter request...');
         var url = restURL;
-        getData(url, function(data) {
+        getData(req, res, url, function(data) {
             messages = data;
-            response.json({messagesNum: messages.length});
+            res.json({messagesNum: messages.length});
         });
     });
 
 router.route('/filter/*')
-    .get(function(req, response) {
+    .get(function(req, res) {
         console.log('Handling filter request...');
         var url = restURL+req.url;
-        getData(url, function(data) {
+        getData(req, res, url, function(data) {
             messages = data;
-            response.json({messagesNum: messages.length});
+            res.json({messagesNum: messages.length});
         });
     });
 
+router.route('/cluster/:clusterAlgo')
+    .get(function(req, res) {
+        console.log('Handling ' + req.params.clusterAlgo + ' clustering request...');
+        if (!messages) {
+            console.log('Cannot cluster when no messages are loaded!');
+            res.json([]);
+        }
+        var clusterAlgo = clustering[req.params.clusterAlgo];
+        if (!clusterAlgo) {
+            clusters = messages;
+        }
+        else {
+            clusters = clusterAlgo.cluster(messages, req.query);
+        }
+        res.json(clusters.map(function(cluster) {return cluster.length}));
+    });
+
+
 router.route('/convexhulls')
     .get(function(req, res) {
-        if (!clusters) {
+        if (!clusters || !Array.isArray(clusters) || clusters.length === 0) {
             console.log('No clusters to display...');
             res.json([]);
         }
@@ -134,17 +122,6 @@ router.route('/convexhulls')
         res.json(convexHulls);
     });
 
-router.route('/cluster/:clusterAlgo')
-    .get(function(req, res) {
-        console.log('Handling ' + req.params.clusterAlgo + ' clustering request...');
-        if (!messages) {
-            console.log('Cannot cluster when no messages are loaded!');
-            res.json([]);
-        }
-        var clusterAlgo = clustering[req.params.clusterAlgo];
-        clusters = clusterAlgo.cluster(messages, req.query);
-        res.json(clusters.map(function(cluster) {return cluster.length}));
-    });
 
 router.route('/trends/:trendAlgo/:clusterIndex')
     .get(function(req, res) {
