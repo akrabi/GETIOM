@@ -28,7 +28,8 @@ var Hierarchical = function() {
                     return leaf.value;
                 });
             });
-            return flat_clusters.map(function(cluster) {return cluster.length});
+
+            return flat_clusters;
         }
     }
 }();
