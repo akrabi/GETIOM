@@ -9,7 +9,7 @@ var KMeans = function() {
                 var loc2 = {latitude: msg2.geometry.coordinates[0], longitude: msg2.geometry.coordinates[1]};
                 return geolib.getDistance(loc1, loc2);
             }
-            return clusterfck.kmeans(data, k, metric);
+            return (new clusterfck.Kmeans).cluster(data, k, metric, null, null);
         }
     }
 }();
