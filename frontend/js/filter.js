@@ -69,8 +69,6 @@ var FilterPage = {
                         if (i > 1) {
                             points += ',';
                         }
-                        //points += 'lat'+i+'=' + latLng.lat() + '&lng'+i+'=' + latLng.lng();
-                        //points += 'point'+i+'=['+latLng.lat()+','+latLng.lng()+']'
                         points += '[\"'+latLng.lat()+'\",\"'+latLng.lng()+'\"]';
                     });
                 });
