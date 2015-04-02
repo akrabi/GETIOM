@@ -50,10 +50,13 @@ function getClusters(url) {
     });
 }
 
+function getClustersHulls() {
+
+}
+
 function clusteringError(msg) {
     $('#processingModal').modal('hide');
     modalMessage(msg);
-    moveTo('trends');
 }
 
 $(document).ready(function () {
@@ -61,14 +64,8 @@ $(document).ready(function () {
     clusterForm.init();
     $('#submitCluster').click(function() {
         clusterForm.submit();
-    })
+    });
     $('#skipCluster').click(function() {
-        $.getJSON('cluster/grid', function( data ) {
-            GETIOM.clusterSizeArray = data;
-            var t2 = Date.now();
-            var ms = t2-GETIOM.clusteringTime;     //time in milliseconds
-            GETIOM.clusteringTime = ms / 1000;
-            clusteringDone();
-        });
+        getClusters('/cluster/skip');
     });
 });

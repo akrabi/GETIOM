@@ -98,7 +98,7 @@ router.route('/cluster/:clusterAlgo')
         }
         var clusterAlgo = clustering[req.params.clusterAlgo];
         if (!clusterAlgo) {
-            clusters = messages;
+            clusters = [messages];
         }
         else {
             clusters = clusterAlgo.cluster(messages, req.query);
