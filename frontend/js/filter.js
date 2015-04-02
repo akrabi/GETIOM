@@ -10,10 +10,11 @@ var FilterPage = {
         // Get number of messages stored in server's DB
         $.getJSON('messages/num', function (data) {         //TODO get rid of messages!! change to dbsize
             GETIOM.databaseMessagesNum = data.messagesNum;
-            var resultsModal = $('#resultsModal');
-            resultsModal.find('.modal-body').html('GETIOM Started.<br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!')
-            resultsModal.modal();
-        });
+            modalMessage('GETIOM Started.<br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!');
+        })
+            .error(function() {
+                modalMessage('Error!<br> Failed to start GETIOM.<br>Check that the server is up and running');
+            });
 
         // Initialize slider
         if (!this.slider) {
@@ -28,26 +29,22 @@ var FilterPage = {
         map.init(40.821715, -74.122381);
         map.addSearchBox();
         map.addDrawingManager();
-        $('#filterLocationCollapse').click(function () {
-            setTimeout(function () {
-                map.show();
-            }, 50);
-        });
 
         $('#filterLocationForm').submit(function (e) {
             e.preventDefault();
+
             var shape = map.getShape();
+            var url = null;
+
             $('#processingModal').modal();
+            GETIOM.filteringTime = Date.now();
+
             if (shape.type === 'circle') {
                 var circle = shape.overlay;
                 var lat = circle.getCenter().lat();
                 var lng = circle.getCenter().lng();
                 var radius = circle.getRadius();
-                GETIOM.filteringTime = Date.now();
-                $.getJSON('filter/location/circle?lat=' + lat + '&lng=' + lng + '&radius=' + radius, function (data) {
-                    GETIOM.filteredMessagesNum = data.messagesNum;
-                    filteringDone();
-                });
+                url = 'filter/location/circle?lat=' + lat + '&lng=' + lng + '&radius=' + radius;
             }
             else if (shape.type === 'rectangle') {
                 var rect = shape.overlay;
@@ -56,30 +53,51 @@ var FilterPage = {
                 var lng1 = bounds.getNorthEast().lng();
                 var lat2 = bounds.getSouthWest().lat();
                 var lng2 = bounds.getSouthWest().lng();
-                GETIOM.filteringTime = Date.now();
-                $.getJSON('filter/location/rectangle?lat1=' + lat1 + '&lng1=' + lng1 + '&lat2=' + lat2 + '&lng2=' + lng2, function (data) {
-                    GETIOM.filteredMessagesNum = data.messagesNum;
-                    filteringDone();
+                url = 'filter/location/rectangle?lat1=' + lat1 + '&lng1=' + lng1 + '&lat2=' + lat2 + '&lng2=' + lng2;
+            }
+            else if (shape.type === 'polygon') {
+                var i = 0;
+                var points = '[';
+                var poly = shape.overlay;
+
+                //iterate over the paths
+                poly.getPaths().getArray().forEach(function(path){
+
+                    //iterate over the points in the path
+                    path.getArray().forEach(function(latLng){
+                        i++;
+                        if (i > 1) {
+                            points += ',';
+                        }
+                        //points += 'lat'+i+'=' + latLng.lat() + '&lng'+i+'=' + latLng.lng();
+                        //points += 'point'+i+'=['+latLng.lat()+','+latLng.lng()+']'
+                        points += '[\"'+latLng.lat()+'\",\"'+latLng.lng()+'\"]';
+                    });
                 });
+                points  += ']';
+                url = 'filter/location/polygon?points=' + points;
             }
             else {
                 GETIOM.filteringTime = Date.now();
-                $.getJSON('filter', function (data) {
-                    GETIOM.filteredMessagesNum = data.messagesNum;
-                    filteringDone();
-                });
+                url = 'filter';
             }
+            $.getJSON(url, function (data) {
+                GETIOM.filteredMessagesNum = data.messagesNum;
+                filteringDone();
+            })
+                .error(function() {
+                    $('#processingModal').modal('hide');
+                    modalMessage('Error!<br> Failed to filter.<br>Check that the server is up and running');
+                });
         });
     }
 };
 
 function filteringDone() {
     $('#processingModal').modal('hide');
-    var resultsModal = $('#resultsModal');
     var t2 = Date.now();
     var ms = t2 - GETIOM.filteringTime;     //time in milliseconds
     GETIOM.filteringTime = ms / 1000;
-    resultsModal.find('.modal-body').html('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!')
-    resultsModal.modal();
+    modalMessage('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!');
     moveTo('cluster');
 }
