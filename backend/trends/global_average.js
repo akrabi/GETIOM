@@ -20,25 +20,43 @@ var StandardDeviation = function() {
         findTrends: function(cluster, params) {
             var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
             var daysArray = trendUtils.daysArray(messagesPerDay);
-            var factor = params.factor;
+            var threshold = parseFloat(params.threshold);
 
-            var avgMsgPerDay = cluster.length / daysArray.length //Number of messages divided by number of days
+            var avg = cluster.length / daysArray.length //Number of messages divided by number of days
             var sd = standardDeviation(daysArray);
 
-            var trends = daysArray.filter(function(day) {
-               return day[1] > avgMsgPerDay + sd*factor || day[1] < avgMsgPerDay - sd*factor;
-            });
+            var daysNum = daysArray.length;
 
-            return {
-                trends: trends,
-                additional: {
-                    days: daysArray,
-                    messagesNum: cluster.length,
-                    avg: avgMsgPerDay,
-                    sd: sd
-                }
+            if (daysNum < 2) {
+                return null;
             }
 
+            var averagePoints = [];
+            var bottomSDPoints = [];
+            var topSDPoints = [];
+            var trends = [];
+            
+            for (var i=0; i<daysNum; ++i) {
+                var day = daysArray[i][0];
+                var messages = daysArray[i][1];
+                if (messages > avg + sd*threshold || messages < avg - sd*threshold) {
+                    trends.push(daysArray[i]);
+                }
+                topSDPoints.push([day, avg + sd*threshold]);
+                averagePoints.push([day, avg]);
+                bottomSDPoints.push([day, avg - sd*threshold]);
+            }
+
+            return {
+                trendsNum: trends.length,
+                daysNum: daysNum,
+                messagesNum: cluster.length,
+                days: daysArray,
+                trends: trends,
+                topSDPoints: topSDPoints,
+                averagePoints: averagePoints,
+                bottomSDPoints: bottomSDPoints
+            }
         }
     }
 }();

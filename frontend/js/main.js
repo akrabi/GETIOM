@@ -3,11 +3,11 @@ var GETIOM = {
     databaseMessagesNum: null,
     filteredMessagesNum: null,
     clusterSizeArray: null,
+    trendAlgorithms: null,
     clusteringTime: null,
     filteringTime: null,
     trendDetectionTime: null,
-    currentStep: 'welcome',
-    gridData: null
+    currentStep: 'welcome'
 };
 
 //TODO clear data when going "back" from an advanced step....
@@ -77,3 +77,11 @@ function modalMessage(msg) { //TODO add title option, build html around title an
     resultsModal.find('.modal-body').html(msg);
     resultsModal.modal();
 }
+
+$(document).ready(function() {
+    $.getJSON('trends/algorithms', function(data) {
+        GETIOM.trendAlgorithms = data;
+    }).error(function() {
+        modalMessage('Failed to retrieve trend algorithms. Please check configuration.');
+    })
+})

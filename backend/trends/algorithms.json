@@ -1,0 +1,58 @@
+{
+  "global_average": {
+    "name": "Global Average",
+    "description": "Finds days where the number of messages exceeds the global average of messages per day by more a certain percentage of that average.",
+    "params":
+      {
+        "threshold":
+          {
+            "name": "Threshold"
+          }
+      },
+    "plotData": [
+      {
+        "data": "days",
+        "lines": {
+          "show": true
+        },
+        "points": {
+          "show": true,
+          "radius": 4
+        }
+      },
+      {
+        "data": "trends",
+        "points": {
+          "show": true,
+          "radius": 5
+        },
+        "color": "#ff0000"
+      },
+      {
+        "data": "topSDPoints",
+        "label": "Average + Factor*SD",
+        "dashes": {"show": true}
+      },
+      {
+        "data": "averagePoints",
+        "label": "Average",
+        "lines": {"show": true}
+      },
+      {
+        "data": "bottomSDPoints",
+        "label": "Average - Factor*SD",
+        "dashes": {"show": true}
+      }
+    ],
+    "plotOptions": {
+      "xaxis": {
+        "mode": "time",
+        "timeformat": "%d/%m/%Y"
+      },
+      "grid": {
+        "backgroundColor": "#f8f8f8",
+        "hoverable": true
+      }
+    }
+  }
+}

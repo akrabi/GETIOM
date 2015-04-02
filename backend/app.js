@@ -5,7 +5,7 @@ var morgan     = require('morgan');
 var terraformer= require('terraformer');
 var trends     = require('./trends/trends.js');
 var clustering = require('./clustering/clustering.js');
-
+var trendAlgo  = require('./trends/algorithms.json')
 
 
 // Configuration parameters
@@ -122,6 +122,10 @@ router.route('/convexhulls')
         res.json(convexHulls);
     });
 
+router.route('/trends/algorithms')
+    .get(function(req, res) {
+        res.json(trendAlgo);
+    });
 
 router.route('/trends/:trendAlgo/:clusterIndex')
     .get(function(req, res) {
@@ -139,6 +143,7 @@ app.use('/', router);
 
 // Register client side web app
 app.use(express.static(webAppPath));
+
 
 // Start the server
 app.listen(port);
