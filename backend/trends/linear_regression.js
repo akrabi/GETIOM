@@ -68,18 +68,17 @@ var LinearRegression = function() {
                 }
             }
             return {
+                trendsNum: trends.length,
+                daysNum: daysArray.length,
+                messagesNum: cluster.length,
+                days: daysArray,
                 trends: trends,
-                additional: {
-                    days: daysArray,
-                    messagesNum: cluster.length,
-                    line: linePoints,
-                    linePlusThreshold: linePlusThreshold,
-                    lineMinusThreshold: lineMinusThreshold
-                }
+                line: linePoints,
+                linePlusThreshold: linePlusThreshold,
+                lineMinusThreshold: lineMinusThreshold
             };
         }
     };
 }();
-
 
 module.exports = LinearRegression;

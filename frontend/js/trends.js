@@ -132,86 +132,9 @@ function runGA() {
 }
 
 function runLR(){
-    var map = TrendsPage.map;
-    var clusterIndex = map.getSelectedClusterIndex();
-    var threshold = parseFloat($('input[name="lr"]').val());
-    if (clusterIndex > -1) {
-        $.getJSON('trends/linear_regression/'+clusterIndex+'?threshold='+threshold, function( data ) {
-            var trends = data.trends;
-            var days = data.additional.days;
-            if (trends.length == 0) {
-                modalMessage('No trends found!');
-            }
-            else {
-
-                var result =    'Messages: ' + data.additional.messagesNum + '<br>' +
-                    'Days: ' + days.length + '<br>' +
-                    'Trends: ' + trends.length;
-
-                modalMessage(result);
-                var line = data.additional.line;
-                var linePlusThreshold = data.additional.linePlusThreshold;
-                var lineMinusThreshold = data.additional.lineMinusThreshold;
-
-                moveTo('results');
-
-                $.plot("#trend_results", [
-                        {
-                            data: days,
-                            lines:   {
-                                show: true
-                            },
-                            points: {
-                                show: true,
-                                radius: 4
-                            }
-                        },
-                        {
-                            data: trends,
-                            points:
-                            {
-                                show: true,
-                                radius: 5
-                            },
-                            color: "#ff0000"
-                        },
-                        {
-                            data: line,
-                            label: "Linear Regression",
-                            lines: { show: true }
-                        },
-                        {
-                            data: linePlusThreshold,
-                            label: "+ Threshold",
-                            dashes: { show: true }
-                        },
-                        {
-                            data: lineMinusThreshold,
-                            label: "- Threshold",
-                            dashes: { show: true }
-                        }
-                    ],
-                    {
-                        xaxis:
-                        {
-                            mode: "time",
-                            timeformat: "%d/%m/%Y"
-                        },
-                        grid:
-                        {
-                            backgroundColor: "#f8f8f8",
-                            hoverable: true
-                        }
-                    }
-
-                );
-            }
-        });
-    }
-    else {
-        modalMessage('No cluster selected')
-    }
+    runTrendDetection('linear_regression');
 }
+
 
 function runRA() {
     var map = TrendsPage.map;

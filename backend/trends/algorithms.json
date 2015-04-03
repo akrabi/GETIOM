@@ -3,12 +3,12 @@
     "name": "Global Average",
     "description": "Finds days where the number of messages exceeds the global average of messages per day by more a certain percentage of that average.",
     "params":
+    {
+      "threshold":
       {
-        "threshold":
-          {
-            "name": "Threshold"
-          }
-      },
+        "name": "Threshold"
+      }
+    },
     "plotData": [
       {
         "data": "days",
@@ -50,6 +50,67 @@
         "timeformat": "%d/%m/%Y"
       },
       "grid": {
+        "backgroundColor": "#f8f8f8",
+        "hoverable": true
+      }
+    }
+  },
+  "linear_regression":
+  {
+    "name": "Linear Regression",
+    "description": "Finds days where the number of messages is greater than a certain threshold percentage of the value of the linear regression of messages from all days",
+    "params":
+    {
+      "threshold":
+      {
+        "name": "Threshold"
+      }
+    },
+    "plotData": [
+      {
+        "data": "days",
+        "lines":   {
+          "show": true
+        },
+        "points": {
+          "show": true,
+          "radius": 4
+        }
+      },
+      {
+        "data": "trends",
+        "points":
+        {
+          "show": true,
+          "radius": 5
+        },
+        "color": "#ff0000"
+      },
+      {
+        "data": "line",
+        "label": "Linear Regression",
+        "lines": { "show": true }
+      },
+      {
+        "data": "linePlusThreshold",
+        "label": "+ Threshold",
+        "dashes": { "show": true }
+      },
+      {
+        "data": "lineMinusThreshold",
+        "label": "- Threshold",
+        "dashes": { "show": true }
+      }
+    ],
+    "plotOptions":
+    {
+      "xaxis":
+      {
+        "mode": "time",
+        "timeformat": "%d/%m/%Y"
+      },
+      "grid":
+      {
         "backgroundColor": "#f8f8f8",
         "hoverable": true
       }
