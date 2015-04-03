@@ -115,5 +115,65 @@
         "hoverable": true
       }
     }
+  },
+  "running_average":
+  {
+    "name": "Running Average",
+    "description": "",
+    "params":
+    {
+      "threshold":
+      {
+        "name": "Threshold"
+      }
+    },
+    "plotData":
+    [
+      {
+        "data": "days",
+        "lines":   {
+          "show": true
+        },
+        "points": {
+          "show": true,
+          "radius": 4
+        }
+      },
+      {	"data": "trends",
+        "points":
+        {
+          "show": true,
+          "radius": 5
+        },
+        "color": "#ff0000"
+      },
+      {
+        "data": "runningAverage",
+        "label": "Running Average",
+        "lines": { "show": true }
+      },
+      {
+        "data": "runningAveragePlusThreshold",
+        "label": "+ Threshold",
+        "dashes": { "show": true }
+      },
+      {
+        "data": "runningAverageMinusThreshold",
+        "label": "- Threshold",
+        "dashes": { "show": true }
+      }],
+    "plotOptions":
+    {
+      "xaxis":
+      {
+        "mode": "time",
+        "timeformat": "%d/%m/%Y"
+      },
+      "grid":
+      {
+        "backgroundColor": "#f8f8f8",
+        "hoverable": true
+      }
+    }
   }
 }

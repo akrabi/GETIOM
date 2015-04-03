@@ -25,14 +25,16 @@ var RunningAverage = function() {
                     trends.push(daysArray[i]);
                 }
             }
-            return {trends: trends,
-                    additional: {
-                        days: daysArray,
-                        messagesNum: cluster.length,
-                        runningAverage: runningAverage,
-                        runningAveragePlusThreshold: runningAveragePlusThreshold,
-                        runningAverageMinusThreshold: runningAverageMinusThreshold
-                    }};
+            return {
+                trendsNum: trends.length,
+                daysNum: daysArray.length,
+                messagesNum: cluster.length,
+                days: daysArray,
+                trends: trends,
+                runningAverage: runningAverage,
+                runningAveragePlusThreshold: runningAveragePlusThreshold,
+                runningAverageMinusThreshold: runningAverageMinusThreshold
+            };
         }
     }
 }();

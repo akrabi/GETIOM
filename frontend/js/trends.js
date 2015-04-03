@@ -135,83 +135,8 @@ function runLR(){
     runTrendDetection('linear_regression');
 }
 
-
 function runRA() {
-    var map = TrendsPage.map;
-    var clusterIndex = map.getSelectedClusterIndex();
-    var threshold = parseFloat($('input[name="ra"]').val());
-    if (clusterIndex > -1) {
-        $.getJSON('trends/running_average/'+clusterIndex+'?threshold='+threshold, function( data ) {
-            var trends = data.trends;
-            var runningAverage = data.additional.runningAverage;
-            var runningAveragePlusThreshold = data.additional.runningAveragePlusThreshold;
-            var runningAverageMinusThreshold = data.additional.runningAverageMinusThreshold;
-            var days = data.additional.days;
-            if (trends.length == 0) {
-                modalMessage('No trends found!');
-            }
-            else {
-                var result =    'Messages: ' + data.additional.messagesNum + '<br>' +
-                    'Days: ' + days.length + '<br>' +
-                    'Days: ' + days.length + '<br>' +
-                    'Trends: ' + trends.length;
-
-                modalMessage(result);
-                moveTo('results');
-                $.plot("#trend_results", [
-                        {
-                            data: days,
-                            lines:   {
-                                show: true
-                            },
-                            points: {
-                                show: true,
-                                radius: 4
-                            }
-                        },
-                        {	data: trends,
-                            points:
-                            {
-                                show: true,
-                                radius: 5
-                            },
-                            color: "#ff0000"
-
-                        },
-                        {
-                            data: runningAverage,
-                            label: "Running Average",
-                            lines: { show: true }
-                        },
-                        {
-                            data: runningAveragePlusThreshold,
-                            label: "+ Threshold",
-                            dashes: { show: true }
-                        },
-                        {
-                            data: runningAverageMinusThreshold,
-                            label: "- Threshold",
-                            dashes: { show: true }
-                        }],
-                        {
-                            xaxis:
-                            {
-                                mode: "time",
-                                timeformat: "%d/%m/%Y"
-                            },
-                            grid:
-                            {
-                                backgroundColor: "#f8f8f8",
-                                hoverable: true
-                            }
-                        }
-                    );
-            }
-        });
-    }
-    else {
-        modalMessage('No cluster selected')
-    }
+     runTrendDetection('running_average');
 }
 
 var TrendsPage = {
