@@ -58,7 +58,9 @@ var TrendsPage = {
                     runTrendDetection(algorithm)
                 });
             }
-            TrendsPage.trendForm = SelectiveForm(ids, panels, 'trend_algo_select', calls); // TODO new?
+            //TrendsPage.trendForm = SelectiveForm(ids, panels, 'trend_algo_select', calls); // TODO new?
+            //TrendsPage.trendForm.init();
+            TrendsPage.trendForm = AlgorithmsForm(trendAlgorithms, 'trend_algo_select', 'trend_param_panel', runTrendDetection);
             TrendsPage.trendForm.init();
         }
         var map = new Map($('#resultsMap')[0]);

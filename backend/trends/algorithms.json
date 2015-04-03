@@ -6,7 +6,9 @@
     {
       "threshold":
       {
-        "name": "Threshold"
+        "name": "Threshold",
+        "info": "Multiple of SD",
+        "defaultValue": 0.5
       }
     },
     "plotData": [
@@ -63,7 +65,9 @@
     {
       "threshold":
       {
-        "name": "Threshold"
+        "name": "Threshold",
+        "info": "Percent from line value",
+        "defaultValue": 50
       }
     },
     "plotData": [
@@ -124,7 +128,9 @@
     {
       "threshold":
       {
-        "name": "Threshold"
+        "name": "Threshold",
+        "info": "Percent from average",
+        "defaultValue": 50
       }
     },
     "plotData":

@@ -1,13 +1,3 @@
-div {
-    padding: 0;
-    margin: 0;
-}
-
-body {
-    font-size:9pt;
-    font-family: Arial;
-}
-
 #input_panel {
     display: inline-block;
     clear: both;

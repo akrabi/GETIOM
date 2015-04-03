@@ -99,9 +99,9 @@
 
 <!-- Cluster -->
 <div id="cluster">
-    <div id="input_panel">
-        <div id="algo_panel">
-            <fieldset id="algorithms">
+    <div id="cluster_input_panel">
+        <div id="cluster_algo_panel">
+            <fieldset id="cluster_algorithms">
                 <legend>Clustering algorithm</legend>
                 <select id="cluster_algo_select">
                     <option value="kmeans" selected>K-means</option>
@@ -179,52 +179,23 @@
 <!-- Trend Detection -->
 <div id="trends" align="center">
     <div id="resultsMap" class="map-canvas"></div>
-    <div id="trend_input_panel">
+    <div id="trend_input_panel" class="container-fluid">
+        <form>
         <div id="trend_algo_panel">
             <fieldset id="trend_algorithms">
                 <legend>Trends</legend>
                 <select id="trend_algo_select">
-                    <option value="global_average" selected>Global Average</option>
-                    <option value="running_average">Running Average</option>
-                    <option value="linear_regression">Linear Regression</option>
+                    // Auto generated algorithms options
                 </select>
             </fieldset>
         </div>
 
 
         <div id="trend_param_panel">
-            <div id="global_average_panel">
-                <fieldset id="global_average__params">
-                    <legend>Control panel</legend>
-                    Multiple of SD to consider as trend:
-                    <input type="text" name="global_average_threshold" value="0.5" />
-                </fieldset>
-            </div>
-
-            <div id="linear_regression_panel">
-                <fieldset id="linear_regression__params">
-                    <legend>Control panel</legend>
-                    Threshold for difference from linear regression (in %):
-                    <input type="text" name="linear_regression_threshold" value="50" />
-                </fieldset>
-            </div>
-
-            <div id="running_average_panel">
-                <fieldset id="running_average_params">
-                    <legend>Control panel</legend>
-                    Threshold for difference from running average (in %):
-                    <input type="text" name="running_average_threshold" value="50" />
-                </fieldset>
-            </div>
-
-            <!--<div id="trend_button" style="">
-                <div style="display:table-row; width:100%;text-align:center;">
-                    <div style="vertical-align: middle; display:table-cell;">-->
-                        <input id="submitTrend" type="button" class="btn btn-success" value="Find Trends"/>
-                    <!--</div>
-                </div>-
-            </div>-->
         </div>
+
+        <input id="submitTrend" type="button" class="btn btn-success" value="Find Trends"/>
+        </form>
     </div>
 </div>
 
@@ -306,6 +277,7 @@
 <script src="js/modules/TimeSlider.js"></script>
 <script src="js/modules/HCluster.js"></script>
 <script src="js/modules/SelectiveForm.js"></script>
+<script src="js/modules/AlgorithmsForm.js"></script>
 <script src="js/main.js"></script>
 <script src="js/filter.js"></script>
 <script src="js/cluster.js"></script>
