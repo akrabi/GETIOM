@@ -28,25 +28,24 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectorId, paramete
                             '<div class="form-group">' +
                                 '<label class="col-md-1 col-md-offset-5 control-label" for="' + algoId+'_'+ paramId + '">'+param.name+'</label>' +
                                 '<div class="col-md-1">' +
-                                    '<input id="' + algoId+'_'+paramId + '" name="' + algoId+'_'+paramId + '" type="text" placeholder="'+param.defaultValue+'" class="form-control input-md">' +
+                                    '<input id="' + algoId+'_'+paramId + '" name="' + algoId+'_'+paramId + '" type="text" value="'+param.defaultValue+'" class="form-control input-md">' +
                                     '<span class="help-block">'+param.info+'</span>' +
                                 '</div>' +
                             '</div>';
-                    }
-                    console.log(paramInputGroupsHTML.length);
 
-                    parameterPanel.append('' +
-                        '<div id="'+algoId+'_panel">' +
-                            '<fieldset id="'+algoId+'_params">' +
-                                '<legend>' +
-                                    algorithm.name +
-                                    '<h4><small>' + algorithm.description + '</small></h4>' +
-                                '</legend>' +
-                                paramInputGroupsHTML +
-                            '</fieldset>' +
-                        '</div>');
-                    parameterPanels[algoId] = $('#' + algoId + '_panel');
-                    first = false;
+                        parameterPanel.append('' +
+                            '<div id="'+algoId+'_panel">' +
+                                '<fieldset id="'+algoId+'_params">' +
+                                    '<legend>' +
+                                        algorithm.name +
+                                        '<h4><small>' + algorithm.description + '</small></h4>' +
+                                    '</legend>' +
+                                    paramInputGroupsHTML +
+                                '</fieldset>' +
+                            '</div>');
+                        parameterPanels[algoId] = $('#' + algoId + '_panel');
+                        first = false;
+                    }
                 }
             }
             this.updatePanels();
@@ -57,8 +56,8 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectorId, paramete
             showParamPanel(val);
         },
         submit: function () {
-            var val = algorithmSelector.val();
-            functions[val]();
+            var algoId = algorithmSelector.val();
+            runAlgorithmById(algoId);
         }
     };
 }
