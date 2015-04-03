@@ -184,33 +184,33 @@
             <fieldset id="trend_algorithms">
                 <legend>Trends</legend>
                 <select id="trend_algo_select">
-                    <option value="global average" selected>Global Average</option>
-                    <option value="running average">Running Average</option>
-                    <option value="linear regression">Linear Regression</option>
+                    <option value="global_average" selected>Global Average</option>
+                    <option value="running_average">Running Average</option>
+                    <option value="linear_regression">Linear Regression</option>
                 </select>
             </fieldset>
         </div>
 
 
         <div id="trend_param_panel">
-            <div id="ga_panel">
-                <fieldset id="ga_params">
+            <div id="global_average_panel">
+                <fieldset id="global_average__params">
                     <legend>Control panel</legend>
                     Multiple of SD to consider as trend:
                     <input type="text" name="global_average_threshold" value="0.5" />
                 </fieldset>
             </div>
 
-            <div id="lr_panel">
-                <fieldset id="lr_params">
+            <div id="linear_regression_panel">
+                <fieldset id="linear_regression__params">
                     <legend>Control panel</legend>
                     Threshold for difference from linear regression (in %):
                     <input type="text" name="linear_regression_threshold" value="50" />
                 </fieldset>
             </div>
 
-            <div id="ra_panel">
-                <fieldset id="ra_params">
+            <div id="running_average_panel">
+                <fieldset id="running_average_params">
                     <legend>Control panel</legend>
                     Threshold for difference from running average (in %):
                     <input type="text" name="running_average_threshold" value="50" />

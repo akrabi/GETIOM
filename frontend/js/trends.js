@@ -1,88 +1,3 @@
-//function runGA(){
-//    var map = TrendsPage.map;
-//    var clusterIndex = map.getSelectedClusterIndex();
-//    var sdFactor = parseFloat($('input[name="sd"]').val());
-//    if (clusterIndex > -1) {
-//        $.getJSON('trends/global_average/'+clusterIndex+'?factor='+sdFactor, function( data ) {
-//            var trends = data && data.trends;
-//            if (!trends || trends.length == 0) {
-//                modalMessage('No trends found!');
-//            }
-//            else {
-//                var avg = data.additional.avg;
-//                var sd = data.additional.sd;
-//                var days = data.additional.days;
-//                var result =    'Messages: ' + data.additional.messagesNum + '<br>' +
-//                    'Days: ' + days.length + '<br>' +
-//                    'Trends: ' + trends.length;
-//
-//                modalMessage(result);
-//
-//                var averagePoints = days.map(function(day) {
-//                    return [day[0], avg];
-//                });
-//                var topSDPoints = days.map(function(day) {
-//                    return [day[0], avg + sd * sdFactor];
-//                });
-//                var bottomSDPoints = days.map(function(day) {
-//                    return [day[0], avg - sd * sdFactor];
-//                });
-//
-//
-//                moveTo('results');
-//                $.plot("#trend_results", [
-//                        {
-//                            data: days,
-//                            lines:   {
-//                                show: true
-//                            },
-//                            points: {
-//                                show: true,
-//                                radius: 4
-//                            }
-//                        },
-//                        {	data: trends,
-//                            points: {
-//                                show: true,
-//                                radius: 5
-//                            },
-//                            color: "#ff0000"
-//                        },
-//                        {
-//                            data: topSDPoints,
-//                            label: "Average + Factor*SD",
-//                            dashes: { show: true }
-//                        },
-//                        {
-//                            data: averagePoints,
-//                            label: "Average",
-//                            lines: { show: true }
-//                        },
-//                        {
-//                            data: bottomSDPoints,
-//                            label: "Average - Factor*SD",
-//                            dashes: { show: true }
-//                        }],
-//                    {
-//                        xaxis:
-//                        {
-//                            mode: "time",
-//                            timeformat: "%d/%m/%Y"
-//                        },
-//                        grid:
-//                        {
-//                            backgroundColor: "#f8f8f8",
-//                            hoverable: true
-//                        }
-//                    }
-//                );
-//            }
-//        });
-//    }
-//    else {
-//        modalMessage('No cluster selected');
-//    }
-//}
 function runTrendDetection(algorithmId){
     var algorithm = GETIOM.trendAlgorithms[algorithmId];
 
@@ -127,21 +42,25 @@ function runTrendDetection(algorithmId){
     }
 }
 
-function runGA() {
-    runTrendDetection('global_average');
-}
-
-function runLR(){
-    runTrendDetection('linear_regression');
-}
-
-function runRA() {
-     runTrendDetection('running_average');
-}
-
 var TrendsPage = {
     map: null,
+    trendForm: null,
     init: function() {
+        if (!TrendsPage.trendForm) {
+            var trendAlgorithms = GETIOM.trendAlgorithms;
+            var panels = [];
+            var ids = [];
+            var calls = [];
+            for (var algorithm in trendAlgorithms) {
+                ids.push(algorithm);
+                panels.push(algorithm + '_panel');
+                calls.push(function () {
+                    runTrendDetection(algorithm)
+                });
+            }
+            TrendsPage.trendForm = SelectiveForm(ids, panels, 'trend_algo_select', calls); // TODO new?
+            TrendsPage.trendForm.init();
+        }
         var map = new Map($('#resultsMap')[0]);
         this.map = map;
         map.init(40.821715, -74.122381);               //TODO optimize zoom and location to display results
@@ -159,11 +78,9 @@ var TrendsPage = {
 }
 
 $(document).ready(function() {
-    var trendForm = new SelectiveForm(['global average', 'linear regression', 'running average'], ['ga_panel', 'lr_panel', 'ra_panel'], 'trend_algo_select', [runGA, runLR, runRA]);
-    trendForm.init();
     $('#submitTrend').click(function() {
         var t1 = Date.now();
-        trendForm.submit();
+        TrendsPage.trendForm.submit();
         GETIOM.trendDetectionTime = (Date.now() - t1) / 1000;
     })
 });
