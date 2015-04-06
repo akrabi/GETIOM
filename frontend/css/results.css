@@ -5,7 +5,11 @@
     margin: 20px;
 }
 
-#trend_results {
+.trend_result {
+    margin-top: 50px;
+}
+
+.trend_result_graph {
     height: 300px;
     width: 50%;
     display: inline-block;

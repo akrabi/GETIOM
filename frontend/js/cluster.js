@@ -4,7 +4,6 @@ function runKM() {
     var K = parseInt(domobj.options[domobj.selectedIndex].value);
 
     var url = 'cluster/kmeans?k='+K;
-    GETIOM.clusteringTime = Date.now();
     getClusters(url);
 }
 
@@ -15,7 +14,6 @@ function runHC() {
     var threshold = parseInt($('input[name="threshold"]').val());
 
     var url = 'cluster/hierarchical?linkage='+linkage+'&distance='+distance+'&threshold='+threshold;
-    GETIOM.clusteringTime = Date.now();
     getClusters(url);
 }
 
@@ -32,6 +30,7 @@ function radioValue(name) {
 }
 
 function getClusters(url) {
+    GETIOM.clusteringTime = Date.now();
     $.getJSON(url, function( data ) {
         GETIOM.clusterSizeArray = data;
         var t2 = Date.now();

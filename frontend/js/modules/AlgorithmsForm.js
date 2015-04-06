@@ -1,9 +1,12 @@
-var AlgorithmsForm = function(algorithmDefentions, algorithmSelectorId, parametersPanelId, runAlgorithmById) {
+var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, parametersPanelId, runAlgorithmById, multipleSelection) {
 
+    var algorithmSelectorId = algorithmSelectDivId + '_selector';
+    var multipleSelection = multipleSelection;
     var algorithms = algorithmDefentions;
-    var algorithmSelector = $('#' + algorithmSelectorId);
+    var algorithmSelectDiv = $('#' + algorithmSelectDivId);
     var parameterPanel = $('#' + parametersPanelId);
     var parameterPanels = null;
+    var algorithmSelector = null;
 
     function showParamPanel(algorithmId) {
         for (var algoId in parameterPanels) {
@@ -16,9 +19,31 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectorId, paramete
             if (!parameterPanels) {
                 parameterPanels = {};
                 var first = true;
+
+                var algorithmSelectionHTML = '';
+
+                if (multipleSelection) {
+                    algorithmSelectionHTML +=
+                        '<div class="checkbox">';
+                }
+
+                else {
+                    algorithmSelectionHTML +=
+                        '<select id="'+algorithmSelectorId+'" name="'+algorithmSelectorId+'" class="form-control">';
+                }
+
                 for (var algoId in algorithms) {
                     var algorithm = algorithms[algoId];
-                    algorithmSelector.append('<option value="'+algoId+'" ' + (first ? 'selected' : '') + '>'+algorithm.name+'<\/option>'); //TODO bootstrap style!
+                    if (multipleSelection) {
+                        algorithmSelectionHTML +=
+                            '<label for="'+algorithmSelectorId+'_'+algoId+'">' +
+                                '<input type="checkbox" name="'+algoId+'" id="'+algorithmSelectorId+'_'+algoId+'" value="'+algoId+'">' +
+                                algorithm.name +
+                            '</label>';
+                    }
+                    else {
+                        algorithmSelectionHTML += '<option value="' + algoId + '" ' + (first ? 'selected' : '') + '>' + algorithm.name + '<\/option>'; //TODO bootstrap style!
+                    }
 
                     var paramInputGroupsHTML = '';
 
@@ -47,17 +72,35 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectorId, paramete
                         first = false;
                     }
                 }
+                algorithmSelectionHTML += (multipleSelection ? '</div>' : '</select>');
+                algorithmSelectDiv.append(algorithmSelectionHTML);
+
+                if (!multipleSelection) {
+                    algorithmSelector = $('#'+algorithmSelectorId);
+                    algorithmSelector && algorithmSelector.change(this.updatePanels);
+                }
             }
             this.updatePanels();
-            algorithmSelector.change(this.updatePanels);
+
         },
         updatePanels: function() {
-            var val = algorithmSelector.val();
-            showParamPanel(val);
+            if (algorithmSelector) {
+                var val = algorithmSelector.val();
+                showParamPanel(val);
+            }
         },
         submit: function () {
-            var algoId = algorithmSelector.val();
-            runAlgorithmById(algoId);
+            if (multipleSelection) {
+                var algoIds = algorithmSelectDiv.find(':checkbox:checked').map(function(checkbox) {
+                    return this.value;
+                });
+                runAlgorithmById(algoIds);
+                
+            }
+            else {
+                var algoId = algorithmSelector.val();
+                runAlgorithmById(algoId);
+            }
         }
     };
 }

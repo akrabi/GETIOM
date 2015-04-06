@@ -1,44 +1,50 @@
-function runTrendDetection(algorithmId){
-    var algorithm = GETIOM.trendAlgorithms[algorithmId];
+function runTrendDetection(algorithmIds){
+    for (var i=0; i<algorithmIds.length; ++i){
+        var algorithmId = algorithmIds[i];
+        var algorithm = GETIOM.trendAlgorithms[algorithmId];
 
-    var map = TrendsPage.map;
-    var clusterIndex = map.getSelectedClusterIndex();
-    var params = '';
-    var count = 0;
+        var map = TrendsPage.map;
+        var clusterIndex = map.getSelectedClusterIndex();
+        var params = '';
+        var count = 0;
 
-    for (var param in algorithm.params) {
-        if (count > 0) {
-            params += '&';
+        for (var param in algorithm.params) {
+            if (count > 0) {
+                params += '&';
+            }
+            params += param + '=' + $('input[name="'+algorithmId+'_' + param +'"]').val();
         }
-        params += param + '=' + $('input[name="'+algorithmId+'_' + param +'"]').val();
-    }
-    if (clusterIndex > -1) {
-        $.getJSON('trends/'+algorithmId+'/'+clusterIndex+'?'+params, function( data ) {
-            var plotDataArray = $.extend(true, [], algorithm.plotData); // Cloning needed because we're changing it.
-            var plotOptions = algorithm.plotOptions;
-            if (!data || data.trendsNum === 0) {
-                modalMessage('No trends found!');
-            }
-            else {
-                var result =
-                    'Messages: ' + data.messagesNum + '<br>' +
-                    'Days: ' + data.daysNum + '<br>' +
-                    'Trends: ' + data.trendsNum;
+        if (clusterIndex > -1) {
+            $.getJSON('trends/'+algorithmId+'/'+clusterIndex+'?'+params, function( data ) {
+                var plotDataArray = $.extend(true, [], algorithm.plotData); // Cloning needed because we're changing it.
+                var plotOptions = algorithm.plotOptions;
+                if (!data || data.trendsNum === 0) {
+                    modalMessage('No trends found!');
+                }
+                else {
+                    var result =
+                        'Messages: ' + data.messagesNum + '<br>' +
+                        'Days: ' + data.daysNum + '<br>' +
+                        'Trends: ' + data.trendsNum;
 
-                modalMessage(result);
+                    modalMessage(result);
 
-                moveTo('results');
+                    if (GETIOM.currentStep !== 'results') {
+                        moveTo('results');
+                    }
 
-                plotDataArray.forEach(function(plotData) {
-                    plotData.data = data[plotData.data];
-                });
+                    plotDataArray.forEach(function(plotData) {
+                        plotData.data = data[plotData.data];
+                    });
 
-                $.plot("#trend_results", plotDataArray, plotOptions);
-            }
-        });
-    }
-    else {
-        modalMessage('No cluster selected');
+                    $('#'+ algorithmId + '_results').show();
+                    $.plot('#'+algorithmId+'_results_graph', plotDataArray, plotOptions);
+                }
+            });
+        }
+        else {
+            modalMessage('No cluster selected');
+        }
     }
 }
 
@@ -60,7 +66,7 @@ var TrendsPage = {
             }
             //TrendsPage.trendForm = SelectiveForm(ids, panels, 'trend_algo_select', calls); // TODO new?
             //TrendsPage.trendForm.init();
-            TrendsPage.trendForm = AlgorithmsForm(trendAlgorithms, 'trend_algo_select', 'trend_param_panel', runTrendDetection);
+            TrendsPage.trendForm = AlgorithmsForm(trendAlgorithms, 'trend_algo_select', 'trend_param_panel', runTrendDetection, true);
             TrendsPage.trendForm.init();
         }
         var map = new Map($('#resultsMap')[0]);
