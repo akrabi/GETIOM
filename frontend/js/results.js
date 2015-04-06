@@ -35,9 +35,8 @@ var ResultsPage = {
         $.plot('#resultsClusterChart', clusterData, options);
         $.plot('#resultsComputationChart', computationTime, options);
 
-
-        if (this.firstInit) {
-            for (var algorithmId in GETIOM.trendAlgorithms) {
+        for (var algorithmId in GETIOM.trendAlgorithms) {
+            if (this.firstInit) {
                 $('#trend_results')
                     .append(
                     '<div id="' + algorithmId + '_results" class="trend_result">' +
@@ -46,9 +45,9 @@ var ResultsPage = {
                     '<div id="' + algorithmId + '_results_graph" class="trend_result_graph"></div>' +
                     '</div>'
                 );
-                $('#' + algorithmId + '_results').hide();
             }
-            this.firstInit = false;
+            $('#' + algorithmId + '_results').hide();
         }
+        this.firstInit = false;
     }
 };

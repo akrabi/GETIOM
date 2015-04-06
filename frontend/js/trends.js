@@ -14,33 +14,39 @@ function runTrendDetection(algorithmIds){
             }
             params += param + '=' + $('input[name="'+algorithmId+'_' + param +'"]').val();
         }
+
+
+
         if (clusterIndex > -1) {
-            $.getJSON('trends/'+algorithmId+'/'+clusterIndex+'?'+params, function( data ) {
-                var plotDataArray = $.extend(true, [], algorithm.plotData); // Cloning needed because we're changing it.
-                var plotOptions = algorithm.plotOptions;
-                if (!data || data.trendsNum === 0) {
-                    modalMessage('No trends found!');
-                }
-                else {
-                    var result =
-                        'Messages: ' + data.messagesNum + '<br>' +
-                        'Days: ' + data.daysNum + '<br>' +
-                        'Trends: ' + data.trendsNum;
-
-                    modalMessage(result);
-
-                    if (GETIOM.currentStep !== 'results') {
-                        moveTo('results');
+            function getCallback(algorithmId, algorithm) {
+                return function (data) {
+                    var plotDataArray = $.extend(true, [], algorithm.plotData); // Cloning needed because we're changing it.
+                    var plotOptions = algorithm.plotOptions;
+                    if (!data || data.trendsNum === 0) {
+                        modalMessage('No trends found!');
                     }
+                    else {
+                        var result =
+                            'Messages: ' + data.messagesNum + '<br>' +
+                            'Days: ' + data.daysNum + '<br>' +
+                            'Trends: ' + data.trendsNum;
 
-                    plotDataArray.forEach(function(plotData) {
-                        plotData.data = data[plotData.data];
-                    });
+                        modalMessage(result);
 
-                    $('#'+ algorithmId + '_results').show();
-                    $.plot('#'+algorithmId+'_results_graph', plotDataArray, plotOptions);
+                        if (GETIOM.currentStep !== 'results') {
+                            moveTo('results');
+                        }
+
+                        plotDataArray.forEach(function (plotData) {
+                            plotData.data = data[plotData.data];
+                        });
+
+                        $('#' + algorithmId + '_results').show();
+                        $.plot('#' + algorithmId + '_results_graph', plotDataArray, plotOptions);
+                    }
                 }
-            });
+            }
+            $.getJSON('trends/'+algorithmId+'/'+clusterIndex+'?'+params, getCallback(algorithmId, algorithm));
         }
         else {
             modalMessage('No cluster selected');
