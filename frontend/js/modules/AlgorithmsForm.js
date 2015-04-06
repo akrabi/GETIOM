@@ -8,12 +8,6 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, paramet
     var parameterPanels = null;
     var algorithmSelector = null;
 
-    function showParamPanel(algorithmId) {
-        for (var algoId in parameterPanels) {
-            $(parameterPanels[algoId]).hide();
-        }
-        $(parameterPanels[algorithmId]).show();
-    }
     return {
         init: function() {
             if (!parameterPanels) {
@@ -75,6 +69,12 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, paramet
                 algorithmSelectionHTML += (multipleSelection ? '</div>' : '</select>');
                 algorithmSelectDiv.append(algorithmSelectionHTML);
 
+                var self = this;
+                algorithmSelectDiv.find(':checkbox').map(function() {
+                        $(this).change(self.updatePanels);
+                    }
+                );
+
                 if (!multipleSelection) {
                     algorithmSelector = $('#'+algorithmSelectorId);
                     algorithmSelector && algorithmSelector.change(this.updatePanels);
@@ -84,9 +84,18 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, paramet
 
         },
         updatePanels: function() {
-            if (algorithmSelector) {
-                var val = algorithmSelector.val();
-                showParamPanel(val);
+            for (var algoId in parameterPanels) {
+                $(parameterPanels[algoId]).hide();
+            }
+            if (multipleSelection) {
+                algorithmSelectDiv.find(':checkbox:checked').map(function() {
+                    var algoId = this.value;
+                    $(parameterPanels[algoId]).show();
+                });
+            }
+            else {
+                var algoId = algorithmSelector.val()
+                $(parameterPanels[algoId]).show();
             }
         },
         submit: function () {
