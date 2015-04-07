@@ -1,11 +1,12 @@
-var http       = require('http');
-var express    = require('express');
-var bodyParser = require('body-parser');
-var morgan     = require('morgan');
-var terraformer= require('terraformer');
-var trends     = require('./trends/trends.js');
-var clustering = require('./clustering/clustering.js');
-var trendAlgo  = require('./trends/algorithms.json')
+var http            = require('http');
+var express         = require('express');
+var bodyParser      = require('body-parser');
+var morgan          = require('morgan');
+var terraformer     = require('terraformer');
+var trendAlgoImpl   = require('./trends/trends.js');
+var clusterAlgoImpl = require('./cluster/cluster.js');
+var clusterAlgoDef  = require('./cluster/algorithms.json');
+var trendAlgoDef    = require('./trends/algorithms.json')
 
 
 // Configuration parameters
@@ -96,7 +97,7 @@ router.route('/cluster/:clusterAlgo')
             console.log('Cannot cluster when no messages are loaded!');
             res.json([]);
         }
-        var clusterAlgo = clustering[req.params.clusterAlgo];
+        var clusterAlgo = clusterAlgoImpl[req.params.clusterAlgo];
         if (!clusterAlgo) {
             clusters = [messages];
         }
@@ -124,7 +125,10 @@ router.route('/convexhulls')
 
 router.route('/trends/algorithms')
     .get(function(req, res) {
-        res.json(trendAlgo);
+        res.json({
+            clusterAlgorithms: clusterAlgoDef,
+            trendAlgorithms: trendAlgoDef
+        });
     });
 
 router.route('/trends/:trendAlgo/:clusterIndex')
@@ -134,7 +138,7 @@ router.route('/trends/:trendAlgo/:clusterIndex')
             res.json([]);
         }
         var cluster = clusters[req.params.clusterIndex];
-        var trendAlgo = trends[req.params.trendAlgo];
+        var trendAlgo = trendAlgoImpl[req.params.trendAlgo];
         res.json(trendAlgo.findTrends(cluster, req.query));
     });
 

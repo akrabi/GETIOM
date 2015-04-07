@@ -6,6 +6,7 @@ var GETIOM = {
     trendAlgorithms: null,
     clusteringTime: null,
     filteringTime: null,
+    clusterAlgorithms: null,
     trendDetectionTime: null,
     currentStep: 'welcome'
 };
@@ -43,6 +44,7 @@ function moveTo(step) {
         filterStep.removeClass('active , disabled').addClass('complete');
         clusterStep.removeClass('complete , disabled').addClass('active');
         trendsStep.removeClass('complete , active').addClass('disabled');
+        ClusterPage.init();
     }
     else if (step === 'trends') {
         filter.hide();
@@ -65,6 +67,7 @@ function moveTo(step) {
         clusterStep.removeClass('active , disabled').addClass('complete');
         trendsStep.removeClass('complete , disabled').addClass('active');
         ResultsPage.init();
+        ResultsPage.show();
     }
 
     GETIOM.currentStep = step;
@@ -80,7 +83,8 @@ function modalMessage(msg) { //TODO add title option, build html around title an
 
 $(document).ready(function() {
     $.getJSON('trends/algorithms', function(data) {
-        GETIOM.trendAlgorithms = data;
+        GETIOM.clusterAlgorithms = data.clusterAlgorithms;
+        GETIOM.trendAlgorithms = data.trendAlgorithms;
     }).error(function() {
         modalMessage('Failed to retrieve trend algorithms. Please check configuration.');
     })

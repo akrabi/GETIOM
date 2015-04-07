@@ -1,35 +1,20 @@
-function runKM() {
-    $('#processingModal').modal();
-    var domobj = document.getElementById('KM-K');
-    var K = parseInt(domobj.options[domobj.selectedIndex].value);
+function runClusterAlgorithm(algorithmId){
+    var algorithm = GETIOM.clusterAlgorithms[algorithmId];
+    var params = '';
+    var count = 0;
 
-    var url = 'cluster/kmeans?k='+K;
-    getClusters(url);
+    for (var param in algorithm.params) {
+        if (count > 0) {
+            params += '&';
+        }
+        params += param + '=' + $('input[name="'+algorithmId+'_' + param +'"]').val();
+    }
+    getClusters('cluster/'+algorithmId+'?'+params);
 }
 
-function runHC() {
-    $('#processingModal').modal();
-    var linkage = parseInt(radioValue('linkage'));
-    var distance = parseInt(radioValue('distance'));
-    var threshold = parseInt($('input[name="threshold"]').val());
-
-    var url = 'cluster/hierarchical?linkage='+linkage+'&distance='+distance+'&threshold='+threshold;
-    getClusters(url);
-}
-
-
-function runGrid() {
-    //TODO implement?
-}
-
-function radioValue(name) {
-    var radios = $('input[name='+name+']');
-    for (var i = 0; i < radios.length; i++)
-        if (radios[i].checked)
-            return radios[i].value;
-}
 
 function getClusters(url) {
+    $('#processingModal').modal();
     GETIOM.clusteringTime = Date.now();
     $.getJSON(url, function( data ) {
         GETIOM.clusterSizeArray = data;
@@ -49,20 +34,26 @@ function getClusters(url) {
     });
 }
 
-function getClustersHulls() {
-
-}
 
 function clusteringError(msg) {
     $('#processingModal').modal('hide');
     modalMessage(msg);
 }
 
+var ClusterPage = {
+    clusterForm: null,
+    init: function() {
+        if (!ClusterPage.clusterForm) {
+            var clusterAlgorithms = GETIOM.clusterAlgorithms;
+            ClusterPage.clusterForm = AlgorithmsForm(clusterAlgorithms, 'cluster_algo_select', 'cluster_param_panel', runClusterAlgorithm, false); //TODO new?
+            ClusterPage.clusterForm.init();
+        }
+    }
+};
+
 $(document).ready(function () {
-    var clusterForm = new SelectiveForm(['kmeans', 'hierarchical', 'grid'], ['km_panel', 'hc_panel','grid_panel'], 'cluster_algo_select', [runKM, runHC, runGrid]);
-    clusterForm.init();
     $('#submitCluster').click(function() {
-        clusterForm.submit();
+        ClusterPage.clusterForm.submit();
     });
     $('#skipCluster').click(function() {
         getClusters('/cluster/skip');

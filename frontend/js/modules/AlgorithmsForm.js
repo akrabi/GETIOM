@@ -16,12 +16,7 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, paramet
 
                 var algorithmSelectionHTML = '';
 
-                if (multipleSelection) {
-                    algorithmSelectionHTML +=
-                        '<div class="checkbox">';
-                }
-
-                else {
+                if (!multipleSelection) {
                     algorithmSelectionHTML +=
                         '<select id="'+algorithmSelectorId+'" name="'+algorithmSelectorId+'" class="form-control">';
                 }
@@ -30,10 +25,12 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, paramet
                     var algorithm = algorithms[algoId];
                     if (multipleSelection) {
                         algorithmSelectionHTML +=
-                            '<label for="'+algorithmSelectorId+'_'+algoId+'">' +
-                                '<input type="checkbox" name="'+algoId+'" id="'+algorithmSelectorId+'_'+algoId+'" value="'+algoId+'">' +
-                                algorithm.name +
-                            '</label>';
+                            '<div class="checkbox">' +
+                                '<label for="'+algorithmSelectorId+'_'+algoId+'">' +
+                                    '<input type="checkbox" name="'+algoId+'" id="'+algorithmSelectorId+'_'+algoId+'" value="'+algoId+'">' +
+                                    algorithm.name +
+                                '</label>' +
+                            '</div>'
                     }
                     else {
                         algorithmSelectionHTML += '<option value="' + algoId + '" ' + (first ? 'selected' : '') + '>' + algorithm.name + '<\/option>'; //TODO bootstrap style!
@@ -66,7 +63,9 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, paramet
                         first = false;
                     }
                 }
-                algorithmSelectionHTML += (multipleSelection ? '</div>' : '</select>');
+                if (!multipleSelection) {
+                    algorithmSelectionHTML += '</select>';
+                }
                 algorithmSelectDiv.append(algorithmSelectionHTML);
 
                 var self = this;
