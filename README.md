@@ -27,7 +27,7 @@ No need to analyze all of your Big Data for nothing, Just use our unique map fil
 
 #### 3) Built in Popular Clustering Algorithms
 
-GETIOM comes with built in Popular Clustering Algorithms such as: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a>, <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical</a> & Grid (To be added later).
+GETIOM comes with built in Popular Clustering Algorithms such as: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a> & <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical</a>.
 
 #### 4) Trend Detection!
 
