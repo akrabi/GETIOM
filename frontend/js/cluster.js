@@ -24,7 +24,7 @@ function getClusters(url) {
         $.getJSON('convexhulls', function(data) {
             GETIOM.convexHulls = data;
             $('#processingModal').modal('hide');
-            modalMessage('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!');
+            successMessage('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!');
             moveTo('trends');
         }).error(function() {
             clusteringError('Error!<br> Failed to bound clusters.<br>Check that the server is up and running');
@@ -37,7 +37,7 @@ function getClusters(url) {
 
 function clusteringError(msg) {
     $('#processingModal').modal('hide');
-    modalMessage(msg);
+    errorMessage(msg);
 }
 
 var ClusterPage = {

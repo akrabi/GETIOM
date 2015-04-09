@@ -2,7 +2,7 @@ function runTrendDetection(algorithmIds){
     var clusterIndex = TrendsPage.map.getSelectedClusterIndex();
 
     if (clusterIndex < 0) {
-        modalMessage('No cluster selected');
+        errorMessage('No cluster selected');
         return;
     }
 
@@ -32,7 +32,7 @@ function runTrendDetection(algorithmIds){
         $.getJSON('trends/'+algorithmId+'/'+clusterIndex+'?'+params, getCallback(algorithmId, algorithm, algoCount))
             .error(function() {
                 $('#processingModal').modal('hide');
-                modalMessage('Error!<br> Failed to run trend algorithm.<br>Check that the server is up and running');
+                errorMessage('Failed to run trend algorithm.<br>Check that the server is up and running');
             });
 
     }
@@ -104,7 +104,7 @@ function getCallback(algorithmId, algorithm, algoCount) {
         if (TrendsPage.completedAlgoCount >= algoCount) {
             GETIOM.trendDetectionTime = (Date.now()-GETIOM.trendDetectionTime) / 1000;
             $('#processingModal').modal('hide');
-            modalMessage(TrendsPage.results);
+            successMessage(TrendsPage.results);
             moveTo('results');
         }
     }

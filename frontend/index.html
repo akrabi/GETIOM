@@ -4,7 +4,8 @@
     <!-- JQueryUI theme -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.2/themes/ui-lightness/jquery-ui.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/map.css">
@@ -22,11 +23,6 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">GETIOM</a>
         </div>
-        <!--
-        <div class="navbar-right">
-            <a class="navbar-brand" href="#"><img id="logo" src="img/logo.png"></a>
-        </div>
-        -->
     </div>
 </nav>
 
@@ -75,6 +71,13 @@
 </div>
 
 
+<!-- Status Alerts -->
+<div id="status">
+    <div id="status_alert" class="alert" role="alert">
+        <!-- Content created by the alert -->
+    </div>
+</div>
+
 <!-- Filter -->
 <div id="filter" class="panel-group">
     <form id="filterLocationForm" class="form-horizontal" align="center">
@@ -98,86 +101,6 @@
     </form>
 </div>
 
-
-
-<!-- Cluster Old
-<div id="cluster">
-    <div id="cluster_input_panel">
-        <div id="cluster_algo_panel">
-            <fieldset id="cluster_algorithms">
-                <legend>Clustering algorithm</legend>
-                <select id="cluster_algo_select">
-                    <option value="kmeans" selected>K-means</option>
-                    <option value="hierarchical">Hierarchical clustering</option>
-                    <option value="grid">Grid</option>
-                </select>
-            </fieldset>
-        </div>
-
-
-        <div id="param_panel">
-            <div id="km_panel">
-                <fieldset id="km_params">
-                    <legend>Control panel</legend>
-                    Number of clusters (K):
-                    <select id="KM-K">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4" selected="selected">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
-                </fieldset>
-            </div>
-
-            <div id="hc_panel">
-                <fieldset id="hc_params">
-                    <legend>Control panel</legend>
-                    Linkage method:
-                    <input type="radio" name="linkage" value="0" checked/>Single-linkage
-                    <input type="radio" name="linkage" value="1"/>Complete-linkage
-                    <input type="radio" name="linkage" value="2"/>Average-linkage<br/>
-                    <br/>
-                    Distance:
-                    <input type="radio" name="distance" value="0" checked/>Euclidian
-                    <input type="radio" name="distance" value="1"/>Manhattan
-                    <input type="radio" name="distance" value="2"/>Maximum<br/>
-                    <br/>
-                    Threshold:
-                    <input type="text" name="threshold" value="2500" />
-                </fieldset>
-            </div>
-
-            <div id="grid_panel">
-                <fieldset id="grid_params">
-                    <legend>Control panel</legend>
-                    Options:
-                    <input type="radio" name="distance" value="0" checked/>Option 1
-                    <input type="radio" name="distance" value="1"/>Option 2
-                    <input type="radio" name="distance" value="2"/>Option 3<br/>
-                    <br/>
-                    Text Option:
-                    <input type="text" name="demo" value="2500" />
-                </fieldset>
-            </div>
-
-
-
-            <div id="cluster_button" style="">
-                <div style="display:table-row; width:100%;text-align:center;">
-                    <div style="vertical-align: middle; display:table-cell;">
-                        <input id="submitCluster" type="button" class="btn btn-success" value="Cluster Data"/>
-                        <button id="skipCluster"  name="skipCluster" class="btn btn-success">Skip</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-Cluster Old -->
 
 <!-- Clustering -->
 <div id="cluster" align="center">
@@ -265,26 +188,6 @@ Cluster Old -->
     </fieldset>
 </div>
 
-
-
-
-<!-- Results Modal -->
-<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="filterResultsModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Results</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <!-- Processing Modal -->
 <div class="modal fade" id="processingModal" role="dialog" data-backdrop="static" data-keyboard="false"  aria-hidden="true">
     <div class="modal-dialog">
@@ -305,7 +208,7 @@ Cluster Old -->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
 <!-- Bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- Included JS Libs -->
 <script src="js/libs/flot/jquery.flot.js"></script>
 <script src="js/libs/flot/jquery.flot.pie.js"></script>

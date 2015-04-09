@@ -14,8 +14,8 @@ var GETIOM = {
 //TODO clear data when going "back" from an advanced step....
 
 function moveTo(step) {
-    var welcome = $('#welcome');
     var steps = $('#progress_steps');
+    var welcome = $('#welcome');
     var filter = $('#filter');
     var cluster = $('#cluster');
     var trends = $('#trends');
@@ -23,6 +23,18 @@ function moveTo(step) {
     var filterStep = $('#filterStep');
     var clusterStep = $('#clusterStep');
     var trendsStep = $('#trendsStep');
+    var stepsEnum = {
+        'welcome': 0,
+        'filter': 1,
+        'cluster': 2,
+        'trends': 3,
+        'results': 4
+    };
+
+    var backStep = stepsEnum[GETIOM.currentStep] >= stepsEnum[step];
+    if (backStep) {
+        $('#status_alert').hide();
+    }
 
     if (step === 'filter') {
         welcome.hide();
@@ -74,18 +86,38 @@ function moveTo(step) {
     $(window).scrollTop(0);
 }
 
-
-function modalMessage(msg) { //TODO add title option, build html around title and msg
-    var resultsModal = $('#resultsModal');
-    resultsModal.find('.modal-body').html(msg);
-    resultsModal.modal();
+function alertMessage(msg, type) {
+    var status = $('#status_alert');
+    status.removeClass(['alert-success', 'alert-warning', 'alert-error']);
+    status.addClass('alert-'+type);
+    status.html(
+        '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+        //'<strong>'+ type.charAt(0).toUpperCase() + type.slice(1) +'!</strong><br>' +
+        msg
+    );
+    status.find('.close').click(function() {
+        status.hide();
+    });
+    status.show();
+    if (type === 'danger') {
+        $('html,body').animate({scrollTop: 0}, "slow");
+    }
 }
+
+function successMessage(msg) {
+    alertMessage(msg, 'success');
+}
+
+function errorMessage(msg) {
+    alertMessage(msg, 'danger');
+}
+
 
 $(document).ready(function() {
     $.getJSON('trends/algorithms', function(data) {
         GETIOM.clusterAlgorithms = data.clusterAlgorithms;
         GETIOM.trendAlgorithms = data.trendAlgorithms;
     }).error(function() {
-        modalMessage('Failed to retrieve trend algorithms. Please check configuration.');
+        errorMessage('Failed to retrieve trend algorithms. Please check configuration.');
     })
 })

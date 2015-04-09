@@ -10,10 +10,10 @@ var FilterPage = {
         // Get number of messages stored in server's DB
         $.getJSON('messages/num', function (data) {         //TODO get rid of messages!! change to dbsize
             GETIOM.databaseMessagesNum = data.messagesNum;
-            modalMessage('GETIOM Started.<br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!');
+            successMessage('GETIOM Started.<br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!');
         })
             .error(function() {
-                modalMessage('Error!<br> Failed to start GETIOM.<br>Check that the server is up and running');
+                errorMessage('Failed to start GETIOM.<br>Check that the server is up and running');
             });
 
         // Initialize slider
@@ -73,7 +73,7 @@ var FilterPage = {
                 url = 'filter/location/polygon?points=' + points;
             }
             else {
-                modalMessage('No filter selected!');
+                errorMessage('No filter selected!');
                 return;
             }
             applyFilter(url);
@@ -94,7 +94,7 @@ function applyFilter(url) {
     })
         .error(function() {
             $('#processingModal').modal('hide');
-            modalMessage('Error!<br> Failed to filter.<br>Check that the server is up and running');
+            errorMessage('Failed to filter.<br>Check that the server is up and running');
         });
 }
 
@@ -103,6 +103,6 @@ function filteringDone() {
     var t2 = Date.now();
     var ms = t2 - GETIOM.filteringTime;     //time in milliseconds
     GETIOM.filteringTime = ms / 1000;
-    modalMessage('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!');
+    successMessage('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!');
     moveTo('cluster');
 }

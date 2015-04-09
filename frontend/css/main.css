@@ -4,15 +4,19 @@ html, body {
     padding: 0;
 }
 
+#status {
+    text-align: center;
+}
+
+#status_alert {
+    width: 50%;
+    text-align: center;
+    display: inline-block;
+}
 
 fieldset {
     margin-top: 50px;
     margin-bottom: 50px;
-}
-
-#welcome {
-    text-align: center;
-    font-size: 10em;
 }
 
 #banner {
@@ -24,6 +28,12 @@ fieldset {
     max-width:100%;
     max-height:100%;
 }
+
+#welcome {
+    text-align: center;
+    font-size: 10em;
+}
+
 
 /* Filter */
 #filter {
