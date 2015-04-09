@@ -135,6 +135,9 @@ var TrendsPage = {
             });
             map.addClusterPolygon(hullPoints, GETIOM.clusterSizeArray[i]);
         }
+        if (GETIOM.convexHulls.length === 1) {  // If there's a single cluster, select it
+            map.setSelectedClusterIndex(0);
+        }
     }
 }
 

@@ -207,6 +207,10 @@ var Map = function (domNode) {
             clusters = [];
         },
 
+        setSelectedClusterIndex: function(clusterIndex) {
+            setSelectedCluster(clusters[clusterIndex]);
+        },
+
         getSelectedClusterIndex: function() {
             for (var i=0; i<clusters.length; ++i) {
                 if (selectedCluster === clusters[i]) {
