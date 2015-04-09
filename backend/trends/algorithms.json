@@ -1,7 +1,7 @@
 {
   "global_average": {
     "name": "Global Average",
-    "description": "Finds days where the number of messages exceeds the global average of messages per day by more a certain percentage of that average.",
+    "description": "Detects daily trends by considering the average and a function of the standard deviation.",
     "params":
     {
       "threshold":
@@ -64,7 +64,7 @@
   "linear_regression":
   {
     "name": "Linear Regression",
-    "description": "Finds days where the number of messages is greater than a certain threshold percentage of the value of the linear regression of messages from all days",
+    "description": "Detects daily trends by considering the difference in percentage from the linear least square.",
     "params":
     {
       "threshold":
@@ -131,7 +131,7 @@
   "running_average":
   {
     "name": "Running Average",
-    "description": "",
+    "description": "Detects daily trends by considering the difference from daily running average. The daily average is calculate from the first measurement.",
     "params":
     {
       "threshold":
