@@ -36,9 +36,6 @@ var FilterPage = {
             var shape = map.getShape();
             var url = null;
 
-            $('#processingModal').modal();
-            GETIOM.filteringTime = Date.now();
-
             if (shape.type === 'circle') {
                 var circle = shape.overlay;
                 var lat = circle.getCenter().lat();
@@ -76,20 +73,30 @@ var FilterPage = {
                 url = 'filter/location/polygon?points=' + points;
             }
             else {
-                GETIOM.filteringTime = Date.now();
-                url = 'filter';
+                modalMessage('No filter selected!');
+                return;
             }
-            $.getJSON(url, function (data) {
-                GETIOM.filteredMessagesNum = data.messagesNum;
-                filteringDone();
-            })
-                .error(function() {
-                    $('#processingModal').modal('hide');
-                    modalMessage('Error!<br> Failed to filter.<br>Check that the server is up and running');
-                });
+            applyFilter(url);
         });
+        $('#filterLocationSkip').click(function(e) {
+            e.preventDefault();
+            applyFilter('filter')
+        })
     }
 };
+
+function applyFilter(url) {
+    $('#processingModal').modal();
+    GETIOM.filteringTime = Date.now();
+    $.getJSON(url, function (data) {
+        GETIOM.filteredMessagesNum = data.messagesNum;
+        filteringDone();
+    })
+        .error(function() {
+            $('#processingModal').modal('hide');
+            modalMessage('Error!<br> Failed to filter.<br>Check that the server is up and running');
+        });
+}
 
 function filteringDone() {
     $('#processingModal').modal('hide');
