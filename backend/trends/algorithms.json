@@ -33,17 +33,20 @@
       {
         "data": "topSDPoints",
         "label": "Average + Factor*SD",
-        "dashes": {"show": true}
+        "dashes": {"show": true},
+        "color": "#0000ff"
       },
       {
         "data": "averagePoints",
         "label": "Average",
-        "lines": {"show": true}
+        "lines": {"show": true},
+        "color": "#0000ff"
       },
       {
         "data": "bottomSDPoints",
         "label": "Average - Factor*SD",
-        "dashes": {"show": true}
+        "dashes": {"show": true},
+        "color": "#0000ff"
       }
     ],
     "plotOptions": {
@@ -53,7 +56,8 @@
       },
       "grid": {
         "backgroundColor": "#f8f8f8",
-        "hoverable": true
+        "hoverable": true,
+        "clickable": true
       }
     }
   },
@@ -93,17 +97,20 @@
       {
         "data": "line",
         "label": "Linear Regression",
-        "lines": { "show": true }
+        "lines": { "show": true },
+        "color": "#0000ff"
       },
       {
         "data": "linePlusThreshold",
         "label": "+ Threshold",
-        "dashes": { "show": true }
+        "dashes": { "show": true },
+        "color": "#0000ff"
       },
       {
         "data": "lineMinusThreshold",
         "label": "- Threshold",
-        "dashes": { "show": true }
+        "dashes": { "show": true },
+        "color": "#0000ff"
       }
     ],
     "plotOptions":
@@ -116,7 +123,8 @@
       "grid":
       {
         "backgroundColor": "#f8f8f8",
-        "hoverable": true
+        "hoverable": true,
+        "clickable": true
       }
     }
   },
@@ -156,17 +164,20 @@
       {
         "data": "runningAverage",
         "label": "Running Average",
-        "lines": { "show": true }
+        "lines": { "show": true },
+        "color": "#0000ff"
       },
       {
         "data": "runningAveragePlusThreshold",
         "label": "+ Threshold",
-        "dashes": { "show": true }
+        "dashes": { "show": true },
+        "color": "#0000ff"
       },
       {
         "data": "runningAverageMinusThreshold",
         "label": "- Threshold",
-        "dashes": { "show": true }
+        "dashes": { "show": true },
+        "color": "#0000ff"
       }],
     "plotOptions":
     {
@@ -178,7 +189,8 @@
       "grid":
       {
         "backgroundColor": "#f8f8f8",
-        "hoverable": true
+        "hoverable": true,
+        "clickable": true
       }
     }
   }
