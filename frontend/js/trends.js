@@ -6,10 +6,13 @@ function runTrendDetection(algorithmIds){
         return;
     }
 
+
     var algoCount = algorithmIds.length;
 
     TrendsPage.results = '';
     TrendsPage.completedAlgoCount = 0;
+
+    ResultsPage.trendResults = {};
 
     $('#processingModal').modal();
     GETIOM.trendDetectionTime = Date.now();
