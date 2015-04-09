@@ -66,8 +66,38 @@ function getCallback(algorithmId, algorithm, algoCount) {
                 plotData.data = data[plotData.data];
             });
 
+
             $('#' + algorithmId + '_results').show();
-            $.plot('#' + algorithmId + '_results_graph', plotDataArray, plotOptions);
+
+            var resultsGraph = '#' + algorithmId + '_results_graph';
+
+            $.plot(resultsGraph, plotDataArray, plotOptions);
+            $(resultsGraph).bind("plotclick", function (event, pos, item) {
+                if (item) {
+                    var day = item.datapoint[0];
+                    var url = 'http://www.google.com/search?q=' + 'Manhattan ' + new Date(day).toJSON().slice(0,10);
+                    window.open(url, '_blank');
+                }
+            });
+
+            function showTooltip(x, y, contents) {
+                $('<div id="tooltip">' + contents + '</div>').css( {
+                    position: 'absolute', display: 'none', top: y + 5, left: x + 5,
+                    border: '1px solid #fdd', padding: '2px', 'background-color': '#fee', opacity: 0.80
+                }).appendTo("body").fadeIn(200);
+            }
+            $(resultsGraph).bind("plothover", function (event, pos, item) {
+                $("#tooltip").remove();
+                if (item) {
+                    var day = item.datapoint[0];
+                    var messages = item.datapoint[1];
+                    showTooltip(item.pageX, item.pageY,
+                        'Trend!<br>'+
+                        (new Date(day)).toJSON().slice(0,10) + '<br>' +
+                        parseInt(messages) + ' messages');
+                }
+            });
+
 
             $('#results').hide()
         }
