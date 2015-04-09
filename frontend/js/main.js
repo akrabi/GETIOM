@@ -14,79 +14,70 @@ var GETIOM = {
 //TODO clear data when going "back" from an advanced step....
 
 function moveTo(step) {
-    var steps = $('#progress_steps');
-    var welcome = $('#welcome');
-    var filter = $('#filter');
-    var cluster = $('#cluster');
-    var trends = $('#trends');
-    var results = $('#results');
-    var filterStep = $('#filterStep');
-    var clusterStep = $('#clusterStep');
-    var trendsStep = $('#trendsStep');
-    var stepsEnum = {
-        'welcome': 0,
-        'filter': 1,
-        'cluster': 2,
-        'trends': 3,
-        'results': 4
+    var progressBar = $('#progress_steps');
+    var progressSteps = {
+        welcome: {
+            page: $('#welcome'),
+            index: 0
+        },
+        filter: {
+            step: $('#filterStep'),
+            page: $('#filter'),
+            pageObject: FilterPage,
+            index: 1
+        },
+        cluster: {
+            step: $('#clusterStep'),
+            page: $('#cluster'),
+            pageObject: ClusterPage,
+            index: 2
+        },
+        trends: {
+            step: $('#trendsStep'),
+            page: $('#trends'),
+            pageObject: TrendsPage,
+            index: 3
+        },
+        results: {
+            page: $('#results'),
+            pageObject: ResultsPage,
+            index: 4
+        }
     };
 
-    var backStep = stepsEnum[GETIOM.currentStep] >= stepsEnum[step];
+    var currentStep = progressSteps[step];
+    var backStep = progressSteps[GETIOM.currentStep].index >= currentStep.index;
     if (backStep) {
         $('#status_alert').hide();
     }
 
-    if (step === 'filter') {
-        welcome.hide();
-        steps.show();
-        filter.show();
-        cluster.hide();
-        trends.hide();
-        results.hide();
-        filterStep.removeClass('complete disabled').addClass('active');
-        clusterStep.removeClass('complete active').addClass('disabled');
-        trendsStep.removeClass('complete active').addClass('disabled');
-        FilterPage.init();
-    }
-    else if (step === 'cluster') {
-        filter.hide();
-        cluster.show();
-        trends.hide();
-        results.hide();
-        filterStep.removeClass('active disabled').addClass('complete');
-        clusterStep.removeClass('complete disabled').addClass('active');
-        trendsStep.removeClass('complete active').addClass('disabled');
-        ClusterPage.init();
-    }
-    else if (step === 'trends') {
-        filter.hide();
-        cluster.hide();
-        trends.show();
-        results.hide();
-        filterStep.removeClass('active disabled').addClass('complete');
-        clusterStep.removeClass('active disabled').addClass('complete');
-        trendsStep.removeClass('complete disabled').addClass('active');
-        if (!backStep) {
-            TrendsPage.init();
+    for (var progressStepId in progressSteps) {
+        var progressStep = progressSteps[progressStepId];
+        progressStep.page.hide();
+        if (progressStep.step) {
+            if (progressStep.index < currentStep.index) {
+                progressStep.step.removeClass('active disabled').addClass('complete');
+            }
+            else if (progressStep.index == currentStep.index) {
+                progressStep.step.removeClass('complete disabled').addClass('active');
+            }
+            else {
+                progressStep.step.removeClass('complete active').addClass('disabled');
+            }
         }
     }
-    else if (step === 'results') {
-        filter.hide();
-        cluster.hide();
-        trends.hide();
-        results.show();
-        filterStep.removeClass('active , disabled').addClass('complete');
-        clusterStep.removeClass('active , disabled').addClass('complete');
-        trendsStep.removeClass('complete , disabled').addClass('active');
-        if (ResultsPage.firstInit) {
-            ResultsPage.init();
-        }
-        ResultsPage.show();
+    progressBar.show();
+    currentStep.page.show();
+    if (currentStep.pageObject) {
+        currentStep.pageObject.init && currentStep.pageObject.init();
+        currentStep.pageObject.show && currentStep.pageObject.show();
     }
 
     GETIOM.currentStep = step;
-    $(window).scrollTop(0);
+    $('html,body').animate({scrollTop: 0}, "slow");;
 }
+
+
 
 function alertMessage(msg, type) {
     var status = $('#status_alert');
