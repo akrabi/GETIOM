@@ -2,8 +2,8 @@ var ResultsPage = {
     firstInit: true,
 
     init: function() {
-        if (this.firstInit) {
         for (var algorithmId in GETIOM.trendAlgorithms) {
+            if (this.firstInit) {
                 $('#trend_results')
                     .append(
                     '<div id="' + algorithmId + '_results" class="trend_result">' +

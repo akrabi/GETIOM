@@ -43,9 +43,9 @@ function moveTo(step) {
         cluster.hide();
         trends.hide();
         results.hide();
-        filterStep.removeClass('complete , disabled').addClass('active');
-        clusterStep.removeClass('complete , active').addClass('disabled');
-        trendsStep.removeClass('complete , active').addClass('disabled');
+        filterStep.removeClass('complete disabled').addClass('active');
+        clusterStep.removeClass('complete active').addClass('disabled');
+        trendsStep.removeClass('complete active').addClass('disabled');
         FilterPage.init();
     }
     else if (step === 'cluster') {
@@ -53,9 +53,9 @@ function moveTo(step) {
         cluster.show();
         trends.hide();
         results.hide();
-        filterStep.removeClass('active , disabled').addClass('complete');
-        clusterStep.removeClass('complete , disabled').addClass('active');
-        trendsStep.removeClass('complete , active').addClass('disabled');
+        filterStep.removeClass('active disabled').addClass('complete');
+        clusterStep.removeClass('complete disabled').addClass('active');
+        trendsStep.removeClass('complete active').addClass('disabled');
         ClusterPage.init();
     }
     else if (step === 'trends') {
@@ -63,10 +63,10 @@ function moveTo(step) {
         cluster.hide();
         trends.show();
         results.hide();
-        filterStep.removeClass('active , disabled').addClass('complete');
-        clusterStep.removeClass('active , disabled').addClass('complete');
-        trendsStep.removeClass('complete , disabled').addClass('active');
-        if (GETIOM.currentStep !== 'results') {
+        filterStep.removeClass('active disabled').addClass('complete');
+        clusterStep.removeClass('active disabled').addClass('complete');
+        trendsStep.removeClass('complete disabled').addClass('active');
+        if (!backStep) {
             TrendsPage.init();
         }
     }
@@ -78,7 +78,9 @@ function moveTo(step) {
         filterStep.removeClass('active , disabled').addClass('complete');
         clusterStep.removeClass('active , disabled').addClass('complete');
         trendsStep.removeClass('complete , disabled').addClass('active');
-        ResultsPage.init();
+        if (ResultsPage.firstInit) {
+            ResultsPage.init();
+        }
         ResultsPage.show();
     }
 
@@ -88,7 +90,7 @@ function moveTo(step) {
 
 function alertMessage(msg, type) {
     var status = $('#status_alert');
-    status.removeClass(['alert-success', 'alert-warning', 'alert-error']);
+    status.removeClass('alert-success alert-warning alert-danger');
     status.addClass('alert-'+type);
     status.html(
         '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
@@ -99,9 +101,7 @@ function alertMessage(msg, type) {
         status.hide();
     });
     status.show();
-    if (type === 'danger') {
-        $('html,body').animate({scrollTop: 0}, "slow");
-    }
+    $('html,body').animate({scrollTop: 0}, "slow");
 }
 
 function successMessage(msg) {

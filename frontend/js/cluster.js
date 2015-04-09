@@ -27,10 +27,10 @@ function getClusters(url) {
             successMessage('Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!');
             moveTo('trends');
         }).error(function() {
-            clusteringError('Error!<br> Failed to bound clusters.<br>Check that the server is up and running');
+            clusteringError('<strong>Failed to bound clusters.</strong><br>Check that the server is up and running');
         });
     }).error(function() {
-        clusteringError('Error!<br> Failed to cluster.<br>Check that the server is up and running');
+        clusteringError('<strong>Failed to cluster.</strong><br>Check that the server is up and running');
     });
 }
 

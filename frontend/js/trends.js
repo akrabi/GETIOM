@@ -2,7 +2,7 @@ function runTrendDetection(algorithmIds){
     var clusterIndex = TrendsPage.map.getSelectedClusterIndex();
 
     if (clusterIndex < 0) {
-        errorMessage('No cluster selected');
+        errorMessage('<strong>No cluster selected</strong>');
         return;
     }
 
@@ -32,7 +32,7 @@ function runTrendDetection(algorithmIds){
         $.getJSON('trends/'+algorithmId+'/'+clusterIndex+'?'+params, getCallback(algorithmId, algorithm, algoCount))
             .error(function() {
                 $('#processingModal').modal('hide');
-                errorMessage('Failed to run trend algorithm.<br>Check that the server is up and running');
+                errorMessage('<strong>Failed to run trend algorithm.</strong><br>Check that the server is up and running');
             });
 
     }
