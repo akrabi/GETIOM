@@ -7,13 +7,16 @@ The project is based on <a href="https://nodejs.org/">Node.js</a> platform and o
 
 The main goal of our project is to provide an easy framework in order to process & analyze Geo-Tagged information (Big Data) on the Google Map's platform - without the need to mess with servers and configurations. All you need to do is to provide a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> with a <a href="http://geojson.org/">GeoJSON</a> collection (<a href="https://github.com/akrabi/GETIOM/wiki/Rest-API">Explained here</a>) and start using the app's flow even today!
 
-## Full Documentation
+Some screenshots:
 
-See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
+![Statisitcs](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/statistics.png)
 
-## Communication
-- <a href="https://github.com/snaxoa">snaxoa</a> 
-- <a href="https://github.com/akrabi">akrabi</a>
+![Trend](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/trend.png)
+
+![Circle Example](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/circle_example.png)
+
+![Clusters](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/clustering-example2.png)
+
 
 ## What does it do?
 
@@ -27,7 +30,7 @@ No need to analyze all of your Big Data for nothing, Just use our unique map fil
 
 #### 3) Built in Popular Clustering Algorithms
 
-GETIOM comes with built in Popular Clustering Algorithms such as: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a> & <a href="http://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical</a>.
+GETIOM comes with the built in Popular Clustering Algorithm: <a href="http://en.wikipedia.org/wiki/K-means_clustering">K-Means</a>..
 
 #### 4) Trend Detection!
 
@@ -36,6 +39,25 @@ GETIOM can analyze your data in your clusters, by simply clicking on a specific 
 #### 5) Use your own Algorithm!
 
 GETIOM is extendable and let's you add your own Clustering Algorithms or Trend Detection Algorithms very easily!
+
+
+## Full Documentation
+
+See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
+
+
+## Dashboard
+
+A dashboard for anazlyzing the clusters and trends will appear in the last step of the flow. 
+More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
+
+The Flow is very simple to use and user-friendly:
+
+![Dashboard](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/dashboard.png)
+
+
+
+
 
 ## Build
 
@@ -47,12 +69,12 @@ $ cd backend/
 $ ./node app.js
 ```
 
-## Dashboard
 
-A dashboard for anazlyzing the clusters and trends will appear in the last step of the flow. 
-More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
 
-Screenshots coming soon!
+
+## Communication
+- <a href="https://github.com/snaxoa">snaxoa</a> 
+- <a href="https://github.com/akrabi">akrabi</a>
 
 ## Bugs and Feedback
 
