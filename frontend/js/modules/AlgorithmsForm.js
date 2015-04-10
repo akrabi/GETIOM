@@ -33,19 +33,19 @@ var AlgorithmsForm = function(algorithmDefentions, algorithmSelectDivId, paramet
                             '</div>'
                     }
                     else {
-                        algorithmSelectionHTML += '<option value="' + algoId + '" ' + (first ? 'selected' : '') + '>' + algorithm.name + '<\/option>'; //TODO bootstrap style!
+                        algorithmSelectionHTML += '<option value="' + algoId + '" ' + (first ? 'selected' : '') + '>' + algorithm.name + '<\/option>';
                     }
 
                     var paramInputGroupsHTML = '';
 
                     for (var paramId in algorithm.params) {
                         var param = algorithm.params[paramId];
-                        paramInputGroupsHTML +=                     //TODO handle missing param values & STYLE!!!
+                        paramInputGroupsHTML +=
                             '<div class="form-group">' +
-                                '<label class="col-md-1 col-md-offset-5 control-label" for="' + algoId+'_'+ paramId + '">'+param.name+'</label>' +
+                                '<label class="col-md-1 col-md-offset-5 control-label" for="' + algoId+'_'+ paramId + '">'+(param.name || '')+'</label>' +
                                 '<div class="col-md-1">' +
-                                    '<input id="' + algoId+'_'+paramId + '" name="' + algoId+'_'+paramId + '" type="text" value="'+param.defaultValue+'" class="form-control input-md">' +
-                                    '<span class="help-block">'+param.info+'</span>' +
+                                    '<input id="' + algoId+'_'+paramId + '" name="' + algoId+'_'+paramId + '" type="text" value="'+(param.defaultValue || '')+'" class="form-control input-md">' +
+                                    '<span class="help-block">'+(param.info || '')+'</span>' +
                                 '</div>' +
                             '</div>';
 
