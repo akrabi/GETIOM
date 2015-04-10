@@ -6,8 +6,12 @@ function runTrendDetection(algorithmIds){
         return;
     }
 
-
     var algoCount = algorithmIds.length;
+
+    if (algoCount <= 0) {
+        errorMessage('<strong>No algorithms selected</strong>');
+        return
+    }
 
     TrendsPage.results = '';
     TrendsPage.completedAlgoCount = 0;
