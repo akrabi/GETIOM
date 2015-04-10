@@ -61,7 +61,7 @@ router.use(function(req, res, next) {
 });
 
 
-router.route('/messages/num')
+router.route('/db/size')
     .get(function(req, res) {
         console.log('Retrieving number of messages in DB...');
         var url = restURL+'/num';
