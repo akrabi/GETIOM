@@ -7,13 +7,16 @@ The project is based on <a href="https://nodejs.org/">Node.js</a> platform and o
 
 The main goal of our project is to provide an easy framework in order to process & analyze Geo-Tagged information (Big Data) on the Google Map's platform - without the need to mess with servers and configurations. All you need to do is to provide a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST API</a> with a <a href="http://geojson.org/">GeoJSON</a> collection (<a href="https://github.com/akrabi/GETIOM/wiki/Rest-API">Explained here</a>) and start using the app's flow even today!
 
-## Full Documentation
+Some photo examples:
 
-See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
+![Statisitcs](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/statistics.png)
 
-## Communication
-- <a href="https://github.com/snaxoa">snaxoa</a> 
-- <a href="https://github.com/akrabi">akrabi</a>
+![Trend](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/trend.png)
+
+![Circle Example](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/circle_example.png)
+
+![Clusters](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/clustering-example2.png)
+
 
 ## What does it do?
 
@@ -37,6 +40,12 @@ GETIOM can analyze your data in your clusters, by simply clicking on a specific 
 
 GETIOM is extendable and let's you add your own Clustering Algorithms or Trend Detection Algorithms very easily!
 
+
+## Full Documentation
+
+See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
+
+
 ## Build
 
 To build:
@@ -53,6 +62,12 @@ A dashboard for anazlyzing the clusters and trends will appear in the last step 
 More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
 
 Screenshots coming soon!
+
+
+
+## Communication
+- <a href="https://github.com/snaxoa">snaxoa</a> 
+- <a href="https://github.com/akrabi">akrabi</a>
 
 ## Bugs and Feedback
 
