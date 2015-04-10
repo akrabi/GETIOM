@@ -45,7 +45,7 @@ var ClusterPage = {
     init: function() {
         if (!ClusterPage.clusterForm) {
             var clusterAlgorithms = GETIOM.clusterAlgorithms;
-            ClusterPage.clusterForm = AlgorithmsForm(clusterAlgorithms, 'cluster_algo_select', 'cluster_param_panel', runClusterAlgorithm, false); //TODO new?
+            ClusterPage.clusterForm = AlgorithmsForm(clusterAlgorithms, 'cluster_algo_select', 'cluster_param_panel', runClusterAlgorithm, false);
             ClusterPage.clusterForm.init();
         }
     }

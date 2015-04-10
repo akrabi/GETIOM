@@ -7,8 +7,8 @@ var FilterPage = {
             return;
         }
 
-        // Get number of messages stored in server's DB
-        $.getJSON('messages/num', function (data) {         //TODO get rid of messages!! change to dbsize
+        // Get number of data objects stored in server's DB
+        $.getJSON('db/size', function (data) {
             GETIOM.databaseMessagesNum = data.messagesNum;
             successMessage('<strong>GETIOM Started.</strong><br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!');
         })
