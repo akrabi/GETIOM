@@ -16,12 +16,6 @@ var FilterPage = {
                 errorMessage('<strong>Failed to start GETIOM.</strong><br>Check that the server is up and running');
             });
 
-        // Initialize slider
-        if (!this.slider) {
-            this.slider = new TimeSlider($('#filterTimeSlider')[0]);
-            this.slider.init()
-        }
-
 
         // Initialize map
         var map = new Map($('#filterLocationMap')[0]);
