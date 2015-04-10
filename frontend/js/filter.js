@@ -3,7 +3,7 @@ var FilterPage = {
     slider: null,
     init: function () {
         if (this.map) { // Already initialized
-            this.map.deleteAllShapes();     //TODO remove this and add a button which allows shape deletion
+            this.map.deleteAllShapes();
             return;
         }
 
