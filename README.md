@@ -46,6 +46,19 @@ GETIOM is extendable and let's you add your own Clustering Algorithms or Trend D
 See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
 
 
+## Dashboard
+
+A dashboard for anazlyzing the clusters and trends will appear in the last step of the flow. 
+More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
+
+The Flow is very simple to use and user-friendly:
+
+![Dashboard](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/dashboard.png)
+
+
+
+
+
 ## Build
 
 To build:
@@ -56,12 +69,6 @@ $ cd backend/
 $ ./node app.js
 ```
 
-## Dashboard
-
-A dashboard for anazlyzing the clusters and trends will appear in the last step of the flow. 
-More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
-
-Screenshots coming soon!
 
 
 
