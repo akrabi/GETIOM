@@ -17,13 +17,6 @@ Some photo examples:
 
 ![Clusters](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/clustering-example2.png)
 
-## Full Documentation
-
-See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
-
-## Communication
-- <a href="https://github.com/snaxoa">snaxoa</a> 
-- <a href="https://github.com/akrabi">akrabi</a>
 
 ## What does it do?
 
@@ -47,6 +40,12 @@ GETIOM can analyze your data in your clusters, by simply clicking on a specific 
 
 GETIOM is extendable and let's you add your own Clustering Algorithms or Trend Detection Algorithms very easily!
 
+
+## Full Documentation
+
+See the [Wiki](https://github.com/akrabi/GETIOM/wiki) for full documentation, examples, operational details and other information.
+
+
 ## Build
 
 To build:
@@ -63,6 +62,12 @@ A dashboard for anazlyzing the clusters and trends will appear in the last step 
 More information can be found on the [ Wiki](https://github.com/akrabi/GETIOM/wiki).
 
 Screenshots coming soon!
+
+
+
+## Communication
+- <a href="https://github.com/snaxoa">snaxoa</a> 
+- <a href="https://github.com/akrabi">akrabi</a>
 
 ## Bugs and Feedback
 
