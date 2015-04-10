@@ -19,21 +19,28 @@ fieldset {
     margin-bottom: 50px;
 }
 
-#banner {
-    width: 100%;
-    height: auto;
-}
-
-#logo {
-    max-width:100%;
-    max-height:100%;
-}
 
 #welcome {
     text-align: center;
     font-size: 10em;
+    height: 100%;
 }
 
+#logo, #enter {
+    height: 50%;
+    width:100%;
+    vertical-align: middle;
+}
+
+#logo img {
+    max-width:100%;
+    max-height:100%;
+}
+
+#enter i {
+    max-width:100%;
+    max-height:100%;
+}
 
 /* Filter */
 #filter {

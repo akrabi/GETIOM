@@ -50,14 +50,10 @@ function getCallback(algorithmId, algorithm, algoCount) {
         var plotOptions = algorithm.plotOptions;
 
         if (!data || data.trendsNum === 0) {
-            TrendsPage.results += 'No trends found for '+ algorithm.name +'!' + '<br><br>';
+            TrendsPage.results += '<u>' + algorithm.name + '</u>: No trends found<br>';
         }
         else {
-            TrendsPage.results +=
-                algorithm.name + '<br>' +
-                'Messages: ' + data.messagesNum + '<br>' +
-                'Days: ' + data.daysNum + '<br>' +
-                'Trends: ' + data.trendsNum + '<br><br>';
+            TrendsPage.results += '<u>' + algorithm.name + '</u>: Found ' + data.trendsNum + ' trends. <br>';
 
             plotDataArray.forEach(function (plotData) {
                 plotData.data = data[plotData.data];
@@ -68,6 +64,7 @@ function getCallback(algorithmId, algorithm, algoCount) {
         }
         if (TrendsPage.completedAlgoCount >= algoCount) {
             GETIOM.trendDetectionTime = (Date.now()-GETIOM.trendDetectionTime) / 1000;
+            TrendsPage.results = '<strong>Finished trend detection in ' + GETIOM.trendDetectionTime + ' seconds.</strong><br>' + TrendsPage.results;
             $('#processingModal').modal('hide');
             successMessage(TrendsPage.results);
             moveTo('results');
