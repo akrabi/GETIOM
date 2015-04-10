@@ -85,13 +85,13 @@ var TrendsPage = {
         this.completedAlgoCount = 0;
         if (!TrendsPage.trendForm) {
             var trendAlgorithms = GETIOM.trendAlgorithms;
-            TrendsPage.trendForm = AlgorithmsForm(trendAlgorithms, 'trend_algo_select', 'trend_param_panel', runTrendDetection, true); //TODO new?
+            TrendsPage.trendForm = AlgorithmsForm(trendAlgorithms, 'trend_algo_select', 'trend_param_panel', runTrendDetection, true);
             TrendsPage.trendForm.init();
         }
         var map = new Map($('#resultsMap')[0]);
         this.map = map;
-        map.init(40.821715, -74.122381);               //TODO optimize zoom and location to display results
-        TrendsPage.loadPolygons(map);   //TODO use self instead of TrendsPage
+        map.init(40.821715, -74.122381); //TODO optimize zoom and location to display results
+        TrendsPage.loadPolygons(map);
     },
     loadPolygons: function (map) {
         for (var i=0; i < GETIOM.convexHulls.length; ++i) {

@@ -11,8 +11,6 @@ var GETIOM = {
     currentStep: 'welcome'
 };
 
-//TODO clear data when going "back" from an advanced step....
-
 function moveTo(step) {
     var progressBar = $('#progress_steps');
     var progressSteps = {
