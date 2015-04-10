@@ -33,7 +33,6 @@
       },
       {
         "data": "topSDPoints",
-        "label": "Average + Factor*SD",
         "dashes": {"show": true},
         "color": "#0000ff"
       },
@@ -45,7 +44,6 @@
       },
       {
         "data": "bottomSDPoints",
-        "label": "Average - Factor*SD",
         "dashes": {"show": true},
         "color": "#0000ff"
       }
@@ -104,13 +102,11 @@
       },
       {
         "data": "linePlusThreshold",
-        "label": "+ Threshold",
         "dashes": { "show": true },
         "color": "#0000ff"
       },
       {
         "data": "lineMinusThreshold",
-        "label": "- Threshold",
         "dashes": { "show": true },
         "color": "#0000ff"
       }
@@ -172,13 +168,11 @@
       },
       {
         "data": "runningAveragePlusThreshold",
-        "label": "+ Threshold",
         "dashes": { "show": true },
         "color": "#0000ff"
       },
       {
         "data": "runningAverageMinusThreshold",
-        "label": "- Threshold",
         "dashes": { "show": true },
         "color": "#0000ff"
       }],
