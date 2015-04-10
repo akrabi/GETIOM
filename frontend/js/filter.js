@@ -103,6 +103,6 @@ function filteringDone() {
     var t2 = Date.now();
     var ms = t2 - GETIOM.filteringTime;     //time in milliseconds
     GETIOM.filteringTime = ms / 1000;
-    successMessage('Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!');
+    successMessage('<strong>Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!</strong>');
     moveTo('cluster');
 }
