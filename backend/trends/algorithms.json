@@ -24,6 +24,7 @@
       },
       {
         "data": "trends",
+        "label": "Trends",
         "points": {
           "show": true,
           "radius": 5
@@ -87,6 +88,7 @@
       },
       {
         "data": "trends",
+        "label": "Trends",
         "points":
         {
           "show": true,
@@ -154,6 +156,7 @@
         }
       },
       {	"data": "trends",
+        "label": "Trends",
         "points":
         {
           "show": true,

@@ -65,7 +65,7 @@ var ResultsPage = {
             $.plot(resultsGraph, plotDataArray, plotOptions);
 
             $(resultsGraph).bind("plotclick", function (event, pos, item) {
-                if (item) {
+                if (item && item.series.label === 'Trends') {
                     var day = item.datapoint[0];
                     var url = 'http://www.google.com/search?q=' + 'Manhattan ' + new Date(day).toJSON().slice(0,10);
                     window.open(url, '_blank');
@@ -81,7 +81,7 @@ var ResultsPage = {
 
             $(resultsGraph).bind("plothover", function (event, pos, item) {
                 $("#tooltip").remove();
-                if (item) {
+                if (item && item.series.label === 'Trends') {
                     var day = item.datapoint[0];
                     var messages = item.datapoint[1];
                     showTooltip(item.pageX, item.pageY,
