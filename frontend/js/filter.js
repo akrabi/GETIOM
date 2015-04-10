@@ -80,7 +80,12 @@ var FilterPage = {
         });
         $('#filterLocationSkip').click(function(e) {
             e.preventDefault();
-            applyFilter('filter')
+            applyFilter('filter');
+        });
+
+        $('#filterLocationClear').click(function(e) {
+            e.preventDefault();
+            map.deleteAllShapes();
         })
     }
 };

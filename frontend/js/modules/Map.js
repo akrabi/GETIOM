@@ -44,7 +44,7 @@ var Map = function (domNode) {
 
         },
 
-        addDrawingManager: function(rectangleControl, circleControl, polygonControl, deleteControl) {
+            addDrawingManager: function(rectangleControl, circleControl, polygonControl, deleteControl) {
             // Initialize the drawing manager
             drawingManager = new google.maps.drawing.DrawingManager({
                 drawingMode: google.maps.drawing.OverlayType.MARKER,
@@ -96,6 +96,9 @@ var Map = function (domNode) {
             google.maps.event.addListener(drawingManager, 'overlaycomplete', function (shape) {
                 shapes.push(shape);
                 drawingManager.setDrawingMode(null);
+                drawingManager.setOptions({
+                    drawingControl: false
+                });
             });
 
             if(!drawingManager.drawingControl) {
@@ -237,7 +240,7 @@ var Map = function (domNode) {
         },
 
         drawRectangle: function() {
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
+            drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
         },
         drawCircle: function() {
             drawingManager.setDrawingMode(google.maps.drawing.OverlayType.CIRCLE);
@@ -252,6 +255,9 @@ var Map = function (domNode) {
                 var shape = shapes.pop();
                 shape.overlay.setMap(null);
             }
+            drawingManager.setOptions({
+                drawingControl: true
+            });
         }
     }
 };
