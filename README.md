@@ -84,7 +84,7 @@ You can contact us for any reason :)
 - <a href="https://github.com/akrabi">akrabi</a>
 
 The project is supervised by:
-<a href-"https://github.com/ekravi">Elad Kravi</a>
+<a href="https://github.com/ekravi">Elad Kravi</a>
 ## Bugs and Feedback
 
 For bugs, questions and discussions please use the [Github Issues](https://github.com/akrabi/GETIOM/issues).
