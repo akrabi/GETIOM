@@ -89,8 +89,8 @@ var TrendsPage = {
             TrendsPage.trendForm.init();
         }
         var map = new Map($('#resultsMap')[0]);
-        this.map = map;
-        map.init(40.821715, -74.122381); //TODO optimize zoom and location to display results
+        TrendsPage.map = map;
+        map.init(GETIOM.convexHulls[0][0][0], GETIOM.convexHulls[0][0][1]);
         TrendsPage.loadPolygons(map);
     },
     loadPolygons: function (map) {
