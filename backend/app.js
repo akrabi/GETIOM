@@ -10,12 +10,12 @@ var trendAlgoDef    = require('./trends/algorithms.json')
 
 
 // Configuration parameters
-var restURL = "http://localhost:8081/messages"
-var port = process.env.PORT || 8080;    // Server's port
-var webAppPath = "../frontend";         // Path to client web application
+var restURL = "http://localhost:8081/messages"   // API URL
+var port = process.env.PORT || 8080;             // App port
+var webAppPath = "../frontend";                  // Path to client web application
 
 // Declare global app variables
-var messages = null;
+var points = null;
 var clusters = null;
 var convexHulls = null;
 
@@ -32,7 +32,7 @@ function returnError(req, res) {
 }
 
 
-// function to recieve filtered messages from REST API
+// function to recieve filtered points from REST API
 function getData(req, res, url, callback) {
     console.log('Getting data from: ' + url);
     http.get(url, function(res) {
@@ -63,10 +63,10 @@ router.use(function(req, res, next) {
 
 router.route('/db/size')
     .get(function(req, res) {
-        console.log('Retrieving number of messages in DB...');
-        var url = restURL+'/num';
-        getData(req, res, url, function(messagesNum) {
-            res.json(messagesNum);
+        console.log('Retrieving number of points in DB...');
+        var url = restURL+'/db/size';
+        getData(req, res, url, function(pointsNum) {
+            res.json(pointsNum);
         });
     });
 
@@ -75,8 +75,8 @@ router.route('/filter')
         console.log('Handling filter request...');
         var url = restURL;
         getData(req, res, url, function(data) {
-            messages = data;
-            res.json({messagesNum: messages.length});
+            points = data;
+            res.json({pointsNum: points.length});
         });
     });
 
@@ -85,24 +85,24 @@ router.route('/filter/*')
         console.log('Handling filter request...');
         var url = restURL+req.url;
         getData(req, res, url, function(data) {
-            messages = data;
-            res.json({messagesNum: messages.length});
+            points = data;
+            res.json({pointsNum: points.length});
         });
     });
 
 router.route('/cluster/:clusterAlgo')
     .get(function(req, res) {
         console.log('Handling ' + req.params.clusterAlgo + ' clustering request...');
-        if (!messages) {
-            console.log('Cannot cluster when no messages are loaded!');
+        if (!points) {
+            console.log('Cannot cluster when no points are loaded!');
             res.json([]);
         }
         var clusterAlgo = clusterAlgoImpl[req.params.clusterAlgo];
         if (!clusterAlgo) {
-            clusters = [messages];
+            clusters = [points];
         }
         else {
-            clusters = clusterAlgo.cluster(messages, req.query);
+            clusters = clusterAlgo.cluster(points, req.query);
         }
         res.json(clusters.map(function(cluster) {return cluster.length}));
     });
@@ -116,7 +116,6 @@ router.route('/convexhulls')
         }
         convexHulls = clusters.map(function(cluster) {
             return terraformer.Tools.convexHull(cluster.map(function (geoPoint) {
-                //return terraformer.Tools.toGeographic(geoPoint);
                 return geoPoint.geometry.coordinates;
             }));
         });

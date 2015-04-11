@@ -18,11 +18,11 @@ var StandardDeviation = function() {
 
     return {
         findTrends: function(cluster, params) {
-            var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
-            var daysArray = trendUtils.daysArray(messagesPerDay);
+            var pointsPerDay = trendUtils.findPointsPerDay(cluster);
+            var daysArray = trendUtils.daysArray(pointsPerDay);
             var threshold = parseFloat(params.threshold);
 
-            var avg = cluster.length / daysArray.length //Number of messages divided by number of days
+            var avg = cluster.length / daysArray.length //Number of points divided by number of days
             var sd = standardDeviation(daysArray);
 
             var daysNum = daysArray.length;
@@ -38,8 +38,8 @@ var StandardDeviation = function() {
             
             for (var i=0; i<daysNum; ++i) {
                 var day = daysArray[i][0];
-                var messages = daysArray[i][1];
-                if (messages > avg + sd*threshold || messages < avg - sd*threshold) {
+                var points = daysArray[i][1];
+                if (points > avg + sd*threshold || points < avg - sd*threshold) {
                     trends.push(daysArray[i]);
                 }
                 topSDPoints.push([day, avg + sd*threshold]);
@@ -50,7 +50,7 @@ var StandardDeviation = function() {
             return {
                 trendsNum: trends.length,
                 daysNum: daysNum,
-                messagesNum: cluster.length,
+                pointsNum: cluster.length,
                 days: daysArray,
                 trends: trends,
                 topSDPoints: topSDPoints,

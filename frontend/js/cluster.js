@@ -24,7 +24,7 @@ function getClusters(url) {
         $.getJSON('convexhulls', function(data) {
             GETIOM.convexHulls = data;
             $('#processingModal').modal('hide');
-            successMessage('<strong>Clustered ' + GETIOM.filteredMessagesNum + ' messages into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!</strong>');
+            successMessage('<strong>Clustered ' + GETIOM.filteredPointsNum + ' data points into ' + GETIOM.clusterSizeArray.length + ' clusters in ' + GETIOM.clusteringTime + ' seconds!</strong>');
             moveTo('trends');
         }).error(function() {
             clusteringError('<strong>Failed to bound clusters.</strong><br>Check that the server is up and running');

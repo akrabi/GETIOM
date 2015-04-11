@@ -30,9 +30,9 @@ router.use(function(req, res, next) {
 });
 
 
-router.route('/num')
+router.route('/db/size')
     .get(function(req, res) {
-        res.json({messagesNum: messages.length});
+        res.json({pointsNum: messages.length});
     });
 
 

@@ -3,10 +3,10 @@ var RunningAverage = function() {
     return {
         findTrends: function(cluster, params) {
             var threshold = params.threshold;
-            var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
-            var daysArray = trendUtils.daysArray(messagesPerDay);
+            var pointsPerDay = trendUtils.findPointsPerDay(cluster);
+            var daysArray = trendUtils.daysArray(pointsPerDay);
 
-            var messages = 0;
+            var points = 0;
             var average = 0;
             var trends = [];
             var runningAverage = [];
@@ -14,9 +14,9 @@ var RunningAverage = function() {
             var runningAverageMinusThreshold = [];
 
             for (var i=0; i<daysArray.length; ++i) {
-                messages += daysArray[i][1];
+                points += daysArray[i][1];
                 //var previousAverage = average;
-                average = messages / (i+1);
+                average = points / (i+1);
                 runningAverage.push([daysArray[i][0], average]);
                 runningAveragePlusThreshold.push([daysArray[i][0], average+(threshold/100)*average]);
                 runningAverageMinusThreshold.push([daysArray[i][0], average-(threshold/100)*average]);
@@ -28,7 +28,7 @@ var RunningAverage = function() {
             return {
                 trendsNum: trends.length,
                 daysNum: daysArray.length,
-                messagesNum: cluster.length,
+                pointsNum: cluster.length,
                 days: daysArray,
                 trends: trends,
                 runningAverage: runningAverage,

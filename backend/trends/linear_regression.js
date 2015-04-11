@@ -47,8 +47,8 @@ var LinearRegression = function() {
     return {
         findTrends: function(cluster, params) {
             var threshold = params.threshold;
-            var messagesPerDay = trendUtils.findMessagesPerDay(cluster);
-            var daysArray = trendUtils.daysArray(messagesPerDay);
+            var pointsPerDay = trendUtils.findPointsPerDay(cluster);
+            var daysArray = trendUtils.daysArray(pointsPerDay);
             var line = findLineByLeastSquares(daysArray);
             var f = function(x) {return line[0]*x+line[1]};
 
@@ -58,19 +58,19 @@ var LinearRegression = function() {
             var lineMinusThreshold = [];
 
 
-            for (var day in messagesPerDay) {
+            for (var day in pointsPerDay) {
                 var lineValue = f(day);
                 linePoints.push([day, lineValue]);
                 linePlusThreshold.push([day, lineValue+(threshold/100)*lineValue]);
                 lineMinusThreshold.push([day, lineValue-(threshold/100)*lineValue]);
-                if (Math.abs(lineValue - messagesPerDay[day]) > (threshold/100)*lineValue) {
-                    trends.push([day, messagesPerDay[day]]);
+                if (Math.abs(lineValue - pointsPerDay[day]) > (threshold/100)*lineValue) {
+                    trends.push([day, pointsPerDay[day]]);
                 }
             }
             return {
                 trendsNum: trends.length,
                 daysNum: daysArray.length,
-                messagesNum: cluster.length,
+                pointsNum: cluster.length,
                 days: daysArray,
                 trends: trends,
                 line: linePoints,

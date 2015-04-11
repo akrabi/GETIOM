@@ -7,18 +7,18 @@ module.exports = {
         var avg = sum / array.length;
         return avg;
     },
-    findMessagesPerDay: function(cluster) {
-        var messagesPerDay = {};
+    findPointsPerDay: function(cluster) {
+        var pointsPerDay = {};
         cluster.forEach(function(point) {
             var day = Math.floor(point.properties.time/86400)*86400000; // Convert unix timestamp to day in miliseconds
-            messagesPerDay[day] = messagesPerDay[day] ? messagesPerDay[day]+1 : 1;
+            pointsPerDay[day] = pointsPerDay[day] ? pointsPerDay[day]+1 : 1;
         });
-        return messagesPerDay;
+        return pointsPerDay;
     },
-    daysArray: function(messagesPerDay) {
+    daysArray: function(pointsPerDay) {
         var daysArray = [];
-        for (var day in messagesPerDay) {
-            daysArray.push([parseInt(day), parseInt(messagesPerDay[day])]);
+        for (var day in pointsPerDay) {
+            daysArray.push([parseInt(day), parseInt(pointsPerDay[day])]);
         }
         return daysArray.sort(function(day1, day2) {
             return day1[0] - day2[0];

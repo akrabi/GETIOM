@@ -21,8 +21,8 @@ var ResultsPage = {
     show: function() {
         // Draw Charts
         var filterData = [
-            {label: "Included", data: GETIOM.filteredMessagesNum},
-            {label: "Excluded", data: GETIOM.databaseMessagesNum-GETIOM.filteredMessagesNum}
+            {label: "Included", data: GETIOM.filteredPointsNum},
+            {label: "Excluded", data: GETIOM.databasePointsNum-GETIOM.filteredPointsNum}
         ]
         var clusterData = GETIOM.clusterSizeArray.map(function(clusterSize) {
             return {label:"", data: clusterSize};
@@ -83,11 +83,11 @@ var ResultsPage = {
                 $("#tooltip").remove();
                 if (item && item.series.label === 'Trends') {
                     var day = item.datapoint[0];
-                    var messages = item.datapoint[1];
+                    var dataPoints = item.datapoint[1];
                     showTooltip(item.pageX, item.pageY,
                         'Trend!<br>'+
                         (new Date(day)).toJSON().slice(0,10) + '<br>' +
-                        parseInt(messages) + ' messages');
+                        parseInt(dataPoints) + ' data points');
                 }
             });
         }

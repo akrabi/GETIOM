@@ -9,8 +9,13 @@ var FilterPage = {
 
         // Get number of data objects stored in server's DB
         $.getJSON('db/size', function (data) {
-            GETIOM.databaseMessagesNum = data.messagesNum;
-            successMessage('<strong>GETIOM Started.</strong><br>Server DB contains ' + GETIOM.databaseMessagesNum + ' messages!');
+            GETIOM.databasePointsNum = data.pointsNum;
+            if (GETIOM.databasePointsNum && GETIOM.databasePointsNum > 0) {
+                successMessage('<strong>GETIOM Started.</strong><br>Server DB contains ' + GETIOM.databasePointsNum + ' data points!');
+            }
+            else {
+                errorMessage('<strong>Failed to get DB point count from server.</strong><br>Check that the server is up and running');
+            }
         })
             .error(function() {
                 errorMessage('<strong>Failed to start GETIOM.</strong><br>Check that the server is up and running');
@@ -88,7 +93,7 @@ function applyFilter(url) {
     $('#processingModal').modal();
     GETIOM.filteringTime = Date.now();
     $.getJSON(url, function (data) {
-        GETIOM.filteredMessagesNum = data.messagesNum;
+        GETIOM.filteredPointsNum = data.pointsNum;
         filteringDone();
     })
         .error(function() {
@@ -102,6 +107,6 @@ function filteringDone() {
     var t2 = Date.now();
     var ms = t2 - GETIOM.filteringTime;     //time in milliseconds
     GETIOM.filteringTime = ms / 1000;
-    successMessage('<strong>Filtered ' + GETIOM.filteredMessagesNum + ' messages in ' + GETIOM.filteringTime + ' seconds!</strong>');
+    successMessage('<strong>Filtered ' + GETIOM.filteredPointsNum + ' data points in ' + GETIOM.filteringTime + ' seconds!</strong>');
     moveTo('cluster');
 }
