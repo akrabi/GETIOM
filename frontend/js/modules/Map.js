@@ -95,11 +95,13 @@ var Map = function (domNode) {
             });
 
             google.maps.event.addListener(drawingManager, 'overlaycomplete', function (shape) {
-                shapes.push(shape);
-                drawingManager.setDrawingMode(null);
-                drawingManager.setOptions({
-                    drawingControl: false
-                });
+                if (shape.type === 'circle' || shape.type === 'rectangle' || shape.type === 'polygon') {
+                    shapes.push(shape);
+                    drawingManager.setDrawingMode(null);
+                    drawingManager.setOptions({
+                        drawingControl: false
+                    });
+                }
             });
 
             if(!drawingManager.drawingControl) {
