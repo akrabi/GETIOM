@@ -56,9 +56,6 @@ The Flow is very simple to use and user-friendly:
 ![Dashboard](https://github.com/akrabi/GETIOM/blob/master/Examples/Photos/dashboard.png)
 
 
-
-
-
 ## Build
 
 To build:
@@ -66,10 +63,18 @@ To build:
 ```
 $ git clone https://github.com/akrabi/GETIOM.git
 $ cd backend/
+$ ./npm install
 $ ./node app.js
 ```
 
+## To run our API Example Server:
 
+```
+$ git clone https://github.com/akrabi/GETIOM.git
+$ cd RestExamples/NodeRestService
+$ ./npm install
+$ ./node server.js
+```
 
 
 ## Communication
