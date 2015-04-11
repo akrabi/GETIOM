@@ -78,6 +78,8 @@ $ ./node server.js
 
 
 ## Communication
+We would be happy to hear from you! if you used our project, and have suggestions/opinions we would like to know!
+You can contact us for any reason :)
 - <a href="https://github.com/snaxoa">snaxoa</a> 
 - <a href="https://github.com/akrabi">akrabi</a>
 
