@@ -64,9 +64,19 @@ router.use(function(req, res, next) {
 router.route('/db/size')
     .get(function(req, res) {
         console.log('Retrieving number of points in DB...');
-        var url = restURL+'/db/size';
+        var url = restURL+'/num';
         getData(req, res, url, function(pointsNum) {
             res.json(pointsNum);
+        });
+    });
+
+router.route('/samples')
+    .get(function(req, res) {
+        console.log('Handling samples request...');
+        var url = restURL+'/samples';
+        getData(req, res, url, function(featureCollection) {
+            var samplePoints = featureCollection.features;
+            res.json(samplePoints);
         });
     });
 
@@ -74,8 +84,8 @@ router.route('/filter')
     .get(function(req, res) {
         console.log('Handling filter request...');
         var url = restURL;
-        getData(req, res, url, function(data) {
-            points = data;
+        getData(req, res, url, function(featureCollection) {
+            points = featureCollection.features;
             res.json({pointsNum: points.length});
         });
     });
@@ -84,8 +94,8 @@ router.route('/filter/*')
     .get(function(req, res) {
         console.log('Handling filter request...');
         var url = restURL+req.url;
-        getData(req, res, url, function(data) {
-            points = data;
+        getData(req, res, url, function(featureCollection) {
+            points = featureCollection.features;
             res.json({pointsNum: points.length});
         });
     });
