@@ -4,6 +4,7 @@ var Map = function (domNode) {
     var drawingManager = null;
     var searchBox = null;
     var map = null;
+    var heatmap = null;
     var center = null;
     var shapes = [];
     var markers = [];
@@ -176,6 +177,18 @@ var Map = function (domNode) {
                 var bounds = map.getBounds();
                 searchBox.setBounds(bounds);
             });
+        },
+
+        setHeatmapLayer: function(dataPointsArray) {
+            var pointArray = new google.maps.MVCArray(dataPointsArray.map(function(point) {
+                return new google.maps.LatLng(point[0], point[1]);
+            }));
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: pointArray
+            });
+
+            heatmap.setMap(map);
         },
 
         addClusterPolygon: function(clusterHullPoints, clusterSize) {

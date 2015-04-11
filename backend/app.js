@@ -15,7 +15,8 @@ var port = process.env.PORT || 8080;             // App port
 var webAppPath = "../frontend";                  // Path to client web application
 
 // Declare global app variables
-var points = null;
+var samplePoints = null;
+var filteredPoints = null;
 var clusters = null;
 var convexHulls = null;
 
@@ -70,12 +71,14 @@ router.route('/db/size')
         });
     });
 
-router.route('/samples')
+router.route('/samplePoints')
     .get(function(req, res) {
         console.log('Handling samples request...');
         var url = restURL+'/samples';
         getData(req, res, url, function(featureCollection) {
-            var samplePoints = featureCollection.features;
+            var samplePoints = featureCollection.features.map(function(point) {
+                return point.geometry.coordinates;
+            });
             res.json(samplePoints);
         });
     });
@@ -85,8 +88,8 @@ router.route('/filter')
         console.log('Handling filter request...');
         var url = restURL;
         getData(req, res, url, function(featureCollection) {
-            points = featureCollection.features;
-            res.json({pointsNum: points.length});
+            filteredPoints = featureCollection.features;
+            res.json({pointsNum: filteredPoints.length});
         });
     });
 
@@ -95,24 +98,24 @@ router.route('/filter/*')
         console.log('Handling filter request...');
         var url = restURL+req.url;
         getData(req, res, url, function(featureCollection) {
-            points = featureCollection.features;
-            res.json({pointsNum: points.length});
+            filteredPoints = featureCollection.features;
+            res.json({pointsNum: filteredPoints.length});
         });
     });
 
 router.route('/cluster/:clusterAlgo')
     .get(function(req, res) {
         console.log('Handling ' + req.params.clusterAlgo + ' clustering request...');
-        if (!points) {
+        if (!filteredPoints) {
             console.log('Cannot cluster when no points are loaded!');
             res.json([]);
         }
         var clusterAlgo = clusterAlgoImpl[req.params.clusterAlgo];
         if (!clusterAlgo) {
-            clusters = [points];
+            clusters = [filteredPoints];
         }
         else {
-            clusters = clusterAlgo.cluster(points, req.query);
+            clusters = clusterAlgo.cluster(filteredPoints, req.query);
         }
         res.json(clusters.map(function(cluster) {return cluster.length}));
     });

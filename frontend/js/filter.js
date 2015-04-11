@@ -7,27 +7,35 @@ var FilterPage = {
             return;
         }
 
+        $('#processingModal').modal();
+        // Initialize map
+        var map = new Map($('#filterLocationMap')[0]);
+        this.map = map;
+
         // Get number of data objects stored in server's DB
         $.getJSON('db/size', function (data) {
             GETIOM.databasePointsNum = data.pointsNum;
             if (GETIOM.databasePointsNum && GETIOM.databasePointsNum > 0) {
-                successMessage('<strong>GETIOM Started.</strong><br>Server DB contains ' + GETIOM.databasePointsNum + ' data points!');
+                $.getJSON('samplePoints', function (data) {
+                    map.init(data[0][0], data[0][1]);
+                    map.addSearchBox();
+                    map.addDrawingManager();
+                    map.setHeatmapLayer(data);
+                    $('#processingModal').modal('hide');
+                    successMessage('<strong>GETIOM Started.</strong><br>Server DB contains ' + GETIOM.databasePointsNum + ' data points!');
+                }).error(function() {
+                    $('#processingModal').modal('hide');
+                    errorMessage('<strong>Failed to start GETIOM.</strong><br>Check that the server is up and running');
+                });
             }
             else {
+                $('#processingModal').modal('hide');
                 errorMessage('<strong>Failed to get DB point count from server.</strong><br>Check that the server is up and running');
             }
-        })
-            .error(function() {
+         }).error(function() {
+                $('#processingModal').modal('hide');
                 errorMessage('<strong>Failed to start GETIOM.</strong><br>Check that the server is up and running');
             });
-
-
-        // Initialize map
-        var map = new Map($('#filterLocationMap')[0]);
-        this.map = map;
-        map.init(40.821715, -74.122381);
-        map.addSearchBox();
-        map.addDrawingManager();
 
         $('#filterLocationForm').submit(function (e) {
             e.preventDefault();

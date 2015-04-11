@@ -29,7 +29,7 @@ function getMsgCoordinates(msg) {
 }
 
 function random (low, high) {
-    return Math.random() * (high - low) + low;
+    return Math.floor(Math.random() * (high - low) + low);
 }
 
 // configure routers
@@ -50,8 +50,9 @@ router.route('/num')
 router.route('/samples')
     .get(function(req, res) {
         var samples= [];
-        for (var i=0; i<1000; ++i) {
-            samples.push(messages[random(0,messages.length)]);
+        for (var i=0; i<100; ++i) {
+            var rand = random(0,messages.length);
+            samples.push(messages[rand]);
         }
         res.json(featuresArrayToCollection(samples));
     });
