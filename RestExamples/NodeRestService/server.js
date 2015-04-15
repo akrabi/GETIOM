@@ -5,7 +5,7 @@ var geolib     = require('geolib');
 
 // Declare variables
 var fs = require('fs');
-var messages = JSON.parse(fs.readFileSync('./models/messages.json', 'utf8')).features;
+var messages = JSON.parse(fs.readFileSync('./models/1MMessages.json', 'utf8')).features;
 
 
 var port = process.env.PORT || 8081;    // Server's port
@@ -50,7 +50,7 @@ router.route('/num')
 router.route('/samples')
     .get(function(req, res) {
         var samples= [];
-        for (var i=0; i<100; ++i) {
+        for (var i=0; i<10000; ++i) {
             var rand = random(0,messages.length);
             samples.push(messages[rand]);
         }
