@@ -78,9 +78,13 @@ $ ./node server.js
 
 
 ## Communication
+We would be happy to hear from you! if you used our project, and have suggestions/opinions we would like to know!
+You can contact us for any reason :)
 - <a href="https://github.com/snaxoa">snaxoa</a> 
 - <a href="https://github.com/akrabi">akrabi</a>
 
+The project is supervised by:
+<a href="https://github.com/ekravi">Elad Kravi</a>
 ## Bugs and Feedback
 
 For bugs, questions and discussions please use the [Github Issues](https://github.com/akrabi/GETIOM/issues).
