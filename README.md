@@ -89,5 +89,8 @@ The project is supervised by:
 
 For bugs, questions and discussions please use the [Github Issues](https://github.com/akrabi/GETIOM/issues).
 
+<img src="https://github.com/akrabi/GETIOM/blob/07ed6b15f06ca436a80fab8fc901c9acf90ca894/Examples/Photos/poster.jpg">
+
+
 
 
